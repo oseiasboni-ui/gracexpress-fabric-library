@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio | GraceXpress</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero {
+            height: 50vh;
+            margin-top: var(--header-height);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            padding: 60px 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            aspect-ratio: 4/5;
+            background: var(--color-bg-alt);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-item-image {
+            flex: 1;
+            background: linear-gradient(135deg, #e8e4dc 0%, #d4cec2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            opacity: 0.3;
+        }
+
+        .portfolio-item-content {
+            padding: 20px;
+        }
+
+        .portfolio-item-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-item-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header header-hero">
+        <div class="header-container">
+            <a href="index.html" class="logo logo-elegant">GRACEXPRESS |</a>
+            <div class="header-center">
+                <h1 class="header-title">ACERVO TÊXTIL DIGITAL</h1>
+                <span class="header-subtitle">Biblioteca de Pesquisa</span>
+            </div>
+            <nav class="main-nav">
+                <a href="sobre.html" class="nav-link" data-i18n="about">Sobre</a>
+                <a href="portfolio.html" class="nav-link active" data-i18n="portfolio">Portfólio</a>
+                <a href="contato.html" class="nav-link" data-i18n="contact">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero hero-ultrawide">
+        <div class="hero-bg" style="background-image: url('portfolio-hero.jpg')">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" data-i18n="portfolioTitle">Meu Portfólio</h1>
+            <p class="hero-subtitle" data-i18n="portfolioSubtitle">Coleções e projetos de moda</p>
+        </div>
+    </section>
+
+    <div class="portfolio-grid">
+        <!-- Photo 1 -->
+        <article class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&q=80" alt="Coleção Verão"
+                class="portfolio-item-media">
+            <div class="portfolio-item-overlay"></div>
+            <div class="portfolio-item-content">
+                <h3 class="portfolio-item-title" data-i18n="portfolioItem1Title">Coleção Verão 2024</h3>
+                <p class="portfolio-item-phrase" data-i18n="portfolioItem1Phrase">"Fluidez que dança com a brisa"</p>
+            </div>
+        </article>
+
+        <!-- Photo 2 -->
+        <article class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80" alt="Alta Costura"
+                class="portfolio-item-media">
+            <div class="portfolio-item-overlay"></div>
+            <div class="portfolio-item-content">
+                <h3 class="portfolio-item-title" data-i18n="portfolioItem2Title">Alta Costura</h3>
+                <p class="portfolio-item-phrase" data-i18n="portfolioItem2Phrase">"Elegância atemporal em cada detalhe"
+                </p>
+            </div>
+        </article>
+
+        <!-- Video 1 -->
+        <article class="portfolio-item video">
+            <img src="https://images.unsplash.com/photo-1519235106695-a22a7a260ac6?w=600&q=80" alt="Desfile"
+                class="portfolio-item-media">
+            <div class="portfolio-item-overlay"></div>
+            <div class="portfolio-item-content">
+                <h3 class="portfolio-item-title" data-i18n="portfolioItem3Title">Desfile Paris 2024</h3>
+                <p class="portfolio-item-phrase" data-i18n="portfolioItem3Phrase">"O movimento que inspira"</p>
+            </div>
+        </article>
+
+        <!-- Photo 3 -->
+        <article class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Alfaiataria"
+                class="portfolio-item-media">
+            <div class="portfolio-item-overlay"></div>
+            <div class="portfolio-item-content">
+                <h3 class="portfolio-item-title" data-i18n="portfolioItem4Title">Alfaiataria Moderna</h3>
+                <p class="portfolio-item-phrase" data-i18n="portfolioItem4Phrase">"Precisão que define caráter"</p>
+            </div>
+        </article>
+
+        <!-- Photo 4 -->
+        <article class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80" alt="Inverno"
+                class="portfolio-item-media">
+            <div class="portfolio-item-overlay"></div>
+            <div class="portfolio-item-content">
+                <h3 class="portfolio-item-title" data-i18n="portfolioItem5Title">Coleção Inverno 2024</h3>
+                <p class="portfolio-item-phrase" data-i18n="portfolioItem5Phrase">"Calor e sofisticação abraçados"</p>
+            </div>
+        </article>
+
+        <!-- Photo 5 -->
+        <article class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600&q=80" alt="Sustentável"
+                class="portfolio-item-media">
+            <div class="portfolio-item-overlay"></div>
+            <div class="portfolio-item-content">
+                <h3 class="portfolio-item-title" data-i18n="portfolioItem6Title">Moda Sustentável</h3>
+                <p class="portfolio-item-phrase" data-i18n="portfolioItem6Phrase">"Consciência que veste bem"</p>
+            </div>
+        </article>
+
+        <!-- Video 2 -->
+        <article class="portfolio-item video">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80" alt="Backstage"
+                class="portfolio-item-media">
+            <div class="portfolio-item-overlay"></div>
+            <div class="portfolio-item-content">
+                <h3 class="portfolio-item-title" data-i18n="portfolioItem7Title">Backstage Exclusivo</h3>
+                <p class="portfolio-item-phrase" data-i18n="portfolioItem7Phrase">"A magia por trás da criação"</p>
+            </div>
+        </article>
+
+        <!-- Photo 6 -->
+        <article class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80" alt="Esportivo"
+                class="portfolio-item-media">
+            <div class="portfolio-item-overlay"></div>
+            <div class="portfolio-item-content">
+                <h3 class="portfolio-item-title" data-i18n="portfolioItem8Title">Linha Esportiva</h3>
+                <p class="portfolio-item-phrase" data-i18n="portfolioItem8Phrase">"Performance com estilo"</p>
+            </div>
+        </article>
+
+        <!-- Photo 7 -->
+        <article class="portfolio-item">
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80" alt="Noite"
+                class="portfolio-item-media">
+            <div class="portfolio-item-overlay"></div>
+            <div class="portfolio-item-content">
+                <h3 class="portfolio-item-title" data-i18n="portfolioItem9Title">Noite de Gala</h3>
+                <p class="portfolio-item-phrase" data-i18n="portfolioItem9Phrase">"Brilho que encanta olhares"</p>
+            </div>
+        </article>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
+                <div class="footer-controls">
+                    <div class="lang-selector footer-lang">
+                        <select id="langSelect" aria-label="Idioma">
+                            <option value="pt">PT</option>
+                            <option value="en">EN</option>
+                            <option value="es">ES</option>
+                            <option value="fr">FR</option>
+                            <option value="zh">中文</option>
+                        </select>
+                    </div>
+                    <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
+                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="translations.js"></script>
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        if (localStorage.getItem('theme') === 'dark') document.body.dataset.theme = 'dark';
+        themeToggle?.addEventListener('click', () => {
+            const isDark = document.body.dataset.theme === 'dark';
+            document.body.dataset.theme = isDark ? '' : 'dark';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+    </script>
+</body>
+
+</html>

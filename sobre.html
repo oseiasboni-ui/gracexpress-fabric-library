@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre | GraceXpress</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero {
+            height: 50vh;
+            margin-top: var(--header-height);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 32px;
+        }
+
+        .about-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .about-values {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .value-item h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .value-item p {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .about-values {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header header-hero">
+        <div class="header-container">
+            <a href="index.html" class="logo logo-elegant">GRACEXPRESS |</a>
+            <div class="header-center">
+                <h1 class="header-title">ACERVO TÊXTIL DIGITAL</h1>
+                <span class="header-subtitle">Biblioteca de Pesquisa</span>
+            </div>
+            <nav class="main-nav">
+                <a href="sobre.html" class="nav-link active" data-i18n="about">Sobre</a>
+                <a href="portfolio.html" class="nav-link" data-i18n="portfolio">Portfólio</a>
+                <a href="contato.html" class="nav-link" data-i18n="contact">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero hero-ultrawide">
+        <div class="hero-bg" style="background-image: url('sobre-hero.jpg')">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Sobre Nós</h1>
+            <p class="hero-subtitle">Nossa história e missão</p>
+        </div>
+    </section>
+
+    <div class="about-content">
+        <h2>Nossa História</h2>
+        <p>GraceXpress nasceu da paixão por tecidos e pela arte da confecção. Desde nossa fundação, nos dedicamos a
+            catalogar e apresentar os mais diversos tecidos utilizados na indústria da moda, desde as fibras naturais
+            milenares até as mais avançadas tecnologias têxteis.</p>
+        <p>Nossa missão é democratizar o conhecimento sobre tecidos, tornando acessível a qualquer pessoa interessada em
+            moda, design ou confecção as informações detalhadas sobre composição, origem, cuidados e aplicações de cada
+            material.</p>
+        <p>Acreditamos que o conhecimento dos materiais é fundamental para criar peças de qualidade, sustentáveis e
+            adequadas a cada propósito. Por isso, compilamos informações de mais de 120 tecidos diferentes, cada um com
+            sua história única e características especiais.</p>
+
+        <div class="about-values">
+            <div class="value-item">
+                <h3>🎯 Qualidade</h3>
+                <p>Informações precisas e detalhadas sobre cada tecido, pesquisadas em fontes confiáveis.</p>
+            </div>
+            <div class="value-item">
+                <h3>🌱 Sustentabilidade</h3>
+                <p>Destaque para tecidos ecológicos e práticas de produção consciente.</p>
+            </div>
+            <div class="value-item">
+                <h3>📚 Educação</h3>
+                <p>Democratizar o conhecimento têxtil para profissionais e entusiastas.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>© 2024 GraceXpress. Todos os direitos reservados.</p>
+                <div class="footer-controls">
+                    <div class="lang-selector footer-lang">
+                        <select id="langSelect" aria-label="Idioma">
+                            <option value="pt">PT</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
+                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="translations.js"></script>
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        if (localStorage.getItem('theme') === 'dark') document.body.dataset.theme = 'dark';
+        themeToggle?.addEventListener('click', () => {
+            const isDark = document.body.dataset.theme === 'dark';
+            document.body.dataset.theme = isDark ? '' : 'dark';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+    </script>
+</body>
+
+</html>

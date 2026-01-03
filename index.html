@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="GraceXpress - Explore nossa coleção completa de 120 tecidos para moda e confecção.">
+    <title>GraceXpress | Coleção de Tecidos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header header-hero">
+        <div class="header-container">
+            <a href="index.html" class="logo logo-elegant">GRACEXPRESS |</a>
+            <div class="header-center">
+                <h1 class="header-title">ACERVO TÊXTIL DIGITAL</h1>
+                <span class="header-subtitle">Biblioteca de Pesquisa</span>
+            </div>
+            <nav class="main-nav">
+                <a href="sobre.html" class="nav-link" data-i18n="about">Sobre</a>
+                <a href="portfolio.html" class="nav-link" data-i18n="portfolio">Portfólio</a>
+                <a href="contato.html" class="nav-link" data-i18n="contact">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero with Background 21:9 Ultrawide -->
+    <section class="hero hero-ultrawide">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-dim-overlay" id="heroDimOverlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-brand-title" id="heroBrandTitle">
+                <span class="brand-main">GRACEX</span><span class="brand-slide" id="brandSlide">PRESS</span>
+            </h1>
+            <p class="hero-rotating-text" id="heroRotatingText">Uma jornada sensorial pela essência do vestuário</p>
+            <a href="#collection" class="hero-cta hero-cta-outlined">EXPLORAR O ACERVO</a>
+        </div>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="search-bar" id="searchBar">
+        <div class="search-container">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input type="text" id="searchInput" placeholder="Pesquisar tecidos..." autocomplete="off"
+                data-i18n-placeholder="searchPlaceholder">
+            <button class="search-clear-btn" id="searchClearBtn" type="button" aria-label="Limpar busca">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+            <span class="search-count" id="searchCount">120 tecidos</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content" id="collection">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+            <div class="filter-section">
+                <h3 class="filter-title" data-i18n="filterTitle">Filtrar por Tipo</h3>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="todos" checked>
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <path
+                                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                        <span data-i18n="allFabrics">Todos os Tecidos</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="naturais">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+                        </svg>
+                        <span data-i18n="naturalFibers">Fibras Naturais</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="artificiais">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <circle cx="12" cy="12" r="2" />
+                            <circle cx="12" cy="5" r="1.5" />
+                            <circle cx="18" cy="9" r="1.5" />
+                            <circle cx="18" cy="15" r="1.5" />
+                            <circle cx="12" cy="19" r="1.5" />
+                            <circle cx="6" cy="15" r="1.5" />
+                            <circle cx="6" cy="9" r="1.5" />
+                            <path d="M12 7v3M15.5 10l-2 1.5M15.5 14l-2-1.5M12 17v-3M8.5 14l2-1.5M8.5 10l2 1.5" />
+                        </svg>
+                        <span data-i18n="artificialFibers">Fibras Artificiais</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="sinteticos">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <circle cx="6" cy="6" r="2" />
+                            <circle cx="18" cy="6" r="2" />
+                            <circle cx="6" cy="18" r="2" />
+                            <circle cx="18" cy="18" r="2" />
+                            <circle cx="12" cy="12" r="2" />
+                            <path
+                                d="M8 6h8M6 8v8M18 8v8M8 18h8M8 8l2.5 2.5M16 8l-2.5 2.5M8 16l2.5-2.5M16 16l-2.5-2.5" />
+                        </svg>
+                        <span data-i18n="syntheticFibers">Fibras Sintéticas</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="malhas">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M3 6c3-2 6 2 9 0s6 2 9 0M3 12c3-2 6 2 9 0s6 2 9 0M3 18c3-2 6 2 9 0s6 2 9 0" />
+                        </svg>
+                        <span data-i18n="knits">Malhas</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="planos">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M3 3v18h18" />
+                            <path d="M3 8h18M3 14h18M3 20h18M8 3v18M14 3v18M20 3v18" />
+                        </svg>
+                        <span data-i18n="wovens">Tecidos Planos</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="leves">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5l6.74-6.76z" />
+                            <path d="M16 8L2 22M17.5 15H9" />
+                        </svg>
+                        <span data-i18n="lightweight">Tecidos Leves</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="nobres">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z" />
+                            <path d="M4 20h16" />
+                        </svg>
+                        <span data-i18n="luxury">Tecidos Nobres</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="esportivos">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                            <path d="M21 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2" />
+                            <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />
+                            <path d="M15 9l-6 6M9 9l6 6" />
+                        </svg>
+                        <span data-i18n="sportswear">Esportivos</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="inverno">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 2v20M4.93 4.93l14.14 14.14M2 12h20M4.93 19.07l14.14-14.14" />
+                            <circle cx="12" cy="12" r="4" />
+                        </svg>
+                        <span data-i18n="winterFabrics">Outono/Inverno</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="radio" name="category" value="estruturados">
+                        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />
+                            <path d="M12 12l8-4.5M12 12v9M12 12L4 7.5" />
+                        </svg>
+                        <span data-i18n="structured">Estruturados</span>
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Collection Grid - 4 columns -->
+        <section class="collection-grid" id="collectionGrid"></section>
+    </main>
+
+    <!-- Fabric Slider (80% pop-in) -->
+    <div class="fabric-slider" id="fabricSlider">
+        <button class="slider-close" id="sliderClose">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+        </button>
+        <div class="slider-container">
+            <div class="slider-wrapper" id="sliderWrapper"></div>
+            <div class="slider-progress" id="sliderProgress"></div>
+        </div>
+    </div>
+
+    <!-- Advertising Bar (V2) -->
+    <div class="ad-bar">
+        <div class="ad-track">
+            <!-- Slots with Red Divider & Bilingual Text -->
+            <a href="mailto:oseiasboni@gmail.com?subject=Interesse%20em%20Divulga%C3%A7%C3%A3o%20no%20Seu%20Portal&body=Ol%C3%A1%2C%20tudo%20bem%3F%20Tenho%20interesse%20em%20divulgar%20minha%20marca%20%2F%20loja%20no%20seu%20portal."
+                class="ad-slot">
+                <span data-i18n="ad1">Anuncie Sua Marca Aqui</span>
+            </a>
+            <a href="mailto:oseiasboni@gmail.com?subject=Interesse%20em%20Divulga%C3%A7%C3%A3o%20no%20Seu%20Portal&body=Ol%C3%A1%2C%20tudo%20bem%3F%20Tenho%20interesse%20em%20divulgar%20minha%20marca%20%2F%20loja%20no%20seu%20portal."
+                class="ad-slot">
+                <span data-i18n="ad2">Advertise Here / Contact Us</span>
+            </a>
+            <a href="mailto:oseiasboni@gmail.com?subject=Interesse%20em%20Divulga%C3%A7%C3%A3o%20no%20Seu%20Portal&body=Ol%C3%A1%2C%20tudo%20bem%3F%20Tenho%20interesse%20em%20divulgar%20minha%20marca%20%2F%20loja%20no%20seu%20portal."
+                class="ad-slot">
+                <span data-i18n="ad3">Sua Loja em Destaque</span>
+            </a>
+            <a href="mailto:oseiasboni@gmail.com?subject=Interesse%20em%20Divulga%C3%A7%C3%A3o%20no%20Seu%20Portal&body=Ol%C3%A1%2C%20tudo%20bem%3F%20Tenho%20interesse%20em%20divulgar%20minha%20marca%20%2F%20loja%20no%20seu%20portal."
+                class="ad-slot">
+                <span data-i18n="ad4">Your Brand Highlighted</span>
+            </a>
+            <!-- Duplicated for loop -->
+            <a href="mailto:oseiasboni@gmail.com?subject=Interesse%20em%20Divulga%C3%A7%C3%A3o%20no%20Seu%20Portal&body=Ol%C3%A1%2C%20tudo%20bem%3F%20Tenho%20interesse%20em%20divulgar%20minha%20marca%20%2F%20loja%20no%20seu%20portal."
+                class="ad-slot">
+                <span data-i18n="ad1">Anuncie Sua Marca Aqui</span>
+            </a>
+            <a href="mailto:oseiasboni@gmail.com?subject=Interesse%20em%20Divulga%C3%A7%C3%A3o%20no%20Seu%20Portal&body=Ol%C3%A1%2C%20tudo%20bem%3F%20Tenho%20interesse%20em%20divulgar%20minha%20marca%20%2F%20loja%20no%20seu%20portal."
+                class="ad-slot">
+                <span data-i18n="ad2">Advertise Here / Contact Us</span>
+            </a>
+            <a href="mailto:oseiasboni@gmail.com?subject=Interesse%20em%20Divulga%C3%A7%C3%A3o%20no%20Seu%20Portal&body=Ol%C3%A1%2C%20tudo%20bem%3F%20Tenho%20interesse%20em%20divulgar%20minha%20marca%20%2F%20loja%20no%20seu%20portal."
+                class="ad-slot">
+                <span data-i18n="ad3">Sua Loja em Destaque</span>
+            </a>
+            <a href="mailto:oseiasboni@gmail.com?subject=Interesse%20em%20Divulga%C3%A7%C3%A3o%20no%20Seu%20Portal&body=Ol%C3%A1%2C%20tudo%20bem%3F%20Tenho%20interesse%20em%20divulgar%20minha%20marca%20%2F%20loja%20no%20seu%20portal."
+                class="ad-slot">
+                <span data-i18n="ad4">Your Brand Highlighted</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <h3>GraceXpress</h3>
+                    <p data-i18n="footerBrand">Sua referência em tecidos para moda e confecção.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4 data-i18n="navigation">Navegação</h4>
+                        <a href="portfolio.html" data-i18n="portfolio">Portfólio</a>
+                        <a href="sobre.html" data-i18n="about">Sobre</a>
+                        <a href="contato.html" data-i18n="contact">Contato</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
+                <div class="footer-controls">
+                    <div class="lang-selector footer-lang">
+                        <select id="langSelect" aria-label="Idioma">
+                            <option value="pt">PT</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
+                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- Admin Link Removed -->
+            </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <span class="admin-close" onclick="closeAdminLogin()">&times;</span>
+            <h3>Acesso Administrativo</h3>
+            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="adminEmail" required placeholder="admin@gracexpress.com">
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="adminPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="admin-btn">Entrar</button>
+                <a href="#" class="admin-forgot" onclick="resetAdminPassword()">Esqueci minha senha</a>
+            </form>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="translations.js"></script>
+    <script src="factories-data.js"></script>
+    <script src="fabrics-data.js"></script>
+    <script src="media-manager.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
