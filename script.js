@@ -716,3 +716,53 @@ document.documentElement.lang = savedLang;
 // Initialize
 document.addEventListener('DOMContentLoaded', () => render(fabrics));
 
+// ==========================================
+// Mobile Menu Toggle
+// ==========================================
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+function toggleMobileMenu() {
+  mobileNavOverlay?.classList.toggle('active');
+
+  // Toggle hamburger icon animation
+  if (mobileMenuBtn) {
+    const isOpen = mobileNavOverlay?.classList.contains('active');
+    if (isOpen) {
+      mobileMenuBtn.innerHTML = `
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      `;
+    } else {
+      mobileMenuBtn.innerHTML = `
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      `;
+    }
+  }
+}
+
+mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+
+// Close mobile menu when clicking a link
+mobileNavOverlay?.querySelectorAll('.mobile-nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileNavOverlay.classList.remove('active');
+    if (mobileMenuBtn) {
+      mobileMenuBtn.innerHTML = `
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      `;
+    }
+  });
+});
+
+// Close mobile menu on escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && mobileNavOverlay?.classList.contains('active')) {
+    toggleMobileMenu();
+  }
+});
