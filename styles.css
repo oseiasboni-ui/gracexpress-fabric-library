@@ -535,6 +535,38 @@ body {
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
+/* Hero Content Left Aligned */
+.hero-content-left {
+    text-align: left;
+    align-items: flex-start;
+    padding-left: 10%;
+}
+
+/* Brand Grace and Express */
+.brand-grace {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+.brand-express {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+/* Hero Subtitle Black - Aligned Right of Title */
+.hero-subtitle-black {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 500;
+    color: #000000;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 16px 0 40px 0;
+    text-shadow: none;
+    text-align: left;
+    padding-left: 0;
+}
+
 /* CTA Button - Outlined Elegant Style */
 .hero-cta {
     display: inline-block;
@@ -565,6 +597,24 @@ body {
     color: #222;
     border-color: #FFFFFF;
     text-shadow: none;
+}
+
+/* CTA Button - Blue Style (Reference Design) */
+.hero-cta.hero-cta-blue {
+    background: #1a6b99;
+    border: 2px solid #1a6b99;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    padding: 16px 36px;
+    text-shadow: none;
+    text-transform: uppercase;
+}
+
+.hero-cta.hero-cta-blue:hover {
+    background: #135a85;
+    border-color: #135a85;
 }
 
 .hero-cta:hover {
@@ -884,20 +934,10 @@ body {
 .fabric-card {
     cursor: pointer;
     transition: var(--transition);
-    /* iOS touch support */
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
-    touch-action: manipulation;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
 .fabric-card:hover {
     transform: translateY(-3px);
-}
-
-.fabric-card:active {
-    transform: scale(0.98);
 }
 
 .fabric-card-image {
@@ -3376,156 +3416,4 @@ body {
     .main-nav {
         display: none !important;
     }
-}
-
-/* ====================================================
-   iOS/SAFARI SPECIFIC FIXES
-   ==================================================== */
-
-/* iOS Safe Area Insets for notched devices */
-@supports (padding: env(safe-area-inset-top)) {
-    .header {
-        padding-top: env(safe-area-inset-top);
-    }
-
-    .footer {
-        padding-bottom: calc(90px + env(safe-area-inset-bottom));
-    }
-
-    .ad-bar {
-        padding-bottom: env(safe-area-inset-bottom);
-    }
-
-    .mobile-nav-overlay {
-        padding-top: env(safe-area-inset-top);
-        padding-bottom: env(safe-area-inset-bottom);
-    }
-
-    .fabric-slider {
-        padding-top: env(safe-area-inset-top);
-        padding-bottom: env(safe-area-inset-bottom);
-    }
-}
-
-/* Fix for iOS 100vh issue - Safari includes URL bar in vh */
-@supports (-webkit-touch-callout: none) {
-    .hero {
-        height: -webkit-fill-available;
-        min-height: -webkit-fill-available;
-    }
-
-    .mobile-nav-overlay {
-        height: -webkit-fill-available;
-    }
-
-    .fabric-slider {
-        height: -webkit-fill-available;
-    }
-}
-
-/* WebKit specific prefixes for animations */
-.accord-fill,
-.season-meter-fill {
-    -webkit-transform: scaleX(0);
-    transform: scaleX(0);
-    -webkit-transform-origin: left;
-    transform-origin: left;
-}
-
-.accord-fill.animate,
-.season-meter-fill.animate {
-    -webkit-animation: barGrow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation: barGrow 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-/* iOS touch scrolling */
-.slide-content-section {
-    -webkit-overflow-scrolling: touch;
-}
-
-.slider-wrapper {
-    -webkit-overflow-scrolling: touch;
-}
-
-.collection-grid {
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Fix iOS button styling */
-.hero-cta,
-.mobile-menu-btn,
-.slider-nav,
-.slider-close,
-.filter-option,
-.admin-btn {
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-/* Fix iOS input styling */
-input,
-select,
-textarea {
-    -webkit-appearance: none;
-    -webkit-border-radius: 0;
-    border-radius: 4px;
-}
-
-/* Fix for iOS flexbox issues */
-.slide {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-}
-
-@media (min-width: 769px) {
-    .slide {
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: row;
-        flex-direction: row;
-    }
-}
-
-/* iOS hover state fix */
-@media (hover: none) {
-    .fabric-card:hover .fabric-card-image img {
-        -webkit-transform: none;
-        transform: none;
-    }
-
-    .hero-cta:hover {
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
-/* Fix for iOS position:fixed issues */
-.header,
-.search-bar,
-.ad-bar {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-/* iOS animation performance */
-.brand-slide,
-.accord-fill,
-.season-meter-fill,
-.fabric-card,
-.hero-bg {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-perspective: 1000;
-    perspective: 1000;
-}
-
-/* Fix blurry text on iOS */
-* {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }

@@ -72,7 +72,7 @@ function render(list) {
       : `<span class="fabric-card-placeholder">🧵</span>`;
 
     return `
-      <article class="fabric-card" data-fabric-id="${f.id}">
+      <article class="fabric-card" data-fabric-id="${f.id}" onclick="openSlider(${f.id})">
         <div class="fabric-card-image">
           ${imageContent}
         </div>
@@ -80,9 +80,6 @@ function render(list) {
       </article>
     `;
   }).join('');
-
-  // Attach event listeners using event delegation for iOS compatibility
-  attachFabricCardListeners();
 }
 
 // Clear all filters and show all fabrics
@@ -132,29 +129,6 @@ function filter() {
     // Restore scroll position after render
     window.scrollTo({ top: scrollY, behavior: 'instant' });
   });
-}
-
-// ==========================================
-// iOS Touch Event Support - Event Delegation
-// ==========================================
-function attachFabricCardListeners() {
-  if (!grid) return;
-
-  // Use event delegation on the grid for better iOS compatibility
-  // iOS Safari works better with just click events
-  grid.addEventListener('click', handleFabricCardClick);
-}
-
-function handleFabricCardClick(e) {
-  const card = e.target.closest('.fabric-card');
-  if (card && card.dataset.fabricId) {
-    e.preventDefault();
-    e.stopPropagation();
-    const fabricId = parseInt(card.dataset.fabricId, 10);
-    if (!isNaN(fabricId)) {
-      openSlider(fabricId);
-    }
-  }
 }
 
 // Generate slide HTML - Premium Modern Design with i18n
