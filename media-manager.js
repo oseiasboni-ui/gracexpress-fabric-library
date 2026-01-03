@@ -246,15 +246,13 @@ async function discardAdminChanges() {
 }
 
 function exitAdminMode() {
-    if (confirm('Sair do modo admin? Alterações não salvas serão perdidas.')) {
-        sessionStorage.removeItem('isAdminMode');
-        isAdminMode = false;
-        document.body.classList.remove('edit-mode-active');
-        removeAdminToolbar();
-        showNotification('Modo admin desativado.', 'info');
-        // Reload to refresh UI
-        location.reload();
-    }
+    // Sair diretamente do modo admin
+    sessionStorage.removeItem('isAdminMode');
+    isAdminMode = false;
+    document.body.classList.remove('edit-mode-active');
+    removeAdminToolbar();
+    // Reload to refresh UI without admin mode
+    location.reload();
 }
 
 // ==========================================
