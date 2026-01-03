@@ -579,9 +579,9 @@ document.addEventListener('keydown', e => {
 const heroRotatingText = document.getElementById('heroRotatingText');
 const rotatingPhrases = [
   'Uma jornada sensorial pela essência do vestuário',
-  '...explore texturas que dão vida ao movimento.',
-  '...descubra a origem nobre e a pureza de cada fibra selecionada.',
-  '...sinta a suavidade de tramas que abraçam.'
+  'Explore texturas que dão vida ao movimento',
+  'Descubra a origem nobre e a pureza de cada fibra selecionada',
+  'Sinta a suavidade de tramas que abraçam'
 ];
 let currentTextIndex = 0;
 

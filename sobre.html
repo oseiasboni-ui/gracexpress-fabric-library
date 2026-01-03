@@ -7,6 +7,8 @@
     <title>Sobre | GraceXpress</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         .page-hero {
@@ -14,46 +16,56 @@
             margin-top: var(--header-height);
         }
 
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 32px;
-        }
-
-        .about-content h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-
-        .about-content p {
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--color-text-secondary);
-            margin-bottom: 24px;
-        }
-
-        .about-values {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .value-item h3 {
-            font-size: 18px;
+        /* Hero title formal style */
+        .hero-title-formal {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: clamp(48px, 8vw, 90px);
             font-weight: 600;
-            margin-bottom: 12px;
+            color: #ffffff;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            margin: 0;
+            letter-spacing: 0.02em;
         }
 
-        .value-item p {
-            font-size: 14px;
+        /* About content centered */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .about-main-title {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 50px;
+            letter-spacing: 0.02em;
+        }
+
+        .about-paragraph {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: clamp(16px, 2vw, 20px);
+            line-height: 2;
             color: var(--color-text-secondary);
+            margin-bottom: 40px;
+            text-align: justify;
+            text-align-last: center;
+        }
+
+        .about-paragraph:last-child {
+            margin-bottom: 0;
         }
 
         @media (max-width: 768px) {
-            .about-values {
-                grid-template-columns: 1fr;
+            .about-content {
+                padding: 60px 24px;
+            }
+
+            .about-paragraph {
+                text-align: left;
+                text-align-last: left;
             }
         }
     </style>
@@ -72,6 +84,21 @@
                 <a href="portfolio.html" class="nav-link" data-i18n="portfolio">Portfólio</a>
                 <a href="contato.html" class="nav-link" data-i18n="contact">Contato</a>
             </nav>
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay">
+            <nav class="mobile-nav">
+                <a href="index.html" class="mobile-nav-link" data-i18n="home">Início</a>
+                <a href="sobre.html" class="mobile-nav-link" data-i18n="about">Sobre</a>
+                <a href="portfolio.html" class="mobile-nav-link" data-i18n="portfolio">Portfólio</a>
+                <a href="contato.html" class="mobile-nav-link" data-i18n="contact">Contato</a>
+            </nav>
         </div>
     </header>
 
@@ -80,37 +107,29 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Sobre Nós</h1>
-            <p class="hero-subtitle">Nossa história e missão</p>
+            <h1 class="hero-title-formal">Sobre Nós</h1>
         </div>
     </section>
 
     <div class="about-content">
-        <h2>Nossa História</h2>
-        <p>GraceXpress nasceu da paixão por tecidos e pela arte da confecção. Desde nossa fundação, nos dedicamos a
-            catalogar e apresentar os mais diversos tecidos utilizados na indústria da moda, desde as fibras naturais
-            milenares até as mais avançadas tecnologias têxteis.</p>
-        <p>Nossa missão é democratizar o conhecimento sobre tecidos, tornando acessível a qualquer pessoa interessada em
-            moda, design ou confecção as informações detalhadas sobre composição, origem, cuidados e aplicações de cada
-            material.</p>
-        <p>Acreditamos que o conhecimento dos materiais é fundamental para criar peças de qualidade, sustentáveis e
-            adequadas a cada propósito. Por isso, compilamos informações de mais de 120 tecidos diferentes, cada um com
-            sua história única e características especiais.</p>
+        <h2 class="about-main-title">A Alquimia do Vestir</h2>
 
-        <div class="about-values">
-            <div class="value-item">
-                <h3>🎯 Qualidade</h3>
-                <p>Informações precisas e detalhadas sobre cada tecido, pesquisadas em fontes confiáveis.</p>
-            </div>
-            <div class="value-item">
-                <h3>🌱 Sustentabilidade</h3>
-                <p>Destaque para tecidos ecológicos e práticas de produção consciente.</p>
-            </div>
-            <div class="value-item">
-                <h3>📚 Educação</h3>
-                <p>Democratizar o conhecimento têxtil para profissionais e entusiastas.</p>
-            </div>
-        </div>
+        <p class="about-paragraph">
+            Entre o urdume da história e a trama da inovação, floresceu a GraceXpress. Fundada sob o pilar da paixão,
+            dedicamo-nos a mapear o vasto universo tátil que veste a humanidade.
+        </p>
+
+        <p class="about-paragraph">
+            Nossa busca é iluminar os caminhos da criação. Queremos que o designer, o alfaiate e o amante da moda
+            compreendam profundamente o que tocam. Pois sabemos: a verdadeira excelência de uma peça nasce na escolha
+            sábia de sua essência.
+        </p>
+
+        <p class="about-paragraph">
+            Somos uma biblioteca viva de texturas. Devolvemos ao mundo o conhecimento de mais de 120 materiais
+            distintos, cada um com sua biografia singular. Porque entender o tecido é o primeiro passo para transformar
+            o simples ato de vestir em pura arte.
+        </p>
     </div>
 
     <footer class="footer">
@@ -148,6 +167,17 @@
             const isDark = document.body.dataset.theme === 'dark';
             document.body.dataset.theme = isDark ? '' : 'dark';
             localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileNavOverlay?.classList.toggle('active');
+            const isOpen = mobileNavOverlay?.classList.contains('active');
+            mobileMenuBtn.innerHTML = isOpen ?
+                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>' :
+                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
         });
     </script>
 </body>

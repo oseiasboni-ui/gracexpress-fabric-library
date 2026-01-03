@@ -7,11 +7,25 @@
     <title>Portfólio | GraceXpress</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <link rel="stylesheet" href="styles.css">
     <style>
         .page-hero {
             height: 50vh;
             margin-top: var(--header-height);
+        }
+
+        /* Hero title formal style */
+        .hero-title-formal {
+            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            font-size: clamp(48px, 8vw, 90px);
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            margin: 0;
+            letter-spacing: 0.02em;
         }
 
         .portfolio-grid {
@@ -28,20 +42,52 @@
             background: var(--color-bg-alt);
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .portfolio-item-image {
-            flex: 1;
-            background: linear-gradient(135deg, #e8e4dc 0%, #d4cec2 100%);
+        .portfolio-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-item-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .portfolio-item-placeholder {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            opacity: 0.3;
+            background: linear-gradient(135deg, #e8e4dc 0%, #d4cec2 100%);
+            font-size: 64px;
+            opacity: 0.5;
+        }
+
+        .portfolio-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
         }
 
         .portfolio-item-content {
-            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            color: #fff;
+            z-index: 2;
         }
 
         .portfolio-item-title {
@@ -50,9 +96,237 @@
             margin-bottom: 8px;
         }
 
-        .portfolio-item-desc {
+        .portfolio-item-phrase {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+
+        .portfolio-item.video::before {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #333;
+            z-index: 3;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item.video:hover::before {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Admin Edit Badge for Portfolio */
+        .portfolio-edit-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--color-accent);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 10;
+            display: none;
+            cursor: pointer;
+        }
+
+        .edit-mode-active .portfolio-edit-badge {
+            display: block;
+        }
+
+        /* Add New Item Button */
+        .portfolio-add-item {
+            aspect-ratio: 4/5;
+            background: var(--color-bg-alt);
+            border: 2px dashed var(--color-border);
+            border-radius: 8px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            gap: 12px;
+        }
+
+        .edit-mode-active .portfolio-add-item {
+            display: flex;
+        }
+
+        .portfolio-add-item:hover {
+            border-color: var(--color-accent);
+            background: rgba(139, 115, 85, 0.05);
+        }
+
+        .portfolio-add-item svg {
+            width: 48px;
+            height: 48px;
+            color: var(--color-text-secondary);
+        }
+
+        .portfolio-add-item span {
             font-size: 14px;
             color: var(--color-text-secondary);
+        }
+
+        /* Portfolio Edit Modal */
+        .portfolio-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portfolio-modal.active {
+            display: flex;
+        }
+
+        .portfolio-modal-content {
+            background: var(--color-bg);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .portfolio-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .portfolio-modal-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .portfolio-modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--color-text-secondary);
+        }
+
+        .portfolio-modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--color-text);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .image-preview {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: var(--color-bg-alt);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-preview-placeholder {
+            font-size: 48px;
+            opacity: 0.3;
+        }
+
+        .btn-upload {
+            width: 100%;
+            padding: 12px;
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-upload:hover {
+            border-color: var(--color-accent);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn-save {
+            flex: 1;
+            padding: 14px;
+            background: var(--color-accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .btn-delete {
+            padding: 14px 20px;
+            background: transparent;
+            color: #ef4444;
+            border: 1px solid #ef4444;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
         }
 
         @media (max-width: 768px) {
@@ -76,6 +350,21 @@
                 <a href="portfolio.html" class="nav-link active" data-i18n="portfolio">Portfólio</a>
                 <a href="contato.html" class="nav-link" data-i18n="contact">Contato</a>
             </nav>
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay">
+            <nav class="mobile-nav">
+                <a href="index.html" class="mobile-nav-link" data-i18n="home">Início</a>
+                <a href="sobre.html" class="mobile-nav-link" data-i18n="about">Sobre</a>
+                <a href="portfolio.html" class="mobile-nav-link" data-i18n="portfolio">Portfólio</a>
+                <a href="contato.html" class="mobile-nav-link" data-i18n="contact">Contato</a>
+            </nav>
         </div>
     </header>
 
@@ -84,112 +373,145 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title" data-i18n="portfolioTitle">Meu Portfólio</h1>
-            <p class="hero-subtitle" data-i18n="portfolioSubtitle">Coleções e projetos de moda</p>
+            <h1 class="hero-title-formal">Meu Portfólio</h1>
         </div>
     </section>
 
-    <div class="portfolio-grid">
-        <!-- Photo 1 -->
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&q=80" alt="Coleção Verão"
-                class="portfolio-item-media">
-            <div class="portfolio-item-overlay"></div>
-            <div class="portfolio-item-content">
-                <h3 class="portfolio-item-title" data-i18n="portfolioItem1Title">Coleção Verão 2024</h3>
-                <p class="portfolio-item-phrase" data-i18n="portfolioItem1Phrase">"Fluidez que dança com a brisa"</p>
-            </div>
-        </article>
-
-        <!-- Photo 2 -->
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80" alt="Alta Costura"
-                class="portfolio-item-media">
-            <div class="portfolio-item-overlay"></div>
-            <div class="portfolio-item-content">
-                <h3 class="portfolio-item-title" data-i18n="portfolioItem2Title">Alta Costura</h3>
-                <p class="portfolio-item-phrase" data-i18n="portfolioItem2Phrase">"Elegância atemporal em cada detalhe"
-                </p>
-            </div>
-        </article>
-
-        <!-- Video 1 -->
-        <article class="portfolio-item video">
-            <img src="https://images.unsplash.com/photo-1519235106695-a22a7a260ac6?w=600&q=80" alt="Desfile"
-                class="portfolio-item-media">
-            <div class="portfolio-item-overlay"></div>
-            <div class="portfolio-item-content">
-                <h3 class="portfolio-item-title" data-i18n="portfolioItem3Title">Desfile Paris 2024</h3>
-                <p class="portfolio-item-phrase" data-i18n="portfolioItem3Phrase">"O movimento que inspira"</p>
-            </div>
-        </article>
-
-        <!-- Photo 3 -->
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Alfaiataria"
-                class="portfolio-item-media">
-            <div class="portfolio-item-overlay"></div>
-            <div class="portfolio-item-content">
-                <h3 class="portfolio-item-title" data-i18n="portfolioItem4Title">Alfaiataria Moderna</h3>
-                <p class="portfolio-item-phrase" data-i18n="portfolioItem4Phrase">"Precisão que define caráter"</p>
-            </div>
-        </article>
-
-        <!-- Photo 4 -->
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80" alt="Inverno"
-                class="portfolio-item-media">
-            <div class="portfolio-item-overlay"></div>
-            <div class="portfolio-item-content">
-                <h3 class="portfolio-item-title" data-i18n="portfolioItem5Title">Coleção Inverno 2024</h3>
-                <p class="portfolio-item-phrase" data-i18n="portfolioItem5Phrase">"Calor e sofisticação abraçados"</p>
-            </div>
-        </article>
-
-        <!-- Photo 5 -->
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600&q=80" alt="Sustentável"
-                class="portfolio-item-media">
-            <div class="portfolio-item-overlay"></div>
-            <div class="portfolio-item-content">
-                <h3 class="portfolio-item-title" data-i18n="portfolioItem6Title">Moda Sustentável</h3>
-                <p class="portfolio-item-phrase" data-i18n="portfolioItem6Phrase">"Consciência que veste bem"</p>
-            </div>
-        </article>
-
-        <!-- Video 2 -->
-        <article class="portfolio-item video">
-            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80" alt="Backstage"
-                class="portfolio-item-media">
-            <div class="portfolio-item-overlay"></div>
-            <div class="portfolio-item-content">
-                <h3 class="portfolio-item-title" data-i18n="portfolioItem7Title">Backstage Exclusivo</h3>
-                <p class="portfolio-item-phrase" data-i18n="portfolioItem7Phrase">"A magia por trás da criação"</p>
-            </div>
-        </article>
-
-        <!-- Photo 6 -->
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80" alt="Esportivo"
-                class="portfolio-item-media">
-            <div class="portfolio-item-overlay"></div>
-            <div class="portfolio-item-content">
-                <h3 class="portfolio-item-title" data-i18n="portfolioItem8Title">Linha Esportiva</h3>
-                <p class="portfolio-item-phrase" data-i18n="portfolioItem8Phrase">"Performance com estilo"</p>
-            </div>
-        </article>
-
-        <!-- Photo 7 -->
-        <article class="portfolio-item">
-            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80" alt="Noite"
-                class="portfolio-item-media">
-            <div class="portfolio-item-overlay"></div>
-            <div class="portfolio-item-content">
-                <h3 class="portfolio-item-title" data-i18n="portfolioItem9Title">Noite de Gala</h3>
-                <p class="portfolio-item-phrase" data-i18n="portfolioItem9Phrase">"Brilho que encanta olhares"</p>
-            </div>
-        </article>
+    <div class="portfolio-grid" id="portfolioGrid">
+        <!-- Items will be rendered by JavaScript -->
     </div>
+
+    <!-- Portfolio Edit Modal -->
+    <div class="portfolio-modal" id="portfolioModal">
+        <div class="portfolio-modal-content">
+            <div class="portfolio-modal-header">
+                <h3 id="modalTitle">Editar Item</h3>
+                <button class="portfolio-modal-close" onclick="closePortfolioModal()">×</button>
+            </div>
+            <div class="portfolio-modal-body">
+                <div class="form-group">
+                    <label>Imagem</label>
+                    <div class="image-preview" id="imagePreview">
+                        <span class="image-preview-placeholder">📷</span>
+                    </div>
+                    <input type="file" id="portfolioImageInput" accept="image/*" style="display: none;">
+                    <button class="btn-upload" onclick="document.getElementById('portfolioImageInput').click()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                        Carregar Imagem
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <select id="portfolioType">
+                        <option value="photo">Foto</option>
+                        <option value="video">Vídeo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Título</label>
+                    <input type="text" id="portfolioTitle" placeholder="Ex: Coleção Verão 2024">
+                </div>
+                <div class="form-group">
+                    <label>Frase</label>
+                    <input type="text" id="portfolioPhrase" placeholder="Ex: Elegância atemporal">
+                </div>
+                <div class="form-group" id="videoUrlGroup" style="display: none;">
+                    <label>URL do Vídeo (YouTube/Vimeo)</label>
+                    <input type="text" id="portfolioVideoUrl" placeholder="https://youtube.com/watch?v=...">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-save" onclick="savePortfolioItem()">Salvar</button>
+                    <button class="btn-delete" id="btnDelete" onclick="deletePortfolioItem()">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div class="video-player-modal" id="videoPlayerModal">
+        <div class="video-player-overlay" onclick="closeVideoPlayer()"></div>
+        <div class="video-player-content">
+            <button class="video-player-close" onclick="closeVideoPlayer()">×</button>
+            <div class="video-player-wrapper" id="videoPlayerWrapper">
+                <!-- YouTube iframe will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Video Player Modal */
+        .video-player-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-player-modal.active {
+            display: flex;
+        }
+
+        .video-player-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .video-player-content {
+            position: relative;
+            width: 90%;
+            max-width: 900px;
+            z-index: 1;
+        }
+
+        .video-player-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .video-player-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .video-player-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-player-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 
     <footer class="footer">
         <div class="footer-container">
@@ -200,9 +522,6 @@
                         <select id="langSelect" aria-label="Idioma">
                             <option value="pt">PT</option>
                             <option value="en">EN</option>
-                            <option value="es">ES</option>
-                            <option value="fr">FR</option>
-                            <option value="zh">中文</option>
                         </select>
                     </div>
                     <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
@@ -221,8 +540,12 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="translations.js"></script>
+    <script src="media-manager.js"></script>
     <script>
+        // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         if (localStorage.getItem('theme') === 'dark') document.body.dataset.theme = 'dark';
         themeToggle?.addEventListener('click', () => {
@@ -230,6 +553,280 @@
             document.body.dataset.theme = isDark ? '' : 'dark';
             localStorage.setItem('theme', isDark ? 'light' : 'dark');
         });
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileNavOverlay?.classList.toggle('active');
+            const isOpen = mobileNavOverlay?.classList.contains('active');
+            mobileMenuBtn.innerHTML = isOpen ?
+                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>' :
+                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
+        });
+
+        // Portfolio Data Management
+        const PORTFOLIO_STORAGE_KEY = 'portfolioItems';
+        let portfolioItems = [];
+        let currentEditIndex = null;
+        let currentImageData = null;
+
+        // Default items
+        const defaultPortfolioItems = [
+            { id: 1, type: 'photo', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&q=80', title: 'Coleção Verão 2024', phrase: 'Fluidez que dança com a brisa' },
+            { id: 2, type: 'photo', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80', title: 'Alta Costura', phrase: 'Elegância atemporal em cada detalhe' },
+            { id: 3, type: 'video', image: 'https://images.unsplash.com/photo-1519235106695-a22a7a260ac6?w=600&q=80', title: 'Desfile Paris 2024', phrase: 'O movimento que inspira', videoUrl: '' },
+            { id: 4, type: 'photo', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', title: 'Alfaiataria Moderna', phrase: 'Precisão que define caráter' },
+            { id: 5, type: 'photo', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80', title: 'Coleção Inverno 2024', phrase: 'Calor e sofisticação abraçados' },
+            { id: 6, type: 'photo', image: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600&q=80', title: 'Moda Sustentável', phrase: 'Consciência que veste bem' },
+            { id: 7, type: 'video', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80', title: 'Backstage Exclusivo', phrase: 'A magia por trás da criação', videoUrl: '' },
+            { id: 8, type: 'photo', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80', title: 'Linha Esportiva', phrase: 'Performance com estilo' },
+            { id: 9, type: 'photo', image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80', title: 'Noite de Gala', phrase: 'Brilho que encanta olhares' }
+        ];
+
+        // Load portfolio items
+        function loadPortfolioItems() {
+            const stored = localStorage.getItem(PORTFOLIO_STORAGE_KEY);
+            if (stored) {
+                portfolioItems = JSON.parse(stored);
+            } else {
+                portfolioItems = [...defaultPortfolioItems];
+                savePortfolioItems();
+            }
+        }
+
+        // Save portfolio items
+        function savePortfolioItems() {
+            localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioItems));
+        }
+
+        // Render portfolio grid
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolioGrid');
+            const isAdmin = sessionStorage.getItem('isAdminMode') === 'true';
+
+            let html = portfolioItems.map((item, index) => `
+                <article class="portfolio-item ${item.type === 'video' ? 'video' : ''}" onclick="handleItemClick(${index})">
+                    ${item.image ? `<img src="${item.image}" alt="${item.title}" class="portfolio-item-media">` :
+                    '<div class="portfolio-item-placeholder">📷</div>'}
+                    <div class="portfolio-item-overlay"></div>
+                    <div class="portfolio-item-content">
+                        <h3 class="portfolio-item-title">${item.title}</h3>
+                        <p class="portfolio-item-phrase">"${item.phrase}"</p>
+                    </div>
+                    <div class="portfolio-edit-badge" onclick="event.stopPropagation(); openEditModal(${index})">EDITAR</div>
+                </article>
+            `).join('');
+
+            // Add "Add New" button for admin
+            html += `
+                <div class="portfolio-add-item" onclick="openAddModal()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 8v8M8 12h8"/>
+                    </svg>
+                    <span>Adicionar Item</span>
+                </div>
+            `;
+
+            grid.innerHTML = html;
+        }
+
+        // Handle item click
+        function handleItemClick(index) {
+            const item = portfolioItems[index];
+            if (item.type === 'video' && item.videoUrl) {
+                openVideoPlayer(item.videoUrl);
+            }
+        }
+
+        // Extract YouTube video ID from URL
+        function getYouTubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        // Open video player modal
+        function openVideoPlayer(url) {
+            const videoId = getYouTubeId(url);
+            const wrapper = document.getElementById('videoPlayerWrapper');
+
+            if (videoId) {
+                wrapper.innerHTML = `<iframe 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>`;
+            } else {
+                // If not YouTube, try opening as regular video or redirect
+                window.open(url, '_blank');
+                return;
+            }
+
+            document.getElementById('videoPlayerModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close video player modal
+        function closeVideoPlayer() {
+            document.getElementById('videoPlayerModal').classList.remove('active');
+            document.getElementById('videoPlayerWrapper').innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        // Close video player on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('videoPlayerModal').classList.contains('active')) {
+                closeVideoPlayer();
+            }
+        });
+
+        // Open modal for editing
+        function openEditModal(index) {
+            currentEditIndex = index;
+            const item = portfolioItems[index];
+
+            document.getElementById('modalTitle').textContent = 'Editar Item';
+            document.getElementById('portfolioType').value = item.type;
+            document.getElementById('portfolioTitle').value = item.title;
+            document.getElementById('portfolioPhrase').value = item.phrase;
+            document.getElementById('portfolioVideoUrl').value = item.videoUrl || '';
+            document.getElementById('btnDelete').style.display = 'block';
+
+            // Show/hide video URL field
+            document.getElementById('videoUrlGroup').style.display = item.type === 'video' ? 'block' : 'none';
+
+            // Show image preview
+            const preview = document.getElementById('imagePreview');
+            if (item.image) {
+                preview.innerHTML = `<img src="${item.image}" alt="Preview">`;
+                currentImageData = item.image;
+            } else {
+                preview.innerHTML = '<span class="image-preview-placeholder">📷</span>';
+                currentImageData = null;
+            }
+
+            document.getElementById('portfolioModal').classList.add('active');
+        }
+
+        // Open modal for adding new item
+        function openAddModal() {
+            currentEditIndex = null;
+            currentImageData = null;
+
+            document.getElementById('modalTitle').textContent = 'Adicionar Item';
+            document.getElementById('portfolioType').value = 'photo';
+            document.getElementById('portfolioTitle').value = '';
+            document.getElementById('portfolioPhrase').value = '';
+            document.getElementById('portfolioVideoUrl').value = '';
+            document.getElementById('btnDelete').style.display = 'none';
+            document.getElementById('videoUrlGroup').style.display = 'none';
+            document.getElementById('imagePreview').innerHTML = '<span class="image-preview-placeholder">📷</span>';
+
+            document.getElementById('portfolioModal').classList.add('active');
+        }
+
+        // Close modal
+        function closePortfolioModal() {
+            document.getElementById('portfolioModal').classList.remove('active');
+            currentEditIndex = null;
+            currentImageData = null;
+        }
+
+        // Save portfolio item
+        function savePortfolioItem() {
+            const type = document.getElementById('portfolioType').value;
+            const title = document.getElementById('portfolioTitle').value.trim();
+            const phrase = document.getElementById('portfolioPhrase').value.trim();
+            const videoUrl = document.getElementById('portfolioVideoUrl').value.trim();
+
+            if (!title) {
+                alert('Por favor, insira um título.');
+                return;
+            }
+
+            const item = {
+                id: currentEditIndex !== null ? portfolioItems[currentEditIndex].id : Date.now(),
+                type,
+                image: currentImageData || (currentEditIndex !== null ? portfolioItems[currentEditIndex].image : ''),
+                title,
+                phrase,
+                videoUrl: type === 'video' ? videoUrl : ''
+            };
+
+            if (currentEditIndex !== null) {
+                portfolioItems[currentEditIndex] = item;
+            } else {
+                portfolioItems.push(item);
+            }
+
+            savePortfolioItems();
+            renderPortfolio();
+            closePortfolioModal();
+
+            if (typeof showNotification === 'function') {
+                showNotification('Item salvo com sucesso!', 'success');
+            }
+        }
+
+        // Delete portfolio item
+        function deletePortfolioItem() {
+            if (currentEditIndex === null) return;
+
+            if (confirm('Tem certeza que deseja excluir este item?')) {
+                portfolioItems.splice(currentEditIndex, 1);
+                savePortfolioItems();
+                renderPortfolio();
+                closePortfolioModal();
+
+                if (typeof showNotification === 'function') {
+                    showNotification('Item excluído!', 'info');
+                }
+            }
+        }
+
+        // Handle image upload
+        document.getElementById('portfolioImageInput')?.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                currentImageData = event.target.result;
+                document.getElementById('imagePreview').innerHTML = `<img src="${currentImageData}" alt="Preview">`;
+            };
+            reader.readAsDataURL(file);
+            e.target.value = '';
+        });
+
+        // Handle type change
+        document.getElementById('portfolioType')?.addEventListener('change', (e) => {
+            document.getElementById('videoUrlGroup').style.display = e.target.value === 'video' ? 'block' : 'none';
+        });
+
+        // Check admin mode and apply class
+        function checkAdminMode() {
+            if (sessionStorage.getItem('isAdminMode') === 'true') {
+                document.body.classList.add('edit-mode-active');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPortfolioItems();
+            renderPortfolio();
+            checkAdminMode();
+        });
+
+        // Make functions global
+        window.openEditModal = openEditModal;
+        window.openAddModal = openAddModal;
+        window.closePortfolioModal = closePortfolioModal;
+        window.savePortfolioItem = savePortfolioItem;
+        window.deletePortfolioItem = deletePortfolioItem;
+        window.handleItemClick = handleItemClick;
+        window.openVideoPlayer = openVideoPlayer;
+        window.closeVideoPlayer = closeVideoPlayer;
     </script>
 </body>
 
