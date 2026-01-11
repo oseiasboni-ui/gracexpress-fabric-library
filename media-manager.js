@@ -330,11 +330,18 @@ async function confirmCrop() {
     });
 
     try {
-        const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        showNotification('Enviando imagem para a nuvem...', 'info');
 
-        // Save Image to memory and IndexedDB
+        // Convert canvas to blob for upload
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+
+        // Upload to Cloudinary
+        const cloudinaryResult = await CloudinaryService.uploadImage(blob, 'gracexpress-fabrics');
+
+        // Save Cloudinary URL to memory and IndexedDB
         const imageData = {
-            url: croppedDataUrl,
+            url: cloudinaryResult.url,
+            publicId: cloudinaryResult.publicId,
             uploadedAt: new Date().toISOString()
         };
         fabricImages[currentEditFabricId] = imageData;
@@ -342,11 +349,11 @@ async function confirmCrop() {
 
         // Convert to visual update
         updateFabricMedia(currentEditFabricId);
-        showNotification('Imagem atualizada!', 'success');
+        showNotification('Imagem enviada para a nuvem com sucesso!', 'success');
         closeEditModal();
     } catch (e) {
         console.error(e);
-        showNotification('Erro ao salvar imagem.', 'error');
+        showNotification('Erro ao enviar imagem. Verifique sua conexão.', 'error');
     }
 }
 
