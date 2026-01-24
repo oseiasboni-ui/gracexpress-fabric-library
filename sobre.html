@@ -107,25 +107,25 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title-formal">Sobre Nós</h1>
+            <h1 class="hero-title-formal" data-i18n="aboutTitle">Sobre Nós</h1>
         </div>
     </section>
 
     <div class="about-content">
-        <h2 class="about-main-title">A Alquimia do Vestir</h2>
+        <h2 class="about-main-title" data-i18n="aboutMainTitle">A Alquimia do Vestir</h2>
 
-        <p class="about-paragraph">
+        <p class="about-paragraph" data-i18n="aboutP1">
             Entre o urdume da história e a trama da inovação, floresceu a GraceXpress. Fundada sob o pilar da paixão,
             dedicamo-nos a mapear o vasto universo tátil que veste a humanidade.
         </p>
 
-        <p class="about-paragraph">
+        <p class="about-paragraph" data-i18n="aboutP2">
             Nossa busca é iluminar os caminhos da criação. Queremos que o designer, o alfaiate e o amante da moda
             compreendam profundamente o que tocam. Pois sabemos: a verdadeira excelência de uma peça nasce na escolha
             sábia de sua essência.
         </p>
 
-        <p class="about-paragraph">
+        <p class="about-paragraph" data-i18n="aboutP3">
             Somos uma biblioteca viva de texturas. Devolvemos ao mundo o conhecimento de mais de 120 materiais
             distintos, cada um com sua biografia singular. Porque entender o tecido é o primeiro passo para transformar
             o simples ato de vestir em pura arte.
@@ -155,11 +155,40 @@
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                         </svg>
                     </button>
+                    <!-- Admin Link -->
+                    <a href="javascript:void(0)" onclick="openAdminLogin()"
+                        style="color: inherit; opacity: 0.5; font-size: 11px; margin-left: 10px; text-decoration: none; text-transform: uppercase; cursor: pointer;">Admin</a>
                 </div>
             </div>
         </div>
     </footer>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <span class="admin-close" onclick="closeAdminLogin()">&times;</span>
+            <h3>Acesso Administrativo</h3>
+            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="adminEmail" required placeholder="seu-email@exemplo.com">
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="adminPassword" required placeholder="Sua senha">
+                </div>
+                <button type="submit" class="admin-btn">Entrar</button>
+                <a href="#" class="admin-forgot" onclick="resetAdminPassword()">Esqueci minha senha</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth-service.js"></script>
     <script src="translations.js"></script>
+    <script src="media-manager.js?v=2"></script>
     <script>
         const themeToggle = document.getElementById('themeToggle');
         if (localStorage.getItem('theme') === 'dark') document.body.dataset.theme = 'dark';

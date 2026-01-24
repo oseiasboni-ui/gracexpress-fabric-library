@@ -9,7 +9,7 @@ let fabricImages = {};
 let fabricVideos = JSON.parse(localStorage.getItem('fabricVideos') || '{}');
 let cropper = null;
 let currentEditFabricId = null;
-let isAdminMode = sessionStorage.getItem('isAdminMode') === 'true';
+let isAdminMode = false;
 let db = null;
 
 // Backup for discard functionality
@@ -105,9 +105,7 @@ async function clearAllImagesFromDB() {
     });
 }
 
-// Admin Credentials (Simulated)
-const ADMIN_EMAIL = 'oseiasboni@gmail.com';
-const ADMIN_PASS = 'nivanilda';
+// Auth handled by js/auth-service.js
 
 // Helper: Get fabric image URL
 function getFabricImageUrl(fabricId) {
@@ -126,28 +124,30 @@ function closeAdminLogin() {
     document.getElementById('adminLoginModal').classList.remove('active');
 }
 
-function handleAdminLogin(e) {
+async function handleAdminLogin(e) {
     e.preventDefault();
     const email = document.getElementById('adminEmail').value;
     const pass = document.getElementById('adminPassword').value;
 
-    if (email === ADMIN_EMAIL && pass === ADMIN_PASS) {
-        sessionStorage.setItem('isAdminMode', 'true');
-        isAdminMode = true;
-        enableEditMode();
-        closeAdminLogin();
-        showNotification('Login realizado com sucesso! Modo de edição ativo.', 'success');
-    } else {
-        showNotification('Credenciais inválidas.', 'error');
+    try {
+        const user = await AuthService.login(email, pass);
+        if (user) {
+            isAdminMode = true;
+            enableEditMode();
+            closeAdminLogin();
+            showNotification('Login realizado com sucesso! Modo de edição ativo.', 'success');
+        }
+    } catch (error) {
+        showNotification('Erro ao fazer login: ' + error.message, 'error');
     }
 }
 
 function resetAdminPassword() {
     const email = document.getElementById('adminEmail').value;
-    if (email === ADMIN_EMAIL) {
-        showNotification(`Link de redefinição enviado para ${email}`, 'success');
+    if (email) {
+        showNotification('Para redefinir sua senha, solicite através do painel do Supabase.', 'info');
     } else {
-        showNotification('Digite o e-mail de administrador para redefinir.', 'info');
+        showNotification('Digite seu e-mail para instruções.', 'info');
     }
 }
 
@@ -173,12 +173,15 @@ function updateAdminUI() {
 function createAdminToolbar() {
     if (document.getElementById('adminToolbar')) return;
 
+    // Get translations
+    const t = typeof getCurrentTranslations === 'function' ? getCurrentTranslations() : (window.translations?.pt || {});
+
     const toolbar = document.createElement('div');
     toolbar.id = 'adminToolbar';
     toolbar.className = 'admin-toolbar';
     toolbar.innerHTML = `
         <div class="admin-toolbar-content">
-            <span class="admin-toolbar-label">🔐 Modo Admin</span>
+            <span class="admin-toolbar-label" data-i18n="adminMode">🔐 ${t.adminMode || 'Modo Admin'}</span>
             <div class="admin-toolbar-buttons">
                 <button class="admin-toolbar-btn save" onclick="saveAdminChanges()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -186,14 +189,14 @@ function createAdminToolbar() {
                         <polyline points="17 21 17 13 7 13 7 21"/>
                         <polyline points="7 3 7 8 15 8"/>
                     </svg>
-                    Salvar
+                    <span data-i18n="save">${t.save || 'Salvar'}</span>
                 </button>
                 <button class="admin-toolbar-btn discard" onclick="discardAdminChanges()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="3 6 5 6 21 6"/>
                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
                     </svg>
-                    Descartar
+                    <span data-i18n="discard">${t.discard || 'Descartar'}</span>
                 </button>
                 <button class="admin-toolbar-btn exit" onclick="exitAdminMode()">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -201,7 +204,7 @@ function createAdminToolbar() {
                         <polyline points="16 17 21 12 16 7"/>
                         <line x1="21" y1="12" x2="9" y2="12"/>
                     </svg>
-                    Sair
+                    <span data-i18n="exit">${t.exit || 'Sair'}</span>
                 </button>
             </div>
         </div>
@@ -245,14 +248,11 @@ async function discardAdminChanges() {
     }
 }
 
-function exitAdminMode() {
-    // Sair diretamente do modo admin
-    sessionStorage.removeItem('isAdminMode');
+async function exitAdminMode() {
+    await AuthService.logout();
     isAdminMode = false;
     document.body.classList.remove('edit-mode-active');
     removeAdminToolbar();
-    // Reload to refresh UI without admin mode
-    location.reload();
 }
 
 // ==========================================
@@ -470,13 +470,16 @@ function updateFabricMedia(fabricId) {
 function ensureEditModalExists() {
     if (document.getElementById('mediaEditModal')) return;
 
+    // Get current translations or fallback to PT
+    const t = typeof getCurrentTranslations === 'function' ? getCurrentTranslations() : (window.translations?.pt || {});
+
     const modal = document.createElement('div');
     modal.id = 'mediaEditModal';
     modal.className = 'crop-modal'; // Re-use styling
     modal.innerHTML = `
     <div class="crop-modal-content">
       <div class="crop-header">
-        <h3>Gerenciar Mídia</h3>
+        <h3 data-i18n="manageMedia">${t.manageMedia || 'Gerenciar Mídia'}</h3>
         <button class="crop-close-btn" onclick="closeEditModal()">×</button>
       </div>
       
@@ -487,30 +490,30 @@ function ensureEditModalExists() {
             <div style="max-height: 400px; overflow: hidden; margin-bottom: 20px;">
                 <img id="cropImageTarget" style="max-width: 100%;">
             </div>
-            <button class="btn-confirm" onclick="confirmCrop()" style="width: 100%; justify-content: center;">
-                Confirmar Recorte (1:1)
+            <button class="btn-confirm" onclick="confirmCrop()" style="width: 100%; justify-content: center;" data-i18n="confirmCrop">
+                ${t.confirmCrop || 'Confirmar Recorte (1:1)'}
             </button>
-            <button class="btn-cancel" onclick="cancelCrop()" style="width: 100%; margin-top: 10px;">Cancelar Recorte</button>
+            <button class="btn-cancel" onclick="cancelCrop()" style="width: 100%; margin-top: 10px;" data-i18n="cancelCrop">${t.cancelCrop || 'Cancelar Recorte'}</button>
         </div>
 
         <!-- Main Edit Interface -->
         <div id="editVideoSection">
-            <h4 style="margin-bottom: 10px;">Imagem</h4>
+            <h4 style="margin-bottom: 10px;" data-i18n="imageLabel">${t.imageLabel || 'Imagem'}</h4>
              <div class="image-upload-wrapper" style="margin-bottom: 20px;">
                 <input type="file" id="adminImageInput" accept="image/*" onchange="onFabricImageSelect(event)" style="display: none;">
-                <button class="admin-btn" onclick="document.getElementById('adminImageInput').click()">
-                    Carregar Nova Imagem
+                <button class="admin-btn" onclick="document.getElementById('adminImageInput').click()" data-i18n="uploadNewImage">
+                    ${t.uploadNewImage || 'Carregar Nova Imagem'}
                 </button>
             </div>
 
-            <h4 style="margin-bottom: 10px;">Vídeo (YouTube/Vimeo)</h4>
+            <h4 style="margin-bottom: 10px;" data-i18n="videoLabel">${t.videoLabel || 'Vídeo (YouTube/Vimeo)'}</h4>
             <div class="form-group">
-                <input type="text" id="videoUrlInput" placeholder="Cole o link do vídeo aqui...">
+                <input type="text" id="videoUrlInput" placeholder="${t.videoPlaceholder || 'Cole o link do vídeo aqui...'}" data-i18n-placeholder="videoPlaceholder">
             </div>
             
              <div style="display: flex; gap: 10px; margin-top: 30px;">
-                <button class="btn-confirm" onclick="saveVideoLink()" style="flex: 1; justify-content: center;">Salvar Alterações</button>
-                <button class="btn-cancel" onclick="deleteMedia()" style="color: #ef4444; border-color: #ef4444;">Excluir Mídia</button>
+                <button class="btn-confirm" onclick="saveVideoLink()" style="flex: 1; justify-content: center;" data-i18n="saveChanges">${t.saveChanges || 'Salvar Alterações'}</button>
+                <button class="btn-cancel" onclick="deleteMedia()" style="color: #ef4444; border-color: #ef4444;" data-i18n="deleteMedia">${t.deleteMedia || 'Excluir Mídia'}</button>
             </div>
         </div>
 
@@ -581,7 +584,11 @@ window.exitAdminMode = exitAdminMode;
 document.addEventListener('DOMContentLoaded', async () => {
     await initDB();
     await loadAllMedia();
-    if (isAdminMode) {
-        createAdminToolbar();
+
+    // Check Supabase Auth Status
+    const isAuth = await AuthService.isAuthenticated();
+    if (isAuth) {
+        isAdminMode = true;
+        enableEditMode();
     }
 });

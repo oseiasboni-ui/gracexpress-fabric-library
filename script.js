@@ -1,5 +1,16 @@
 // Import fabric data
-const fabrics = fabricsData;
+let fabrics = fabricsData; // Default to PT
+
+// Global function to update fabrics based on language
+window.updateFabricsLanguage = function (lang) {
+  if (lang === 'en' && typeof fabricsDataEn !== 'undefined') {
+    fabrics = fabricsDataEn;
+  } else {
+    fabrics = fabricsData;
+  }
+  // Re-apply current filters
+  filter();
+};
 
 // DOM Elements
 const grid = document.getElementById('collectionGrid');
@@ -56,9 +67,9 @@ function render(list) {
     grid.innerHTML = `
       <div class="empty-state">
         <div class="empty-state-icon">🔍</div>
-        <h3 class="empty-state-title">Nenhum tecido encontrado</h3>
-        <p class="empty-state-message">Tente ajustar sua busca ou selecionar outra categoria.</p>
-        <button class="empty-state-btn" onclick="clearAllFilters()">Ver todos os tecidos</button>
+        <h3 class="empty-state-title" data-i18n="noFabricsTitle">${t.noFabricsTitle || 'Nenhum tecido encontrado'}</h3>
+        <p class="empty-state-message" data-i18n="noFabricsMsg">${t.noFabricsMsg || 'Tente ajustar sua busca ou selecionar outra categoria.'}</p>
+        <button class="empty-state-btn" onclick="clearAllFilters()" data-i18n="viewAllFabrics">${t.viewAllFabrics || 'Ver todos os tecidos'}</button>
       </div>
     `;
     return;
@@ -358,8 +369,10 @@ function openSlider(fabricId) {
 
   updateNavInfo();
 
-  // Trigger bar animations for first slide
-  setTimeout(() => animateBars(0), 100);
+  // Trigger bar animations for first slide after modal animation (popIn is 0.4s)
+  requestAnimationFrame(() => {
+    setTimeout(() => animateBars(0), 400);
+  });
 }
 
 function navigateSlide(direction) {
@@ -416,27 +429,23 @@ function animateBars(slideIndex) {
   const seasonBars = currentSlide.querySelectorAll('.season-meter-fill');
   const allBars = [...accordBars, ...seasonBars];
 
-  // First, reset all bars: remove animation and set to zero
+  // 1. Reset: remove animation class
   allBars.forEach(bar => {
     bar.classList.remove('animate');
-    bar.style.animation = 'none';
-    bar.style.transform = 'scaleX(0)';
+    // Ensure no inline styles interfere with CSS keyframes
+    bar.style.animation = '';
+    bar.style.transform = '';
   });
 
-  // Force reflow to ensure the reset takes effect
+  // 2. Force Reflow (critical for restarting CSS animation)
   void currentSlide.offsetWidth;
-  void currentSlide.offsetHeight;
 
-  // Trigger animation after a brief delay
-  setTimeout(() => {
-    allBars.forEach((bar, index) => {
-      bar.style.animation = '';
-      bar.style.transform = '';
-      // Stagger the animation slightly
-      bar.style.animationDelay = `${index * 0.08}s`;
-      bar.classList.add('animate');
-    });
-  }, 50);
+  // 3. Animate: add class
+  allBars.forEach((bar, index) => {
+    // Stagger the animation using inline delay style
+    bar.style.animationDelay = `${index * 0.08}s`;
+    bar.classList.add('animate');
+  });
 }
 
 function updateNavInfo() {
@@ -576,24 +585,36 @@ document.addEventListener('keydown', e => {
 // ==========================================
 // Hero Rotating Text Effect (4 second interval)
 // ==========================================
+// ==========================================
+// Hero Rotating Text Effect (4 second interval)
+// ==========================================
 const heroRotatingText = document.getElementById('heroRotatingText');
-const rotatingPhrases = [
-  'Uma jornada sensorial pela essência do vestuário',
-  'Explore texturas que dão vida ao movimento',
-  'Descubra a origem nobre e a pureza de cada fibra selecionada',
-  'Sinta a suavidade de tramas que abraçam'
-];
+
+// Dynamic rotating phrases based on language
+function getRotatingPhrases() {
+  const t = typeof getCurrentTranslations === 'function' ? getCurrentTranslations() : (window.translations?.pt || {});
+  return [
+    t.rotatingPhrase1 || 'Uma jornada sensorial pela essência do vestuário',
+    t.rotatingPhrase2 || 'Explore texturas que dão vida ao movimento',
+    t.rotatingPhrase3 || 'Descubra a origem nobre e a pureza de cada fibra selecionada',
+    t.rotatingPhrase4 || 'Sinta a suavidade de tramas que abraçam'
+  ];
+}
+
 let currentTextIndex = 0;
 
 function rotateHeroText() {
   if (!heroRotatingText) return;
 
+  const phrases = getRotatingPhrases();
+
   heroRotatingText.style.opacity = '0';
   heroRotatingText.style.transform = 'translateY(10px)';
 
   setTimeout(() => {
-    currentTextIndex = (currentTextIndex + 1) % rotatingPhrases.length;
-    heroRotatingText.textContent = rotatingPhrases[currentTextIndex];
+    // Re-verify phrases length to be safe
+    currentTextIndex = (currentTextIndex + 1) % phrases.length;
+    heroRotatingText.textContent = phrases[currentTextIndex];
     heroRotatingText.style.opacity = '1';
     heroRotatingText.style.transform = 'translateY(0)';
   }, 400);
@@ -689,6 +710,11 @@ function changeLanguage(lang) {
   // Apply translations to page
   applyTranslations(lang);
 
+  // Update fabrics data
+  if (typeof window.updateFabricsLanguage === 'function') {
+    window.updateFabricsLanguage(lang);
+  }
+
   // Update document language
   document.documentElement.lang = lang;
 
@@ -764,5 +790,13 @@ mobileNavOverlay?.querySelectorAll('.mobile-nav-link').forEach(link => {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && mobileNavOverlay?.classList.contains('active')) {
     toggleMobileMenu();
+  }
+});
+
+// Initialize fabric data language on load
+document.addEventListener('DOMContentLoaded', () => {
+  // Wait for translations to initialize currentLang
+  if (typeof currentLang !== 'undefined' && window.updateFabricsLanguage) {
+    window.updateFabricsLanguage(currentLang);
   }
 });

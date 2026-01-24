@@ -172,15 +172,16 @@
         <div class="contact-content">
             <div class="contact-grid">
                 <div class="contact-info">
-                    <h2>Fale Conosco</h2>
-                    <p>Tem alguma dúvida sobre tecidos ou quer saber mais sobre nosso trabalho? Entre em contato através
+                    <h2 data-i18n="contactTitle">Fale Conosco</h2>
+                    <p data-i18n="contactDesc">Tem alguma dúvida sobre tecidos ou quer saber mais sobre nosso trabalho?
+                        Entre em contato através
                         de
                         um dos canais abaixo.</p>
 
                     <a href="mailto:gracexpressbr@gmail.com" class="contact-item contact-link">
                         <span class="contact-item-icon">📧</span>
                         <div class="contact-item-text">
-                            <h4>E-mail</h4>
+                            <h4 data-i18n="emailLabel">E-mail</h4>
                             <p>gracexpressbr@gmail.com</p>
                         </div>
                     </a>
@@ -188,7 +189,7 @@
                     <a href="https://wa.me/5511978577389" target="_blank" class="contact-item contact-link">
                         <span class="contact-item-icon">📱</span>
                         <div class="contact-item-text">
-                            <h4>WhatsApp</h4>
+                            <h4 data-i18n="whatsappLabel">WhatsApp</h4>
                             <p>+55 11 97857-7389</p>
                         </div>
                     </a>
@@ -197,36 +198,38 @@
                         class="contact-item contact-link">
                         <span class="contact-item-icon">📍</span>
                         <div class="contact-item-text">
-                            <h4>Localização</h4>
-                            <p>São Paulo, Brasil</p>
+                            <h4 data-i18n="locationLabel">Localização</h4>
+                            <p data-i18n="locationValue">São Paulo, Brasil</p>
                         </div>
                     </a>
 
                     <a href="https://instagram.com/gracexpressbr" target="_blank" class="contact-item contact-link">
                         <span class="contact-item-icon">📸</span>
                         <div class="contact-item-text">
-                            <h4>Instagram</h4>
+                            <h4 data-i18n="instagramLabel">Instagram</h4>
                             <p>@gracexpressbr</p>
                         </div>
                     </a>
                 </div>
 
                 <div class="contact-form">
-                    <h3>Envie uma mensagem</h3>
+                    <h3 data-i18n="formTitle">Envie uma mensagem</h3>
                     <form>
                         <div class="form-group">
-                            <label for="name">Nome</label>
-                            <input type="text" id="name" placeholder="Seu nome">
+                            <label for="name" data-i18n="nameLabel">Nome</label>
+                            <input type="text" id="name" placeholder="Seu nome" data-i18n-placeholder="namePlaceholder">
                         </div>
                         <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" placeholder="seu@email.com">
+                            <label for="email" data-i18n="emailFormLabel">E-mail</label>
+                            <input type="email" id="email" placeholder="seu@email.com"
+                                data-i18n-placeholder="emailPlaceholder">
                         </div>
                         <div class="form-group">
-                            <label for="message">Mensagem</label>
-                            <textarea id="message" placeholder="Como podemos ajudar?"></textarea>
+                            <label for="message" data-i18n="messageLabel">Mensagem</label>
+                            <textarea id="message" placeholder="Como podemos ajudar?"
+                                data-i18n-placeholder="messagePlaceholder"></textarea>
                         </div>
-                        <button type="submit" class="form-submit">Enviar Mensagem</button>
+                        <button type="submit" class="form-submit" data-i18n="sendMessageBtn">Enviar Mensagem</button>
                     </form>
                 </div>
             </div>
@@ -257,8 +260,9 @@
                         </svg>
                     </button>
                     <!-- Admin Link -->
-                    <a href="#" onclick="event.preventDefault(); openAdminLogin()"
-                        style="color: inherit; opacity: 0.5; font-size: 11px; margin-left: 10px; text-decoration: none; text-transform: uppercase;">Admin</a>
+                    <!-- Admin Link -->
+                    <a href="javascript:void(0)" onclick="openAdminLogin()"
+                        style="color: inherit; opacity: 0.5; font-size: 11px; margin-left: 10px; text-decoration: none; text-transform: uppercase; cursor: pointer;">Admin</a>
                 </div>
             </div>
         </div>
@@ -272,11 +276,11 @@
             <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="adminEmail" required placeholder="admin@gracexpress.com">
+                    <input type="email" id="adminEmail" required placeholder="seu-email@exemplo.com">
                 </div>
                 <div class="form-group">
                     <label>Senha</label>
-                    <input type="password" id="adminPassword" required placeholder="••••••••">
+                    <input type="password" id="adminPassword" required placeholder="Sua senha">
                 </div>
                 <button type="submit" class="admin-btn">Entrar</button>
                 <a href="#" class="admin-forgot" onclick="resetAdminPassword()">Esqueci minha senha</a>
@@ -285,21 +289,21 @@
     </div>
 
     <!-- Scripts needed for Admin Login -->
+    <!-- Scripts needed for Admin Login -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/auth-service.js"></script>
     <script src="translations.js"></script>
-    <script src="media-manager.js"></script>
+    <script src="media-manager.js?v=2"></script>
 
     <script>
         // Footer Admin Link Injection
         document.addEventListener('DOMContentLoaded', () => {
+            // Footer Admin Link Injection removed - already in static HTML
             const copyrightDiv = document.querySelector('.copyright');
             if (copyrightDiv) {
-                const link = document.createElement('a');
-                link.href = '#';
-                link.textContent = 'Admin';
-                link.style.cssText = 'color: inherit; opacity: 0.5; font-size: 11px; margin-left: 10px; text-decoration: none;';
-                link.onclick = (e) => { e.preventDefault(); openAdminLogin(); };
-                copyrightDiv.appendChild(link);
+                // ...
             }
         });
 
