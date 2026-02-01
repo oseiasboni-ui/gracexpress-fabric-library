@@ -862,18 +862,13 @@
             const videoId = getYouTubeId(item.videoUrl);
             if (!videoId) return;
 
-            const isShorts = item.videoUrl.includes('/shorts/');
-            // Use origin parameter for better compatibility
-            const baseParams = 'autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1';
-            const embedParams = isShorts
-                ? baseParams + '&loop=1&playlist=' + videoId
-                : baseParams;
+            // Standard embed params - works for both regular videos and Shorts
+            const embedParams = 'autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&controls=1';
 
-            inlineContainer.innerHTML = `<iframe 
-                src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen
-                referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+            inlineContainer.innerHTML = `<iframe
+                src="https://www.youtube.com/embed/${videoId}?${embedParams}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>`;
 
             // Show inline video, hide thumbnail, show expand button
             inlineContainer.style.display = 'block';
@@ -927,20 +922,15 @@
         function openVideoPlayer(url) {
             const videoId = getYouTubeId(url);
             const wrapper = document.getElementById('videoPlayerWrapper');
-            const isShorts = url.includes('/shorts/');
 
             if (videoId) {
-                // Use embed format that works for both regular videos and Shorts
-                const baseParams = 'autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1';
-                const embedParams = isShorts
-                    ? baseParams + '&loop=1&playlist=' + videoId
-                    : baseParams;
+                // Standard embed - works for both regular videos and Shorts
+                const embedParams = 'autoplay=1&rel=0&modestbranding=1&playsinline=1&controls=1';
 
                 wrapper.innerHTML = `<iframe 
                     src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen
-                    referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+                    allowfullscreen></iframe>`;
             } else {
                 // If not YouTube, try opening as regular video or redirect
                 window.open(url, '_blank');
