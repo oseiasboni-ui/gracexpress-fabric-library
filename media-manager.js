@@ -113,13 +113,26 @@ function getFabricImageUrl(fabricId) {
     if (fabricImages[fabricId]?.url) {
         return fabricImages[fabricId].url;
     }
-    // Fallback: use Cloudinary direct URL (works on both .com and .com.br)
+    // Fallback: use Cloudinary direct URL (tries current site's folder first)
     if (typeof CloudinaryService !== 'undefined') {
         return CloudinaryService.getImageUrl(fabricId);
     }
     return null;
 }
 window.getFabricImageUrl = getFabricImageUrl;
+
+// Helper: Get alternative image URL (tries the other folder if first one fails)
+function getFabricImageUrlAlt(fabricId) {
+    if (typeof CloudinaryService === 'undefined') return null;
+
+    const currentFolder = CloudinaryService.getCurrentFolder();
+    const otherFolder = currentFolder === CloudinaryService.folders.com
+        ? CloudinaryService.folders.comBr
+        : CloudinaryService.folders.com;
+
+    return CloudinaryService.getImageUrlFromFolder(fabricId, otherFolder);
+}
+window.getFabricImageUrlAlt = getFabricImageUrlAlt;
 
 // ==========================================
 // Admin Authentication

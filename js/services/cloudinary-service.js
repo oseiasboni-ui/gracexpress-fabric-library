@@ -1,37 +1,91 @@
 // ==========================================
 // CLOUDINARY SERVICE
 // Handles image uploads to Cloudinary
+// Syncs images between gracexpress.com and gracexpress.com.br
 // ==========================================
 
 const CloudinaryService = {
     // Cloudinary Configuration
     cloudName: 'dgsylqkgn',
     uploadPreset: 'dgsylqkgn',
-    folder: 'gracexpress-fabrics',
 
-    /**
-     * Get the direct URL for a fabric image by its ID
-     * @param {string} fabricId - The fabric ID
-     * @returns {string} - The Cloudinary URL
-     */
-    getImageUrl(fabricId) {
-        // Cloudinary URL format: don't include extension, Cloudinary auto-serves the correct format
-        return `https://res.cloudinary.com/${this.cloudName}/image/upload/${this.folder}/${fabricId}`;
+    // Two folders - one for each site
+    folders: {
+        com: 'gracexpress-com',
+        comBr: 'gracexpress-com-br'
+    },
+
+    // Detect which site we're on
+    getCurrentFolder() {
+        const hostname = window.location.hostname;
+        if (hostname.includes('.com.br')) {
+            return this.folders.comBr;
+        }
+        // Default to .com folder (also for localhost/development)
+        return this.folders.com;
     },
 
     /**
-     * Check if an image exists in Cloudinary
+     * Get the direct URL for a fabric image by its ID from a specific folder
      * @param {string} fabricId - The fabric ID
+     * @param {string} folder - The folder to get from
+     * @returns {string} - The Cloudinary URL
+     */
+    getImageUrlFromFolder(fabricId, folder) {
+        return `https://res.cloudinary.com/${this.cloudName}/image/upload/${folder}/${fabricId}`;
+    },
+
+    /**
+     * Get image URL - tries current site's folder first, then the other
+     * This enables sync between sites
+     * @param {string} fabricId - The fabric ID
+     * @returns {string} - The Cloudinary URL (from current site's folder)
+     */
+    getImageUrl(fabricId) {
+        const currentFolder = this.getCurrentFolder();
+        return this.getImageUrlFromFolder(fabricId, currentFolder);
+    },
+
+    /**
+     * Check if an image exists in a specific folder
+     * @param {string} fabricId - The fabric ID
+     * @param {string} folder - The folder to check
      * @returns {Promise<boolean>} - True if image exists
      */
-    async checkImageExists(fabricId) {
+    async checkImageExistsInFolder(fabricId, folder) {
         try {
-            const url = this.getImageUrl(fabricId);
+            const url = this.getImageUrlFromFolder(fabricId, folder);
             const response = await fetch(url, { method: 'HEAD' });
             return response.ok;
         } catch {
             return false;
         }
+    },
+
+    /**
+     * Check if an image exists in EITHER folder
+     * Returns the URL if found, null otherwise
+     * @param {string} fabricId - The fabric ID
+     * @returns {Promise<string|null>} - The URL if found, null otherwise
+     */
+    async findImageUrl(fabricId) {
+        // Try current site's folder first
+        const currentFolder = this.getCurrentFolder();
+        const otherFolder = currentFolder === this.folders.com ? this.folders.comBr : this.folders.com;
+
+        // Check current folder first
+        const existsInCurrent = await this.checkImageExistsInFolder(fabricId, currentFolder);
+        if (existsInCurrent) {
+            return this.getImageUrlFromFolder(fabricId, currentFolder);
+        }
+
+        // Check other folder
+        const existsInOther = await this.checkImageExistsInFolder(fabricId, otherFolder);
+        if (existsInOther) {
+            return this.getImageUrlFromFolder(fabricId, otherFolder);
+        }
+
+        return null;
     },
 
     /**
@@ -41,14 +95,17 @@ const CloudinaryService = {
      * @returns {Promise<{url: string, publicId: string}>} - The secure URL and public ID
      */
     async uploadImage(file, fabricId) {
+        const folder = this.getCurrentFolder();
+
         console.log('🚀 Starting Cloudinary upload...');
         console.log('📦 Cloud Name:', this.cloudName);
+        console.log('📁 Folder:', folder);
         console.log('🆔 Fabric ID:', fabricId);
 
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', this.uploadPreset);
-        formData.append('folder', this.folder);
+        formData.append('folder', folder);
         // Use fabric ID as the public_id so we can find it later
         formData.append('public_id', fabricId);
 

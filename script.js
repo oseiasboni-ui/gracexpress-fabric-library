@@ -78,8 +78,11 @@ function render(list) {
   grid.innerHTML = list.map(f => {
     // Check for saved image
     const savedImageUrl = typeof getFabricImageUrl === 'function' ? getFabricImageUrl(f.id) : null;
+    const altImageUrl = typeof getFabricImageUrlAlt === 'function' ? getFabricImageUrlAlt(f.id) : null;
+
+    // Add onerror fallback to try the other Cloudinary folder
     const imageContent = savedImageUrl
-      ? `<img src="${savedImageUrl}" alt="${f.name}" class="fabric-image-1x1">`
+      ? `<img src="${savedImageUrl}" alt="${f.name}" class="fabric-image-1x1" onerror="this.onerror=null; if('${altImageUrl}'!=='null') this.src='${altImageUrl}'; else this.style.display='none';">`
       : `<span class="fabric-card-placeholder">🧵</span>`;
 
     return `
@@ -159,9 +162,10 @@ function generateSlideHTML(f, index, total) {
 
   // Check for saved image
   const savedImageUrl = typeof getFabricImageUrl === 'function' ? getFabricImageUrl(f.id) : null;
+  const altImageUrl = typeof getFabricImageUrlAlt === 'function' ? getFabricImageUrlAlt(f.id) : null;
   const hasImage = !!savedImageUrl;
   const imageHTML = hasImage
-    ? `<img src="${savedImageUrl}" alt="${f.name}" class="slide-fabric-image">`
+    ? `<img src="${savedImageUrl}" alt="${f.name}" class="slide-fabric-image" onerror="this.onerror=null; if('${altImageUrl}'!=='null') this.src='${altImageUrl}';">`
     : '';
   const placeholderStyle = hasImage ? 'display: none;' : '';
 
