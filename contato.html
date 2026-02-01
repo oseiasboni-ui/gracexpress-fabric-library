@@ -145,8 +145,102 @@
         }
 
         @media (max-width: 768px) {
+            .contact-page-wrapper {
+                padding: 20px 16px;
+                min-height: auto;
+            }
+
+            .contact-content {
+                padding: 32px 20px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                border-radius: 16px;
+            }
+
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-info h2 {
+                font-size: 24px;
+                text-align: center;
+                margin-bottom: 16px;
+            }
+
+            .contact-info p {
+                font-size: 14px;
+                text-align: center;
+                margin-bottom: 24px;
+            }
+
+            .contact-item {
+                padding: 14px;
+                margin-bottom: 12px;
+            }
+
+            .contact-item-icon {
+                font-size: 22px;
+            }
+
+            .contact-item-text h4 {
+                font-size: 13px;
+            }
+
+            .contact-item-text p {
+                font-size: 13px;
+            }
+
+            .contact-form h3 {
+                font-size: 18px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 16px;
+            }
+
+            .form-group label {
+                font-size: 11px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 12px;
+                font-size: 16px;
+                /* Prevents zoom on iOS */
+                border-radius: 8px;
+            }
+
+            .form-group textarea {
+                min-height: 100px;
+            }
+
+            .form-submit {
+                width: 100%;
+                padding: 16px;
+                font-size: 15px;
+                border-radius: 8px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 400px) {
+            .contact-content {
+                padding: 24px 16px;
+            }
+
+            .contact-info h2 {
+                font-size: 22px;
+            }
+
+            .contact-item {
+                padding: 12px;
+                gap: 12px;
+            }
+
+            .contact-item-icon {
+                font-size: 20px;
             }
         }
     </style>
@@ -164,6 +258,21 @@
                 <a href="sobre.html" class="nav-link" data-i18n="about">Sobre</a>
                 <a href="portfolio.html" class="nav-link" data-i18n="portfolio">Portfólio</a>
                 <a href="contato.html" class="nav-link active" data-i18n="contact">Contato</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobileNavOverlay">
+            <nav class="mobile-nav">
+                <a href="index.html" class="mobile-nav-link" data-i18n="home">Início</a>
+                <a href="sobre.html" class="mobile-nav-link" data-i18n="about">Sobre</a>
+                <a href="portfolio.html" class="mobile-nav-link" data-i18n="portfolio">Portfólio</a>
+                <a href="contato.html" class="mobile-nav-link" data-i18n="contact">Contato</a>
             </nav>
         </div>
     </header>
@@ -314,6 +423,20 @@
             document.body.dataset.theme = isDark ? '' : 'dark';
             localStorage.setItem('theme', isDark ? 'light' : 'dark');
         });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+        function toggleMobileMenu() {
+            mobileNavOverlay?.classList.toggle('active');
+            const isOpen = mobileNavOverlay?.classList.contains('active');
+            mobileMenuBtn.innerHTML = isOpen ?
+                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>' :
+                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
+        }
+
+        mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
     </script>
 </body>
 
