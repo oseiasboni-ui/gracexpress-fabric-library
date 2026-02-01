@@ -107,9 +107,17 @@ async function clearAllImagesFromDB() {
 
 // Auth handled by js/auth-service.js
 
-// Helper: Get fabric image URL
+// Helper: Get fabric image URL (checks local cache first, then Cloudinary)
 function getFabricImageUrl(fabricId) {
-    return fabricImages[fabricId]?.url || null;
+    // First check local cache
+    if (fabricImages[fabricId]?.url) {
+        return fabricImages[fabricId].url;
+    }
+    // Fallback: use Cloudinary direct URL (works on both .com and .com.br)
+    if (typeof CloudinaryService !== 'undefined') {
+        return CloudinaryService.getImageUrl(fabricId);
+    }
+    return null;
 }
 window.getFabricImageUrl = getFabricImageUrl;
 
@@ -335,8 +343,8 @@ async function confirmCrop() {
         // Convert canvas to blob for upload
         const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.85));
 
-        // Upload to Cloudinary
-        const cloudinaryResult = await CloudinaryService.uploadImage(blob, 'gracexpress-fabrics');
+        // Upload to Cloudinary using fabric ID as filename
+        const cloudinaryResult = await CloudinaryService.uploadImage(blob, currentEditFabricId);
 
         // Save Cloudinary URL to memory and IndexedDB
         const imageData = {

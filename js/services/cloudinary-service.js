@@ -7,27 +7,51 @@ const CloudinaryService = {
     // Cloudinary Configuration
     cloudName: 'dgsylqkgn',
     uploadPreset: 'dgsylqkgn',
+    folder: 'gracexpress-fabrics',
 
     /**
-     * Upload an image to Cloudinary
+     * Get the direct URL for a fabric image by its ID
+     * @param {string} fabricId - The fabric ID
+     * @returns {string} - The Cloudinary URL
+     */
+    getImageUrl(fabricId) {
+        return `https://res.cloudinary.com/${this.cloudName}/image/upload/${this.folder}/${fabricId}.jpg`;
+    },
+
+    /**
+     * Check if an image exists in Cloudinary
+     * @param {string} fabricId - The fabric ID
+     * @returns {Promise<boolean>} - True if image exists
+     */
+    async checkImageExists(fabricId) {
+        try {
+            const url = this.getImageUrl(fabricId);
+            const response = await fetch(url, { method: 'HEAD' });
+            return response.ok;
+        } catch {
+            return false;
+        }
+    },
+
+    /**
+     * Upload an image to Cloudinary with fabric ID as filename
      * @param {Blob|File} file - The image file or blob to upload
-     * @param {string} folder - Optional folder name in Cloudinary
+     * @param {string} fabricId - The fabric ID to use as filename
      * @returns {Promise<{url: string, publicId: string}>} - The secure URL and public ID
      */
-    async uploadImage(file, folder = 'gracexpress-fabrics') {
+    async uploadImage(file, fabricId) {
         console.log('🚀 Starting Cloudinary upload...');
         console.log('📦 Cloud Name:', this.cloudName);
-        console.log('📝 Upload Preset:', this.uploadPreset);
-        console.log('📁 Folder:', folder);
-        console.log('📄 File size:', file.size, 'bytes');
+        console.log('🆔 Fabric ID:', fabricId);
 
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', this.uploadPreset);
-        formData.append('folder', folder);
+        formData.append('folder', this.folder);
+        // Use fabric ID as the public_id so we can find it later
+        formData.append('public_id', fabricId);
 
         const uploadUrl = `https://api.cloudinary.com/v1_1/${this.cloudName}/image/upload`;
-        console.log('🌐 Upload URL:', uploadUrl);
 
         try {
             const response = await fetch(uploadUrl, {
@@ -35,11 +59,7 @@ const CloudinaryService = {
                 body: formData
             });
 
-            console.log('📡 Response status:', response.status);
-            console.log('📡 Response OK:', response.ok);
-
             const data = await response.json();
-            console.log('📥 Cloudinary response:', JSON.stringify(data, null, 2));
 
             if (!response.ok) {
                 console.error('❌ Upload failed:', data.error?.message || 'Unknown error');
@@ -48,7 +68,6 @@ const CloudinaryService = {
 
             console.log('✅ Upload successful!');
             console.log('🔗 Secure URL:', data.secure_url);
-            console.log('🆔 Public ID:', data.public_id);
 
             return {
                 url: data.secure_url,
@@ -80,15 +99,14 @@ const CloudinaryService = {
     /**
      * Upload a base64 image to Cloudinary
      * @param {string} dataUrl - The base64 data URL
-     * @param {string} folder - Optional folder name
+     * @param {string} fabricId - The fabric ID
      * @returns {Promise<{url: string, publicId: string}>}
      */
-    async uploadBase64Image(dataUrl, folder = 'gracexpress-fabrics') {
+    async uploadBase64Image(dataUrl, fabricId) {
         const blob = this.dataUrlToBlob(dataUrl);
-        return this.uploadImage(blob, folder);
+        return this.uploadImage(blob, fabricId);
     }
 };
 
 // Export for global access
 window.CloudinaryService = CloudinaryService;
-
