@@ -142,7 +142,12 @@ const translations = {
         ad1: "Anuncie Sua Marca Aqui",
         ad2: "Alcance Clientes Premium",
         ad3: "Sua Loja em Destaque",
-        ad4: "Espaço Disponível"
+        ad4: "Espaço Disponível",
+        // Slider Navigation
+        fabricWord: "Tecido",
+        ofWord: "de",
+        previous: "Anterior",
+        next: "Próximo"
     },
     en: {
         portfolio: "Portfolio",
@@ -281,7 +286,11 @@ const translations = {
         ad2: "Reach Premium Clients",
         ad3: "Your Store Highlighted",
         ad4: "Space Available",
-
+        // Slider Navigation
+        fabricWord: "Fabric",
+        ofWord: "of",
+        previous: "Previous",
+        next: "Next"
     }
 };
 

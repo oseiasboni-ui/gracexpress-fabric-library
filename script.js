@@ -322,19 +322,20 @@ function getSeasonRatingsHTML(f, allSeasons, seasonMap, seasonClass) {
 
 // Navigation arrows HTML
 function getNavArrowsHTML() {
+  const t = typeof getCurrentTranslations === 'function' ? getCurrentTranslations() : {};
   return `
-    <button class="slider-nav slider-nav-prev" id="sliderNavPrev" aria-label="Anterior">
+    <button class="slider-nav slider-nav-prev" id="sliderNavPrev" aria-label="${t.previous || 'Anterior'}">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="15 18 9 12 15 6"></polyline>
       </svg>
     </button>
-    <button class="slider-nav slider-nav-next" id="sliderNavNext" aria-label="Próximo">
+    <button class="slider-nav slider-nav-next" id="sliderNavNext" aria-label="${t.next || 'Próximo'}">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="9 18 15 12 9 6"></polyline>
       </svg>
     </button>
     <div class="slide-navigation-info" id="slideNavInfo">
-      <span>Tecido</span> <strong id="slideCurrentNum">01</strong> <span>de</span> <strong id="slideTotalNum">120</strong>
+      <span>${t.fabricWord || 'Tecido'}</span> <strong id="slideCurrentNum">01</strong> <span>${t.ofWord || 'de'}</span> <strong id="slideTotalNum">120</strong>
     </div>
   `;
 }
