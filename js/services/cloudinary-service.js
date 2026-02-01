@@ -15,7 +15,8 @@ const CloudinaryService = {
      * @returns {string} - The Cloudinary URL
      */
     getImageUrl(fabricId) {
-        return `https://res.cloudinary.com/${this.cloudName}/image/upload/${this.folder}/${fabricId}.jpg`;
+        // Cloudinary URL format: don't include extension, Cloudinary auto-serves the correct format
+        return `https://res.cloudinary.com/${this.cloudName}/image/upload/${this.folder}/${fabricId}`;
     },
 
     /**
