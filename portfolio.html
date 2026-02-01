@@ -78,6 +78,8 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
         }
 
         .portfolio-item-content {
@@ -88,7 +90,10 @@
             padding: 24px;
             color: #fff;
             z-index: 2;
+            pointer-events: none;
         }
+
+
 
         .portfolio-item-title {
             font-size: 18px;
@@ -161,7 +166,7 @@
             position: absolute;
             inset: 0;
             background: #000;
-            z-index: 5;
+            z-index: 10;
         }
 
         .portfolio-inline-video iframe {
