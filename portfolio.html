@@ -768,38 +768,28 @@
 
                 const tiktokId = getTikTokId(item.videoUrl);
 
-                // For TikTok, we show the iframe immediately (ready to play)
-                const showIframeImmediately = !!tiktokId;
-
                 return `
-                    <article class="portfolio-item ${item.type === 'video' ? 'video' : ''}" data-index="${index}" data-video-url="${item.videoUrl || ''}" data-video-id="${videoId || ''}">
-                    <!-- Thumbnail: Hidden if showing iframe immediately -->
-                    <div class="portfolio-item-thumbnail" onclick="handleItemClick(${index})" style="${showIframeImmediately ? 'display:none' : ''}">
+                <article class="portfolio-item ${item.type === 'video' ? 'video' : ''}" data-index="${index}" data-video-url="${item.videoUrl || ''}" data-video-id="${videoId || ''}">
+                    <!-- Thumbnail: Always visible initially -->
+                    <div class="portfolio-item-thumbnail" onclick="handleItemClick(${index})">
                         ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="portfolio-item-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
                         <div class="portfolio-item-placeholder" style="${thumbnailUrl ? 'display:none' : ''}">
                             ${item.type === 'video' ? '🎥' : '📷'}
                         </div>
                     </div>
                     
-                    <!--Inline Video: Visible immediately for TikTok-->
-                    <div class="portfolio-inline-video" id="inlineVideo${index}" style="${showIframeImmediately ? 'display:block' : 'display:none;'}">
-                        ${showIframeImmediately ? `<iframe 
-                            src="https://www.tiktok.com/embed/v2/${tiktokId}" 
-                            frameborder="0"
-                            style="width:100%;height:100%;position:absolute;top:0;left:0;"
-                            allowfullscreen></iframe>` : ''}
-                    </div>
+                    <!-- Inline Video: Hidden initially -->
+                    <div class="portfolio-inline-video" id="inlineVideo${index}" style="display:none;"></div>
 
-                    ${item.type === 'video' ? `<button class="portfolio-expand-btn" onclick="event.stopPropagation(); expandToModal(${index})" title="Expandir" style="${showIframeImmediately ? 'display:flex' : 'display:none;'}">
+                    ${item.type === 'video' ? `<button class="portfolio-expand-btn" onclick="event.stopPropagation(); expandToModal(${index})" title="Expandir" style="display:none;">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
                             <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
                         </svg>
-                    </button>` : ''
-                    }
-
-                    <div class="portfolio-item-overlay" style="${showIframeImmediately ? 'display:none' : ''}"></div>
-                    <div class="portfolio-item-content" style="${showIframeImmediately ? 'display:none' : ''}">
+                    </button>` : ''}
+                    
+                    <div class="portfolio-item-overlay"></div>
+                    <div class="portfolio-item-content">
                         <h3 class="portfolio-item-title">${item.title}</h3>
                         <p class="portfolio-item-phrase">"${item.phrase}"</p>
                     </div>
@@ -854,34 +844,40 @@
             if (videoId) {
                 // YouTube Embed
                 const embedParams = 'autoplay=1&controls=1&rel=0&playsinline=1';
-                inlineContainer.innerHTML = `< iframe
-            src = "https://www.youtube.com/embed/${videoId}?${embedParams}"
-            frameborder = "0"
-            style = "width:100%;height:100%;position:absolute;top:0;left:0;"
-            allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen ></iframe > `;
+                inlineContainer.innerHTML = `<iframe 
+                    src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
+                    frameborder="0"
+                    style="width:100%;height:100%;position:absolute;top:0;left:0;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>`;
             } else if (tiktokId) {
                 // TikTok Embed
-                inlineContainer.innerHTML = `< iframe
-            src = "https://www.tiktok.com/embed/v2/${tiktokId}"
-            frameborder = "0"
-            style = "width:100%;height:100%;position:absolute;top:0;left:0;"
-            allowfullscreen ></iframe > `;
+                inlineContainer.innerHTML = `<iframe 
+                    src="https://www.tiktok.com/embed/v2/${tiktokId}" 
+                    frameborder="0"
+                    style="width:100%;height:100%;position:absolute;top:0;left:0;"
+                    allowfullscreen></iframe>`;
             } else {
                 // Native HTML5 Video (MP4, etc)
-                inlineContainer.innerHTML = `< video
-            src = "${item.videoUrl}"
-            controls
-            autoplay
-            playsinline
-            style = "width:100%;height:100%;object-fit:contain;background:#000;" >
-                Seu navegador não suporta a tag de vídeo.
-                </video > `;
+                inlineContainer.innerHTML = `<video 
+                    src="${item.videoUrl}" 
+                    controls 
+                    autoplay 
+                    playsinline
+                    style="width:100%;height:100%;object-fit:contain;background:#000;">
+                    Seu navegador não suporta a tag de vídeo.
+                </video>`;
             }
 
-            // Show inline video, hide thumbnail, show expand button
+            const expandBtn = article.querySelector('.portfolio-expand-btn');
+            const overlay = article.querySelector('.portfolio-item-overlay');
+            const content = article.querySelector('.portfolio-item-content');
+
+            // Show inline video, hide thumbnail/overlay, show expand button
             inlineContainer.style.display = 'block';
             thumbnail.style.display = 'none';
+            if (overlay) overlay.style.display = 'none';
+            if (content) content.style.display = 'none';
             if (expandBtn) expandBtn.style.display = 'flex';
             article.classList.add('playing');
 
@@ -890,16 +886,20 @@
 
         // Stop inline video
         function stopInlineVideo(index) {
-            const article = document.querySelector(`[data - index="${index}"]`);
+            const article = document.querySelector(`[data-index="${index}"]`);
             if (!article) return;
 
-            const inlineContainer = document.getElementById(`inlineVideo${index} `);
+            const inlineContainer = document.getElementById(`inlineVideo${index}`);
             const thumbnail = article.querySelector('.portfolio-item-thumbnail');
             const expandBtn = article.querySelector('.portfolio-expand-btn');
+            const overlay = article.querySelector('.portfolio-item-overlay');
+            const content = article.querySelector('.portfolio-item-content');
 
             inlineContainer.innerHTML = '';
             inlineContainer.style.display = 'none';
             thumbnail.style.display = 'block';
+            if (overlay) overlay.style.display = 'block';
+            if (content) content.style.display = 'block';
             if (expandBtn) expandBtn.style.display = 'none';
             article.classList.remove('playing');
 
