@@ -2,8 +2,8 @@
 // Supabase Configuration
 // Using the provided credentials
 
-const SUPABASE_URL = 'https://qwijkdjwyawoohmhgcxd.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_bo8rqsiT-s4i5ccVnHKK5Q_KjUpHZsM';
+const SUPABASE_URL = 'https://dsdmvzksybjpwvhxjaiu.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzZG12emtzeWJqcHd2aHhqYWl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5MTc1MDQsImV4cCI6MjA4NTQ5MzUwNH0.ZhOe9ZOLmp9OApNk-TkCKKRPr09umVI8duDiocarQvw';
 
 // Check if Supabase client is available
 if (typeof supabase === 'undefined') {
