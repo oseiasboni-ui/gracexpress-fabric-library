@@ -368,36 +368,53 @@ async function confirmCrop() {
 
     const canvas = cropper.getCroppedCanvas(outputOptions);
 
+    let finalUrl = null;
+    let finalPublicId = null;
+
     try {
-        showNotification('Enviando imagem para a nuvem...', 'info');
-
-        // Convert canvas to blob for upload
-        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.85));
-
-        // Upload to Cloudinary using fabric ID as filename
+        // Attempt Cloudinary Upload
         const cloudinaryResult = await CloudinaryService.uploadImage(blob, currentEditFabricId);
-
-        // Save Cloudinary URL to memory and IndexedDB
-        const imageData = {
-            url: cloudinaryResult.url,
-            publicId: cloudinaryResult.publicId,
-            uploadedAt: new Date().toISOString()
-        };
-        fabricImages[currentEditFabricId] = imageData;
-        await saveImageToDB(currentEditFabricId, imageData);
-
-        // Convert to visual update
-        if (currentEditFabricId.startsWith('hero_')) {
-            updateHeroMedia(currentEditFabricId);
-        } else {
-            updateFabricMedia(currentEditFabricId);
-        }
+        finalUrl = cloudinaryResult.url;
+        finalPublicId = cloudinaryResult.publicId;
         showNotification('Imagem enviada para a nuvem com sucesso!', 'success');
-        closeEditModal();
-    } catch (e) {
-        console.error(e);
-        showNotification('Erro ao enviar imagem. Verifique sua conexão.', 'error');
+    } catch (uploadError) {
+        console.warn('Cloudinary upload failed, falling back to local storage:', uploadError);
+        showNotification('Conexão falhou. Salvando localmente...', 'warning');
+
+        // Fallback: Convert Blob to Data URI
+        finalUrl = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.readAsDataURL(blob);
+        });
+        finalPublicId = `local_${Date.now()}`;
     }
+
+    // Save URL (Cloudinary or Local) to memory and IndexedDB
+    const imageData = {
+        url: finalUrl,
+        publicId: finalPublicId,
+        uploadedAt: new Date().toISOString()
+    };
+    fabricImages[currentEditFabricId] = imageData;
+    await saveImageToDB(currentEditFabricId, imageData);
+
+    // Convert to visual update
+    if (currentEditFabricId.startsWith('hero_')) {
+        updateHeroMedia(currentEditFabricId);
+    } else {
+        updateFabricMedia(currentEditFabricId);
+    }
+
+    closeEditModal();
+    if (finalPublicId.startsWith('local_')) {
+        showNotification('Imagem salva apenas neste dispositivo!', 'warning');
+    }
+
+} catch (e) {
+    console.error(e);
+    showNotification('Erro crítico ao salvar imagem: ' + e.message, 'error');
+}
 }
 
 // ==========================================
