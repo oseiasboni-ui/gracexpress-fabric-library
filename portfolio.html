@@ -802,9 +802,11 @@
                 return `
                 <article class="portfolio-item ${item.type === 'video' ? 'video' : ''}" data-index="${index}" data-video-url="${item.videoUrl || ''}" data-video-id="${videoId || ''}">
                     <div class="portfolio-item-thumbnail" onclick="handleItemClick(${index})">
-                        ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="portfolio-item-media" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';">` : ''}
-                        <div class="portfolio-item-placeholder" style="${thumbnailUrl ? 'display:none' : ''}">📷</div>
+                    ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="portfolio-item-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
+                    <div class="portfolio-item-placeholder" style="${thumbnailUrl ? 'display:none' : ''}">
+                        ${item.type === 'video' ? '🎥' : '📷'}
                     </div>
+                </div>
                     <div class="portfolio-inline-video" id="inlineVideo${index}" style="display:none;">
                         <!-- Inline iframe will be inserted here -->
                     </div>
@@ -865,18 +867,27 @@
 
             // Get video ID and play inline
             const videoId = getYouTubeId(item.videoUrl);
-            if (!videoId) return;
 
-            // Simple embed params for maximum compatibility
-            const embedParams = 'autoplay=1&controls=1&rel=0&playsinline=1';
-
-            // Use standard youtube.com for best reliability
-            inlineContainer.innerHTML = `<iframe 
-                src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
-                frameborder="0"
-                style="width:100%;height:100%;position:absolute;top:0;left:0;"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen></iframe>`;
+            if (videoId) {
+                // YouTube Embed
+                const embedParams = 'autoplay=1&controls=1&rel=0&playsinline=1';
+                inlineContainer.innerHTML = `<iframe 
+                    src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
+                    frameborder="0"
+                    style="width:100%;height:100%;position:absolute;top:0;left:0;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>`;
+            } else {
+                // Native HTML5 Video (MP4, etc)
+                inlineContainer.innerHTML = `<video 
+                    src="${item.videoUrl}" 
+                    controls 
+                    autoplay 
+                    playsinline
+                    style="width:100%;height:100%;object-fit:contain;background:#000;">
+                    Seu navegador não suporta a tag de vídeo.
+                </video>`;
+            }
 
             // Show inline video, hide thumbnail, show expand button
             inlineContainer.style.display = 'block';
@@ -942,9 +953,15 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen></iframe>`;
             } else {
-                // If not YouTube, try opening as regular video or redirect
-                window.open(url, '_blank');
-                return;
+                // Native HTML5 Video
+                wrapper.innerHTML = `<video 
+                    src="${url}" 
+                    controls 
+                    autoplay 
+                    playsinline
+                    style="width:100%;height:100%;object-fit:contain;background:#000;">
+                    Seu navegador não suporta a tag de vídeo.
+                </video>`;
             }
 
             document.getElementById('videoPlayerModal').classList.add('active');
