@@ -863,14 +863,17 @@
             if (!videoId) return;
 
             const isShorts = item.videoUrl.includes('/shorts/');
+            // Use origin parameter for better compatibility
+            const baseParams = 'autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1';
             const embedParams = isShorts
-                ? 'autoplay=1&mute=1&loop=1&playlist=' + videoId + '&rel=0&modestbranding=1&playsinline=1'
-                : 'autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1';
+                ? baseParams + '&loop=1&playlist=' + videoId
+                : baseParams;
 
             inlineContainer.innerHTML = `<iframe 
                 src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen></iframe>`;
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
 
             // Show inline video, hide thumbnail, show expand button
             inlineContainer.style.display = 'block';
@@ -928,14 +931,16 @@
 
             if (videoId) {
                 // Use embed format that works for both regular videos and Shorts
+                const baseParams = 'autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1';
                 const embedParams = isShorts
-                    ? 'autoplay=1&loop=1&playlist=' + videoId + '&rel=0&modestbranding=1'
-                    : 'autoplay=1&rel=0&modestbranding=1';
+                    ? baseParams + '&loop=1&playlist=' + videoId
+                    : baseParams;
 
                 wrapper.innerHTML = `<iframe 
                     src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen></iframe>`;
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
             } else {
                 // If not YouTube, try opening as regular video or redirect
                 window.open(url, '_blank');
