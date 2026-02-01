@@ -306,8 +306,6 @@ body {
     margin-top: var(--header-height);
     /* Push down below fixed header */
     overflow: hidden;
-    border-radius: var(--hero-radius-bottom, 0 0 50% 50% / 0 0 120px 120px);
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
 }
 
 .hero.hero-ultrawide {

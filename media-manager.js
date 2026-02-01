@@ -650,8 +650,8 @@ window.exitAdminMode = exitAdminMode;
 // Hero Frame Customizer
 // ==========================================
 let heroFrameConfig = {
-    index: { color: 'white', intensity: 80 },
-    portfolio: { color: 'white', intensity: 80 }
+    index: { color: 'white', intensity: 0 },
+    portfolio: { color: 'white', intensity: 0 }
 };
 
 function initHeroSystem() {
