@@ -686,20 +686,23 @@ function injectHeroEditButtons() {
         // Style the button
         Object.assign(btn.style, {
             position: 'absolute',
-            top: '80px', // Below header
-            right: '20px',
-            zIndex: '100',
-            background: 'white',
-            border: '1px solid #ccc',
-            padding: '8px 16px',
-            borderRadius: '4px',
+            top: '50%', // Center vertically relative to hero or specific offset
+            left: '50%',
+            transform: 'translate(-50%, -50%)', // Center it
+            zIndex: '9999', // Maximum visibility
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '2px solid var(--color-accent)',
+            padding: '12px 24px',
+            borderRadius: '50px',
             cursor: 'pointer',
-            fontWeight: '600',
-            fontSize: '12px',
+            fontWeight: '700',
+            fontSize: '14px',
+            color: 'var(--color-accent)',
             display: 'flex',
             alignItems: 'center',
-            gap: '6px',
-            boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
+            gap: '8px',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+            backdropFilter: 'blur(5px)'
         });
 
         container.style.position = 'relative';

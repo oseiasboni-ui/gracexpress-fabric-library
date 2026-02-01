@@ -3495,7 +3495,7 @@ body {
     }
 }
 
-/* Organic Hero Mask */
+/* Organic Hero Mask - Bottom */
 .hero-curve-mask {
     position: absolute;
     bottom: -1px;
@@ -3513,4 +3513,25 @@ body {
     min-height: 80px;
     filter: drop-shadow(0 -5px 15px rgba(0, 0, 0, 0.05));
     /* Subtle depth for the frame */
+}
+
+/* Organic Hero Mask - Top */
+.hero-curve-mask-top {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    pointer-events: none;
+    line-height: 0;
+    transform: rotate(180deg);
+    /* Flip the bottom curve for the top */
+}
+
+.hero-curve-mask-top svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 80px;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.05));
 }
