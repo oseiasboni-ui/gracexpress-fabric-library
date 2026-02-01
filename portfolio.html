@@ -685,12 +685,36 @@
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                         </svg>
                     </button>
-                    <!-- Admin Link -->
-                    <a href="javascript:void(0)" onclick="openAdminLogin()"
-                        style="color: inherit; opacity: 0.5; font-size: 11px; margin-left: 10px; text-decoration: none; text-transform: uppercase; cursor: pointer;">Admin</a>
                 </div>
             </div>
-        </div>
+    </footer>
+
+    <!-- Fixed Admin Floating Button (Bottom Right) -->
+    <button onclick="openAdminLogin()" aria-label="Admin Login" style="
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9999;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        opacity: 0.3;
+        transition: opacity 0.3s;
+    " onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.3'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+    </button>
+    </div>
+    </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
