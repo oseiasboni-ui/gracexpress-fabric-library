@@ -132,6 +132,7 @@
             position: absolute;
             inset: 0;
             background: #000;
+            /* Prevent white flash */
             z-index: 10;
         }
 
@@ -765,42 +766,57 @@
                     }
                 }
 
+                const tiktokId = getTikTokId(item.videoUrl);
+
+                // For TikTok, we show the iframe immediately (ready to play)
+                const showIframeImmediately = !!tiktokId;
+
                 return `
-                <article class="portfolio-item ${item.type === 'video' ? 'video' : ''}" data-index="${index}" data-video-url="${item.videoUrl || ''}" data-video-id="${videoId || ''}">
-                    <div class="portfolio-item-thumbnail" onclick="handleItemClick(${index})">
-                    ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="portfolio-item-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
-                    <div class="portfolio-item-placeholder" style="${thumbnailUrl ? 'display:none' : ''}">
-                        ${item.type === 'video' ? '🎥' : '📷'}
+                    <article class="portfolio-item ${item.type === 'video' ? 'video' : ''}" data-index="${index}" data-video-url="${item.videoUrl || ''}" data-video-id="${videoId || ''}">
+                    <!-- Thumbnail: Hidden if showing iframe immediately -->
+                    <div class="portfolio-item-thumbnail" onclick="handleItemClick(${index})" style="${showIframeImmediately ? 'display:none' : ''}">
+                        ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="portfolio-item-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
+                        <div class="portfolio-item-placeholder" style="${thumbnailUrl ? 'display:none' : ''}">
+                            ${item.type === 'video' ? '🎥' : '📷'}
+                        </div>
                     </div>
-                </div>
-                    <div class="portfolio-inline-video" id="inlineVideo${index}" style="display:none;">
-                        <!-- Inline iframe will be inserted here -->
+                    
+                    <!--Inline Video: Visible immediately for TikTok-- >
+                    <div class="portfolio-inline-video" id="inlineVideo${index}" style="${showIframeImmediately ? 'display:block' : 'display:none;'}">
+                        ${showIframeImmediately ? `<iframe 
+                            src="https://www.tiktok.com/embed/v2/${tiktokId}" 
+                            frameborder="0"
+                            style="width:100%;height:100%;position:absolute;top:0;left:0;"
+                            allowfullscreen></iframe>` : ''}
                     </div>
-                    ${item.type === 'video' ? `<button class="portfolio-expand-btn" onclick="event.stopPropagation(); expandToModal(${index})" title="Expandir" style="display:none;">
+
+                    ${item.type === 'video' ? `<button class="portfolio-expand-btn" onclick="event.stopPropagation(); expandToModal(${index})" title="Expandir" style="${showIframeImmediately ? 'display:flex' : 'display:none;'}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
                             <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
                         </svg>
-                    </button>` : ''}
-                    <div class="portfolio-item-overlay"></div>
-                    <div class="portfolio-item-content">
+                    </button>` : ''
+                    }
+
+                    < div class="portfolio-item-overlay" style = "${showIframeImmediately ? 'display:none' : ''}" ></div >
+                    <div class="portfolio-item-content" style="${showIframeImmediately ? 'display:none' : ''}">
                         <h3 class="portfolio-item-title">${item.title}</h3>
                         <p class="portfolio-item-phrase">"${item.phrase}"</p>
                     </div>
                     <div class="portfolio-edit-badge" onclick="event.stopPropagation(); openEditModal(${index})">EDITAR</div>
-                </article>
-            `}).join('');
+                </article >
+                `}).join('');
 
             // Add "Add New" button for admin
             html += `
-                <div class="portfolio-add-item" onclick="openAddModal()">
+                < div class="portfolio-add-item" onclick = "openAddModal()" >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M12 8v8M8 12h8"/>
                     </svg>
                     <span data-i18n="addItem">${t.addItem}</span>
-                </div>
-            `;
+                </div >
+                `;
 
             grid.innerHTML = html;
         }
@@ -815,8 +831,8 @@
             // If photo, do nothing special (or open lightbox later)
             if (item.type !== 'video' || !item.videoUrl) return;
 
-            const article = document.querySelector(`[data-index="${index}"]`);
-            const inlineContainer = document.getElementById(`inlineVideo${index}`);
+            const article = document.querySelector(`[data - index="${index}"]`);
+            const inlineContainer = document.getElementById(`inlineVideo${index} `);
             const thumbnail = article.querySelector('.portfolio-item-thumbnail');
             const expandBtn = article.querySelector('.portfolio-expand-btn');
 
@@ -838,29 +854,29 @@
             if (videoId) {
                 // YouTube Embed
                 const embedParams = 'autoplay=1&controls=1&rel=0&playsinline=1';
-                inlineContainer.innerHTML = `<iframe 
-                    src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
-                    frameborder="0"
-                    style="width:100%;height:100%;position:absolute;top:0;left:0;"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>`;
+                inlineContainer.innerHTML = `< iframe
+            src = "https://www.youtube.com/embed/${videoId}?${embedParams}"
+            frameborder = "0"
+            style = "width:100%;height:100%;position:absolute;top:0;left:0;"
+            allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen ></iframe > `;
             } else if (tiktokId) {
                 // TikTok Embed
-                inlineContainer.innerHTML = `<iframe 
-                    src="https://www.tiktok.com/embed/v2/${tiktokId}" 
-                    frameborder="0"
-                    style="width:100%;height:100%;position:absolute;top:0;left:0;"
-                    allowfullscreen></iframe>`;
+                inlineContainer.innerHTML = `< iframe
+            src = "https://www.tiktok.com/embed/v2/${tiktokId}"
+            frameborder = "0"
+            style = "width:100%;height:100%;position:absolute;top:0;left:0;"
+            allowfullscreen ></iframe > `;
             } else {
                 // Native HTML5 Video (MP4, etc)
-                inlineContainer.innerHTML = `<video 
-                    src="${item.videoUrl}" 
-                    controls 
-                    autoplay 
-                    playsinline
-                    style="width:100%;height:100%;object-fit:contain;background:#000;">
-                    Seu navegador não suporta a tag de vídeo.
-                </video>`;
+                inlineContainer.innerHTML = `< video
+            src = "${item.videoUrl}"
+            controls
+            autoplay
+            playsinline
+            style = "width:100%;height:100%;object-fit:contain;background:#000;" >
+                Seu navegador não suporta a tag de vídeo.
+                </video > `;
             }
 
             // Show inline video, hide thumbnail, show expand button
@@ -874,10 +890,10 @@
 
         // Stop inline video
         function stopInlineVideo(index) {
-            const article = document.querySelector(`[data-index="${index}"]`);
+            const article = document.querySelector(`[data - index="${index}"]`);
             if (!article) return;
 
-            const inlineContainer = document.getElementById(`inlineVideo${index}`);
+            const inlineContainer = document.getElementById(`inlineVideo${index} `);
             const thumbnail = article.querySelector('.portfolio-item-thumbnail');
             const expandBtn = article.querySelector('.portfolio-expand-btn');
 
@@ -930,29 +946,29 @@
                 // Standard embed - simplified
                 const embedParams = 'autoplay=1&controls=1&rel=0&playsinline=1&fs=1';
 
-                wrapper.innerHTML = `<iframe 
-                    src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
-                    frameborder="0"
-                    style="width:100%;height:100%;"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>`;
+                wrapper.innerHTML = `< iframe
+            src = "https://www.youtube.com/embed/${videoId}?${embedParams}"
+            frameborder = "0"
+            style = "width:100%;height:100%;"
+            allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen ></iframe > `;
             } else if (tiktokId) {
                 // TikTok Embed
-                wrapper.innerHTML = `<iframe 
-                    src="https://www.tiktok.com/embed/v2/${tiktokId}" 
-                    frameborder="0"
-                    style="width:100%;height:100%;"
-                    allowfullscreen></iframe>`;
+                wrapper.innerHTML = `< iframe
+            src = "https://www.tiktok.com/embed/v2/${tiktokId}"
+            frameborder = "0"
+            style = "width:100%;height:100%;"
+            allowfullscreen ></iframe > `;
             } else {
                 // Native HTML5 Video
-                wrapper.innerHTML = `<video 
-                    src="${url}" 
-                    controls 
-                    autoplay 
-                    playsinline
-                    style="width:100%;height:100%;object-fit:contain;background:#000;">
-                    Seu navegador não suporta a tag de vídeo.
-                </video>`;
+                wrapper.innerHTML = `< video
+            src = "${url}"
+            controls
+            autoplay
+            playsinline
+            style = "width:100%;height:100%;object-fit:contain;background:#000;" >
+                Seu navegador não suporta a tag de vídeo.
+                </video > `;
             }
 
             document.getElementById('videoPlayerModal').classList.add('active');
@@ -997,7 +1013,7 @@
             // Show image preview
             const preview = document.getElementById('imagePreview');
             if (item.image) {
-                preview.innerHTML = `<img src="${item.image}" alt="Preview">`;
+                preview.innerHTML = `< img src = "${item.image}" alt = "Preview" > `;
                 currentImageData = item.image;
             } else {
                 preview.innerHTML = '<span class="image-preview-placeholder">📷</span>';
