@@ -4,6 +4,7 @@
 const AuthService = {
     // Check if user is logged in
     async isAuthenticated() {
+        if (localStorage.getItem('rescueSession') === 'true') return true;
         if (!window.supabaseClient) return false;
 
         const { data: { session } } = await window.supabaseClient.auth.getSession();
@@ -40,6 +41,7 @@ const AuthService = {
             // Rescue Login check
             if (email === RESCUE_EMAIL && password === RESCUE_PASS) {
                 console.log('Using RESCUE LOGIN');
+                localStorage.setItem('rescueSession', 'true');
                 return {
                     id: 'rescue_admin',
                     email: RESCUE_EMAIL,
@@ -53,7 +55,11 @@ const AuthService = {
 
     // Logout function
     async logout() {
-        if (!window.supabaseClient) return;
+        localStorage.removeItem('rescueSession');
+        if (!window.supabaseClient) {
+            window.location.reload();
+            return;
+        }
 
         const { error } = await window.supabaseClient.auth.signOut();
         if (error) {
