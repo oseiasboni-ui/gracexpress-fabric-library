@@ -809,14 +809,14 @@
 
             // Add "Add New" button for admin
             html += `
-                < div class="portfolio-add-item" onclick = "openAddModal()" >
+                <div class="portfolio-add-item" onclick="openAddModal()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M12 8v8M8 12h8"/>
                     </svg>
                     <span data-i18n="addItem">${t.addItem}</span>
-                </div >
-                `;
+                </div>
+            `;
 
             grid.innerHTML = html;
         }
@@ -831,8 +831,8 @@
             // If photo, do nothing special (or open lightbox later)
             if (item.type !== 'video' || !item.videoUrl) return;
 
-            const article = document.querySelector(`[data - index="${index}"]`);
-            const inlineContainer = document.getElementById(`inlineVideo${index} `);
+            const article = document.querySelector(`[data-index="${index}"]`);
+            const inlineContainer = document.getElementById(`inlineVideo${index}`);
             const thumbnail = article.querySelector('.portfolio-item-thumbnail');
             const expandBtn = article.querySelector('.portfolio-expand-btn');
 
