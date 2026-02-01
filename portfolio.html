@@ -781,7 +781,7 @@
                         </div>
                     </div>
                     
-                    <!--Inline Video: Visible immediately for TikTok-- >
+                    <!--Inline Video: Visible immediately for TikTok-->
                     <div class="portfolio-inline-video" id="inlineVideo${index}" style="${showIframeImmediately ? 'display:block' : 'display:none;'}">
                         ${showIframeImmediately ? `<iframe 
                             src="https://www.tiktok.com/embed/v2/${tiktokId}" 
@@ -798,13 +798,13 @@
                     </button>` : ''
                     }
 
-                    < div class="portfolio-item-overlay" style = "${showIframeImmediately ? 'display:none' : ''}" ></div >
+                    <div class="portfolio-item-overlay" style="${showIframeImmediately ? 'display:none' : ''}"></div>
                     <div class="portfolio-item-content" style="${showIframeImmediately ? 'display:none' : ''}">
                         <h3 class="portfolio-item-title">${item.title}</h3>
                         <p class="portfolio-item-phrase">"${item.phrase}"</p>
                     </div>
                     <div class="portfolio-edit-badge" onclick="event.stopPropagation(); openEditModal(${index})">EDITAR</div>
-                </article >
+                </article>
                 `}).join('');
 
             // Add "Add New" button for admin
