@@ -310,13 +310,18 @@ function onFabricImageSelect(event) {
 
     const reader = new FileReader();
     reader.onload = (e) => {
-        initCropper(e.target.result);
+        // Check if Hero
+        let aspectRatio = 1; // Default square for fabrics
+        if (currentEditFabricId && currentEditFabricId.startsWith('hero_')) {
+            aspectRatio = NaN; // Free crop for Hero
+        }
+        initCropper(e.target.result, aspectRatio);
     };
     reader.readAsDataURL(file);
     event.target.value = ''; // Reset input
 }
 
-function initCropper(imageSrc) {
+function initCropper(imageSrc, aspectRatio = 1) {
     const image = document.getElementById('cropImageTarget');
     image.src = imageSrc;
     image.style.display = 'block';
@@ -328,7 +333,7 @@ function initCropper(imageSrc) {
     if (cropper) cropper.destroy();
 
     cropper = new Cropper(image, {
-        aspectRatio: 1,
+        aspectRatio: aspectRatio,
         viewMode: 1,
         autoCropArea: 0.9,
         dragMode: 'move',
@@ -344,12 +349,24 @@ function initCropper(imageSrc) {
 async function confirmCrop() {
     if (!cropper || !currentEditFabricId) return;
 
-    const canvas = cropper.getCroppedCanvas({
+    // Determine Output Size
+    let outputOptions = {
         width: 800,
         height: 800,
         imageSmoothingEnabled: true,
         imageSmoothingQuality: 'high',
-    });
+    };
+
+    if (currentEditFabricId.startsWith('hero_')) {
+        outputOptions = {
+            width: 1920, // Full HD width
+            // height auto based on crop
+            imageSmoothingEnabled: true,
+            imageSmoothingQuality: 'high',
+        };
+    }
+
+    const canvas = cropper.getCroppedCanvas(outputOptions);
 
     try {
         showNotification('Enviando imagem para a nuvem...', 'info');
