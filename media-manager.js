@@ -647,20 +647,142 @@ window.discardAdminChanges = discardAdminChanges;
 window.exitAdminMode = exitAdminMode;
 
 // ==========================================
-// Hero System (Admin Edit)
+// Hero Frame Customizer
 // ==========================================
+let heroFrameConfig = {
+    index: { color: 'white', intensity: 80 },
+    portfolio: { color: 'white', intensity: 80 }
+};
+
 function initHeroSystem() {
-    // 1. Load saved hero images
+    // 1. Load saved hero images & configs
     ['index', 'portfolio'].forEach(page => {
         const heroId = `hero_${page}`;
+
+        // Load Image
         if (fabricImages[heroId]) {
             updateHeroMedia(heroId);
         }
+
+        // Load Frame Config
+        const savedConfig = localStorage.getItem(`heroFrame_${page}`);
+        if (savedConfig) {
+            heroFrameConfig[page] = JSON.parse(savedConfig);
+        }
+        applyHeroFrame(page);
     });
 
     // 2. If admin, inject buttons
     if (isAdminMode) injectHeroEditButtons();
 }
+
+function applyHeroFrame(page) {
+    const config = heroFrameConfig[page];
+    const heroSection = document.querySelector(`[data-hero-page="${page}"]`)?.parentElement;
+    if (!heroSection) return;
+
+    // Apply Color (via background of parent usually, or we might need a border frame)
+    // Actually, distinct black vs white frame usually implies the background BEHIND the curve.
+    // Since .hero has overflow hidden and margin-top, the 'frame' is effectively the page background getting revealed or a border.
+    // But the user asked for Black and White frame.
+    // Implementation: Set a box-shadow or border color?
+    // Let's assume 'Frame Color' means the color masking the corners.
+    // If we use border-radius, the 'corners' are transparent, showing the body background.
+    // To make them "black or white", we might need a pseudo-element or just ensure body background matches?
+    // User request: "create your own frame and chonse your color black and white".
+    // I will simulate this by changing the page background color locally or adding a thick border?
+    // Let's try adding a thick bottom border that is curved?
+    // Actually, standard approach: The 'Curve' cuts out the image. The color 'seen' is the section below.
+    // If the user wants a visible *Frame*, maybe they mean a border around the image?
+    // "moudura" = Frame.
+    // I'll add a border to the clipped area.
+
+    // Intensity = Border Radius Y value
+    const radiusY = config.intensity * 2.5; // Map 0-100 to 0-250px
+    const radiusX = 50; // Keep horizontal symmetric at 50%
+
+    heroSection.style.borderRadius = `0 0 ${radiusX}% ${radiusX}% / 0 0 ${radiusY}px ${radiusY}px`;
+
+    // Color: Add a border bottom?
+    // heroSection.style.borderBottom = `20px solid ${config.color}`; 
+    // Wait, simple curvature is cleaner.
+    // Let's stick to the curve adjustment for now as "Modify". 
+    // For color: Maybe they mean the shadow color? Or a border?
+    // Let's try a border.
+    heroSection.style.borderBottom = `5px solid ${config.color}`;
+    heroSection.style.borderColor = config.color;
+}
+
+function openHeroEditModal(heroId) {
+    currentEditFabricId = heroId;
+    ensureEditModalExists();
+    const page = heroId.replace('hero_', '');
+    const config = heroFrameConfig[page];
+
+    const modal = document.getElementById('mediaEditModal');
+    modal.classList.add('active');
+
+    // Hide Video, Show Frame Editor
+    const vidInput = document.getElementById('videoUrlInput').parentElement;
+    if (vidInput) vidInput.style.display = 'none';
+
+    // Inject Custom Frame UI
+    const frameUI = document.createElement('div');
+    frameUI.id = 'heroFrameEditor';
+    frameUI.innerHTML = `
+        <h4 style="margin: 20px 0 10px;">🎨 Personalizar Moldura (Frame)</h4>
+        
+        <div style="margin-bottom: 15px;">
+            <label style="display:block; margin-bottom:5px; font-size:12px;">Cor da Borda:</label>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="updateFrameColor('${page}', 'white')" class="frame-color-btn ${config.color === 'white' ? 'active' : ''}" style="background:white; border:1px solid #ccc; width:40px; height:40px; border-radius:50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor:pointer; position:relative;">
+                    ${config.color === 'white' ? '✓' : ''}
+                </button>
+                <button onclick="updateFrameColor('${page}', 'black')" class="frame-color-btn ${config.color === 'black' ? 'active' : ''}" style="background:black; border:1px solid #ccc; width:40px; height:40px; border-radius:50%; color:white; cursor:pointer; position:relative;">
+                    ${config.color === 'black' ? '✓' : ''}
+                </button>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display:block; margin-bottom:5px; font-size:12px;">Curvatura (Intensidade):</label>
+            <input type="range" min="0" max="100" value="${config.intensity}" 
+                oninput="updateFrameIntensity('${page}', this.value)" 
+                style="width: 100%; cursor: pointer;">
+        </div>
+    `;
+
+    // Clean up previous injection if any
+    const oldUI = document.getElementById('heroFrameEditor');
+    if (oldUI) oldUI.remove();
+
+    const editSection = document.getElementById('editVideoSection');
+    editSection.insertBefore(frameUI, editSection.firstChild);
+}
+
+// Global handlers for the injected HTML
+window.updateFrameColor = (page, color) => {
+    heroFrameConfig[page].color = color;
+    localStorage.setItem(`heroFrame_${page}`, JSON.stringify(heroFrameConfig[page]));
+
+    // Update active checkmark UI
+    document.querySelectorAll('.frame-color-btn').forEach(btn => {
+        btn.innerText = '';
+        btn.classList.remove('active');
+        if (btn.style.background === color || (color === 'white' && btn.style.background.includes('white'))) {
+            btn.innerText = '✓';
+            btn.classList.add('active');
+        }
+    });
+
+    applyHeroFrame(page);
+};
+
+window.updateFrameIntensity = (page, value) => {
+    heroFrameConfig[page].intensity = value;
+    localStorage.setItem(`heroFrame_${page}`, JSON.stringify(heroFrameConfig[page]));
+    applyHeroFrame(page);
+};
 
 function injectHeroEditButtons() {
     document.querySelectorAll('[data-hero-page]').forEach(heroBg => {
@@ -718,14 +840,11 @@ function openHeroEditModal(heroId) {
     const modal = document.getElementById('mediaEditModal');
     modal.classList.add('active');
 
-    // Hide Video Section for Hero
-    const vidInput = document.getElementById('videoUrlInput').parentElement;
-    const vidTitle = vidInput.previousElementSibling;
-    if (vidInput) vidInput.style.display = 'none';
-    if (vidTitle) vidTitle.style.display = 'none';
-
     // Clear video input just in case
     document.getElementById('videoUrlInput').value = '';
+
+    // Clean up Frame Editor if we are opening a normal fabric (safety check) but here we know it is hero
+    // Logic handled in openHeroEditModal specific injection
 }
 
 function updateHeroMedia(heroId) {

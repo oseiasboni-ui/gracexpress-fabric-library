@@ -306,9 +306,8 @@ body {
     margin-top: var(--header-height);
     /* Push down below fixed header */
     overflow: hidden;
-    /* Curved bottom edge + White Frame */
+    border-radius: var(--hero-radius-bottom, 0 0 50% 50% / 0 0 120px 120px);
     box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
-    /* Seamless with header */
 }
 
 .hero.hero-ultrawide {
@@ -3493,45 +3492,4 @@ body {
     .search-container {
         flex: 1;
     }
-}
-
-/* Organic Hero Mask - Bottom */
-.hero-curve-mask {
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    pointer-events: none;
-    line-height: 0;
-}
-
-.hero-curve-mask svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    min-height: 80px;
-    filter: drop-shadow(0 -5px 15px rgba(0, 0, 0, 0.05));
-    /* Subtle depth for the frame */
-}
-
-/* Organic Hero Mask - Top */
-.hero-curve-mask-top {
-    position: absolute;
-    top: -1px;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    pointer-events: none;
-    line-height: 0;
-    transform: rotate(180deg);
-    /* Flip the bottom curve for the top */
-}
-
-.hero-curve-mask-top svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    min-height: 80px;
-    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.05));
 }
