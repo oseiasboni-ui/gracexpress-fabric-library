@@ -863,11 +863,14 @@
             if (!videoId) return;
 
             // Standard embed params - works for both regular videos and Shorts
-            const embedParams = 'autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&controls=1';
+            const embedParams = 'autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&controls=1&fs=1';
 
-            inlineContainer.innerHTML = `<iframe
-                src="https://www.youtube.com/embed/${videoId}?${embedParams}"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            inlineContainer.innerHTML = `<iframe 
+                src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
+                frameborder="0"
+                loading="eager"
+                style="width:100%;height:100%;position:absolute;top:0;left:0;"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen></iframe>`;
 
             // Show inline video, hide thumbnail, show expand button
