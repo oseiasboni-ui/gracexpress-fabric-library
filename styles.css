@@ -301,9 +301,12 @@ body {
     justify-content: center;
     margin-top: 0;
     overflow: hidden;
-    /* Curved bottom edge */
+    /* Curved bottom edge + White Frame */
     border-radius: 0 0 50% 50% / 0 0 120px 120px;
     box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+    border: 20px solid #ffffff;
+    border-top: none;
+    /* Seamless with header */
 }
 
 .hero.hero-ultrawide {
