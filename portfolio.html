@@ -658,11 +658,11 @@
         const defaultPortfolioItems = [
             { id: 1, type: 'photo', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&q=80', title: 'Coleção Verão 2024', phrase: 'Fluidez que dança com a brisa' },
             { id: 2, type: 'photo', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80', title: 'Alta Costura', phrase: 'Elegância atemporal em cada detalhe' },
-            { id: 3, type: 'video', image: 'https://images.unsplash.com/photo-1519235106695-a22a7a260ac6?w=600&q=80', title: 'Desfile Paris 2024', phrase: 'O movimento que inspira', videoUrl: '' },
+            { id: 3, type: 'video', image: '', title: 'Desfile Paris 2024', phrase: 'O movimento que inspira', videoUrl: 'https://www.youtube.com/watch?v=6RPdp9U48UE' },
             { id: 4, type: 'photo', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', title: 'Alfaiataria Moderna', phrase: 'Precisão que define caráter' },
             { id: 5, type: 'photo', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80', title: 'Coleção Inverno 2024', phrase: 'Calor e sofisticação abraçados' },
             { id: 6, type: 'photo', image: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600&q=80', title: 'Moda Sustentável', phrase: 'Consciência que veste bem' },
-            { id: 7, type: 'video', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80', title: 'Backstage Exclusivo', phrase: 'A magia por trás da criação', videoUrl: '' },
+            { id: 7, type: 'video', image: '', title: 'Backstage Exclusivo', phrase: 'A magia por trás da criação', videoUrl: 'https://www.youtube.com/shorts/6RPdp9U48UE' },
             { id: 8, type: 'photo', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80', title: 'Linha Esportiva', phrase: 'Performance com estilo' },
             { id: 9, type: 'photo', image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80', title: 'Noite de Gala', phrase: 'Brilho que encanta olhares' }
         ];
@@ -734,9 +734,11 @@
             }
         }
 
-        // Extract YouTube video ID from URL
+        // Extract YouTube video ID from URL (supports regular videos and Shorts)
         function getYouTubeId(url) {
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            if (!url) return null;
+            // Support: youtube.com/watch?v=, youtu.be/, youtube.com/embed/, youtube.com/shorts/
+            const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|shorts\/|\&v=)([^#\&\?]*).*/;
             const match = url.match(regExp);
             return (match && match[2].length === 11) ? match[2] : null;
         }
