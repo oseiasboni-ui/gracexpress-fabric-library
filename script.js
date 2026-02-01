@@ -805,3 +805,54 @@ document.addEventListener('DOMContentLoaded', () => {
     window.updateFabricsLanguage(currentLang);
   }
 });
+
+// ==========================================
+// Mobile Filter Toggle
+// ==========================================
+const mobileFilterBtn = document.getElementById('mobileFilterBtn');
+const filtersSidebar = document.querySelector('.filters-sidebar');
+
+function toggleMobileFilters() {
+  if (filtersSidebar) {
+    filtersSidebar.classList.toggle('mobile-open');
+
+    // Create close button if it doesn't exist
+    if (!document.querySelector('.mobile-filter-close')) {
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'mobile-filter-close';
+      closeBtn.innerHTML = '×';
+      closeBtn.onclick = toggleMobileFilters;
+      document.body.appendChild(closeBtn);
+    }
+
+    // Toggle close button visibility
+    const closeBtn = document.querySelector('.mobile-filter-close');
+    if (closeBtn) {
+      closeBtn.style.display = filtersSidebar.classList.contains('mobile-open') ? 'flex' : 'none';
+    }
+
+    // Prevent body scroll when filters are open
+    document.body.style.overflow = filtersSidebar.classList.contains('mobile-open') ? 'hidden' : '';
+  }
+}
+
+mobileFilterBtn?.addEventListener('click', toggleMobileFilters);
+
+// Close filters when a filter option is selected
+filterOptions.forEach(opt => {
+  opt.addEventListener('change', () => {
+    // Close mobile filter drawer after selection
+    if (filtersSidebar?.classList.contains('mobile-open')) {
+      setTimeout(() => {
+        toggleMobileFilters();
+      }, 300);
+    }
+  });
+});
+
+// Close mobile filters on escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && filtersSidebar?.classList.contains('mobile-open')) {
+    toggleMobileFilters();
+  }
+});
