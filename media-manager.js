@@ -185,6 +185,7 @@ function updateAdminUI() {
     // Add visual cues for editable elements if in admin mode
     if (isAdminMode) {
         document.body.classList.add('edit-mode-active');
+        injectHeroEditButtons(); // Ensure hero buttons are present
     }
 }
 
@@ -369,7 +370,11 @@ async function confirmCrop() {
         await saveImageToDB(currentEditFabricId, imageData);
 
         // Convert to visual update
-        updateFabricMedia(currentEditFabricId);
+        if (currentEditFabricId.startsWith('hero_')) {
+            updateHeroMedia(currentEditFabricId);
+        } else {
+            updateFabricMedia(currentEditFabricId);
+        }
         showNotification('Imagem enviada para a nuvem com sucesso!', 'success');
         closeEditModal();
     } catch (e) {
@@ -575,7 +580,13 @@ async function loadAllMedia() {
     await loadImagesFromDB();
 
     // Update all fabric cards with loaded images
-    Object.keys(fabricImages).forEach(id => updateFabricMedia(id));
+    Object.keys(fabricImages).forEach(id => {
+        if (id.startsWith('hero_')) return;
+        updateFabricMedia(id);
+    });
+
+    // Initialize Hero
+    initHeroSystem();
 
     if (isAdminMode) {
         updateAdminUI();
@@ -600,6 +611,100 @@ window.onFabricImageSelect = onFabricImageSelect;
 window.saveAdminChanges = saveAdminChanges;
 window.discardAdminChanges = discardAdminChanges;
 window.exitAdminMode = exitAdminMode;
+
+// ==========================================
+// Hero System (Admin Edit)
+// ==========================================
+function initHeroSystem() {
+    // 1. Load saved hero images
+    ['index', 'portfolio'].forEach(page => {
+        const heroId = `hero_${page}`;
+        if (fabricImages[heroId]) {
+            updateHeroMedia(heroId);
+        }
+    });
+
+    // 2. If admin, inject buttons
+    if (isAdminMode) injectHeroEditButtons();
+}
+
+function injectHeroEditButtons() {
+    document.querySelectorAll('[data-hero-page]').forEach(heroBg => {
+        const container = heroBg.parentElement; // .hero section
+        // prevent duplicate
+        if (container.querySelector('.admin-hero-edit-btn')) return;
+
+        const page = heroBg.getAttribute('data-hero-page');
+        const btn = document.createElement('button');
+        btn.className = 'admin-hero-edit-btn';
+        btn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            EDITAR HERO
+        `;
+        btn.onclick = (e) => {
+            e.stopPropagation();
+            openHeroEditModal(`hero_${page}`);
+        };
+
+        // Style the button
+        Object.assign(btn.style, {
+            position: 'absolute',
+            top: '80px', // Below header
+            right: '20px',
+            zIndex: '100',
+            background: 'white',
+            border: '1px solid #ccc',
+            padding: '8px 16px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontWeight: '600',
+            fontSize: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
+        });
+
+        container.style.position = 'relative';
+        container.appendChild(btn);
+    });
+}
+
+function openHeroEditModal(heroId) {
+    currentEditFabricId = heroId;
+    ensureEditModalExists();
+
+    // Customize modal for Image Only
+    const modal = document.getElementById('mediaEditModal');
+    modal.classList.add('active');
+
+    // Hide Video Section for Hero
+    const vidInput = document.getElementById('videoUrlInput').parentElement;
+    const vidTitle = vidInput.previousElementSibling;
+    if (vidInput) vidInput.style.display = 'none';
+    if (vidTitle) vidTitle.style.display = 'none';
+
+    // Clear video input just in case
+    document.getElementById('videoUrlInput').value = '';
+}
+
+function updateHeroMedia(heroId) {
+    const data = fabricImages[heroId];
+    if (!data || !data.url) return;
+
+    const page = heroId.replace('hero_', '');
+    const heroBg = document.querySelector(`[data-hero-page="${page}"]`);
+
+    if (heroBg) {
+        heroBg.style.backgroundImage = `url('${data.url}')`;
+        // Ensure cover size
+        heroBg.style.backgroundSize = 'cover';
+        heroBg.style.backgroundPosition = 'center';
+    }
+}
 
 // Init
 document.addEventListener('DOMContentLoaded', async () => {
