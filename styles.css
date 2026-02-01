@@ -303,7 +303,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 0;
+    margin-top: var(--header-height);
+    /* Push down below fixed header */
     overflow: hidden;
     /* Curved bottom edge + White Frame */
     box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
@@ -596,7 +597,7 @@ body {
    ============================ */
 .search-bar {
     background: var(--color-bg);
-    
+
     padding: 20px 32px;
     position: fixed;
     top: var(--header-height);
@@ -1304,7 +1305,7 @@ body {
     flex-shrink: 0;
     margin-bottom: 8px;
     padding-bottom: 16px;
-    
+
 }
 
 .slide-origin {
@@ -1555,7 +1556,7 @@ body {
     color: var(--color-accent);
     margin-bottom: 10px;
     padding-bottom: 8px;
-    
+
 }
 
 .spec-row {
@@ -2260,7 +2261,7 @@ body {
     /* Hidden by default */
     padding: 12px 16px;
     background: var(--color-bg-alt);
-    
+
 }
 
 /* Show only in admin edit mode */
@@ -2452,7 +2453,7 @@ body {
 
 .crop-header {
     padding: 16px 24px;
-    
+
     display: flex;
     justify-content: space-between;
     align-items: center;
