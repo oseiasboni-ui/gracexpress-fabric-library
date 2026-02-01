@@ -140,6 +140,67 @@
             transform: translate(-50%, -50%) scale(0.95);
         }
 
+        /* Hide play button when video is playing inline */
+        .portfolio-item.video.playing::before,
+        .portfolio-item.video.playing::after {
+            display: none;
+        }
+
+        /* Thumbnail wrapper */
+        .portfolio-item-thumbnail {
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+        }
+
+        /* Inline video container */
+        .portfolio-inline-video {
+            position: absolute;
+            inset: 0;
+            background: #000;
+            z-index: 5;
+        }
+
+        .portfolio-inline-video iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Expand button */
+        .portfolio-expand-btn {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-expand-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #333;
+        }
+
+        .portfolio-expand-btn:hover {
+            background: #fff;
+            transform: scale(1.1);
+        }
+
+        .portfolio-expand-btn:active {
+            transform: scale(0.95);
+        }
+
         /* Admin Edit Badge for Portfolio */
         .portfolio-edit-badge {
             position: absolute;
@@ -721,18 +782,30 @@
             let html = portfolioItems.map((item, index) => {
                 // For video items, get YouTube thumbnail (custom > maxresdefault > hqdefault)
                 let thumbnailUrl = item.customThumbnail || item.image;
-                if (item.type === 'video' && item.videoUrl && !item.customThumbnail) {
-                    const videoId = getYouTubeId(item.videoUrl);
-                    if (videoId) {
-                        // Use maxresdefault for HD quality, with hqdefault as fallback
+                let videoId = null;
+                if (item.type === 'video' && item.videoUrl) {
+                    videoId = getYouTubeId(item.videoUrl);
+                    if (videoId && !item.customThumbnail) {
+                        // Use maxresdefault for HD quality
                         thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
                     }
                 }
 
                 return `
-                <article class="portfolio-item ${item.type === 'video' ? 'video' : ''}" onclick="handleItemClick(${index})" data-video-url="${item.videoUrl || ''}">
-                    ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="portfolio-item-media" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : ''}
-                    <div class="portfolio-item-placeholder" style="${thumbnailUrl ? 'display:none' : ''}">📷</div>
+                <article class="portfolio-item ${item.type === 'video' ? 'video' : ''}" data-index="${index}" data-video-url="${item.videoUrl || ''}" data-video-id="${videoId || ''}">
+                    <div class="portfolio-item-thumbnail" onclick="handleItemClick(${index})">
+                        ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="portfolio-item-media" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';">` : ''}
+                        <div class="portfolio-item-placeholder" style="${thumbnailUrl ? 'display:none' : ''}">📷</div>
+                    </div>
+                    <div class="portfolio-inline-video" id="inlineVideo${index}" style="display:none;">
+                        <!-- Inline iframe will be inserted here -->
+                    </div>
+                    ${item.type === 'video' ? `<button class="portfolio-expand-btn" onclick="event.stopPropagation(); expandToModal(${index})" title="Expandir" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+                            <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+                        </svg>
+                    </button>` : ''}
                     <div class="portfolio-item-overlay"></div>
                     <div class="portfolio-item-content">
                         <h3 class="portfolio-item-title">${item.title}</h3>
@@ -756,12 +829,83 @@
             grid.innerHTML = html;
         }
 
-        // Handle item click
+        // Track current playing video
+        let currentPlayingIndex = null;
+
+        // Handle item click - play video inline in card
         function handleItemClick(index) {
             const item = portfolioItems[index];
-            if (item.type === 'video' && item.videoUrl) {
-                openVideoPlayer(item.videoUrl);
+
+            // If photo, do nothing special (or open lightbox later)
+            if (item.type !== 'video' || !item.videoUrl) return;
+
+            const article = document.querySelector(`[data-index="${index}"]`);
+            const inlineContainer = document.getElementById(`inlineVideo${index}`);
+            const thumbnail = article.querySelector('.portfolio-item-thumbnail');
+            const expandBtn = article.querySelector('.portfolio-expand-btn');
+
+            // If already playing this video, toggle off
+            if (currentPlayingIndex === index) {
+                stopInlineVideo(index);
+                return;
             }
+
+            // Stop any other playing video first
+            if (currentPlayingIndex !== null) {
+                stopInlineVideo(currentPlayingIndex);
+            }
+
+            // Get video ID and play inline
+            const videoId = getYouTubeId(item.videoUrl);
+            if (!videoId) return;
+
+            const isShorts = item.videoUrl.includes('/shorts/');
+            const embedParams = isShorts
+                ? 'autoplay=1&mute=1&loop=1&playlist=' + videoId + '&rel=0&modestbranding=1&playsinline=1'
+                : 'autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1';
+
+            inlineContainer.innerHTML = `<iframe 
+                src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>`;
+
+            // Show inline video, hide thumbnail, show expand button
+            inlineContainer.style.display = 'block';
+            thumbnail.style.display = 'none';
+            if (expandBtn) expandBtn.style.display = 'flex';
+            article.classList.add('playing');
+
+            currentPlayingIndex = index;
+        }
+
+        // Stop inline video
+        function stopInlineVideo(index) {
+            const article = document.querySelector(`[data-index="${index}"]`);
+            if (!article) return;
+
+            const inlineContainer = document.getElementById(`inlineVideo${index}`);
+            const thumbnail = article.querySelector('.portfolio-item-thumbnail');
+            const expandBtn = article.querySelector('.portfolio-expand-btn');
+
+            inlineContainer.innerHTML = '';
+            inlineContainer.style.display = 'none';
+            thumbnail.style.display = 'block';
+            if (expandBtn) expandBtn.style.display = 'none';
+            article.classList.remove('playing');
+
+            currentPlayingIndex = null;
+        }
+
+        // Expand to fullscreen modal
+        function expandToModal(index) {
+            const item = portfolioItems[index];
+            if (!item.videoUrl) return;
+
+            // Stop inline video first
+            stopInlineVideo(index);
+
+            // Open in modal
+            openVideoPlayer(item.videoUrl);
         }
 
         // Extract YouTube video ID from URL (supports regular videos and Shorts)
@@ -971,6 +1115,8 @@
         window.savePortfolioItem = savePortfolioItem;
         window.deletePortfolioItem = deletePortfolioItem;
         window.handleItemClick = handleItemClick;
+        window.expandToModal = expandToModal;
+        window.stopInlineVideo = stopInlineVideo;
         window.openVideoPlayer = openVideoPlayer;
         window.closeVideoPlayer = closeVideoPlayer;
     </script>
