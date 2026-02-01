@@ -1070,16 +1070,38 @@
         }
 
         // Save portfolio item
-        function savePortfolioItem() {
+        async function savePortfolioItem() {
             const type = document.getElementById('portfolioType').value;
             const title = document.getElementById('portfolioTitle').value.trim();
             const phrase = document.getElementById('portfolioPhrase').value.trim();
             const videoUrl = document.getElementById('portfolioVideoUrl').value.trim();
-            const customThumbnail = document.getElementById('portfolioCustomThumbnail').value.trim();
+            let customThumbnail = document.getElementById('portfolioCustomThumbnail').value.trim();
 
             if (!title) {
                 alert('Por favor, insira um título.');
                 return;
+            }
+
+            // Auto-fetch TikTok thumbnail if not provided
+            if (type === 'video' && videoUrl && !customThumbnail && getTikTokId(videoUrl)) {
+                try {
+                    const saveBtn = document.querySelector('.portfolio-modal-footer .btn-primary');
+                    const originalText = saveBtn.textContent;
+                    saveBtn.textContent = 'Buscando capa...';
+                    saveBtn.disabled = true;
+
+                    const response = await fetch(`https://www.tiktok.com/oembed?url=${videoUrl}`);
+                    const data = await response.json();
+                    if (data.thumbnail_url) {
+                        customThumbnail = data.thumbnail_url;
+                    }
+
+                    saveBtn.textContent = originalText;
+                    saveBtn.disabled = false;
+                } catch (e) {
+                    console.error('Erro ao buscar thumbnail do TikTok:', e);
+                    // Continue saving even if fetch fails
+                }
             }
 
             const item = {
