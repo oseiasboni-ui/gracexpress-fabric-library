@@ -439,6 +439,13 @@
                     <label data-i18n="videoUrlLabel">URL do Vídeo (YouTube/Vimeo)</label>
                     <input type="text" id="portfolioVideoUrl" placeholder="https://youtube.com/watch?v=...">
                 </div>
+                <div class="form-group" id="customThumbnailGroup" style="display: none;">
+                    <label>Thumbnail Personalizada (opcional)</label>
+                    <input type="text" id="portfolioCustomThumbnail"
+                        placeholder="URL da imagem ou deixe vazio para usar do YouTube">
+                    <small style="color: #888; font-size: 12px;">Cole uma URL de imagem HD para substituir a thumbnail
+                        automática</small>
+                </div>
                 <div class="modal-actions">
                     <button class="btn-save" onclick="savePortfolioItem()" data-i18n="saveBtn">Salvar</button>
                     <button class="btn-delete" id="btnDelete" onclick="deletePortfolioItem()"
@@ -480,7 +487,7 @@
     </div>
 
     <style>
-        /* Video Player Modal - Mobile Optimized */
+        /* Video Player Modal - 9:16 Vertical Format */
         .video-player-modal {
             position: fixed;
             inset: 0;
@@ -493,56 +500,89 @@
 
         .video-player-modal.active {
             display: flex;
+            animation: fadeIn 0.2s ease;
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Backdrop blur + dark overlay */
         .video-player-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* 9:16 Vertical Container */
         .video-player-content {
             position: relative;
-            width: 95%;
-            max-width: 900px;
+            width: auto;
+            height: 85vh;
+            max-height: 800px;
+            aspect-ratio: 9 / 16;
             z-index: 1;
+            animation: modalSlideIn 0.3s ease;
         }
 
+        @keyframes modalSlideIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Close Button - Large X */
         .video-player-close {
             position: absolute;
-            top: -50px;
-            right: 0;
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
-            min-height: 44px;
-            background: rgba(255, 255, 255, 0.2);
+            top: -16px;
+            right: -16px;
+            width: 48px;
+            height: 48px;
+            background: #fff;
             border: none;
             border-radius: 50%;
-            color: #fff;
+            color: #000;
             font-size: 28px;
+            font-weight: 300;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s ease;
-            -webkit-tap-highlight-color: transparent;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10;
         }
 
-        .video-player-close:hover,
-        .video-player-close:active {
-            background: rgba(255, 255, 255, 0.4);
+        .video-player-close:hover {
+            background: #ff4444;
+            color: #fff;
+            transform: scale(1.1);
         }
 
+        /* Video Wrapper - 9:16 */
         .video-player-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%;
-            /* 16:9 aspect ratio */
+            height: 100%;
             background: #000;
-            border-radius: 8px;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         .video-player-wrapper iframe {
@@ -554,38 +594,27 @@
             border: none;
         }
 
-        /* Mobile adjustments for video modal */
+        /* Mobile */
         @media (max-width: 768px) {
             .video-player-content {
-                width: 100%;
-                padding: 0 8px;
+                height: 80vh;
+                max-width: 90vw;
             }
 
             .video-player-close {
-                top: -48px;
-                right: 8px;
-            }
-
-            .video-player-wrapper {
-                border-radius: 4px;
+                top: -12px;
+                right: -12px;
+                width: 44px;
+                height: 44px;
             }
         }
 
-        /* Landscape mode on mobile */
-        @media (max-height: 500px) and (orientation: landscape) {
+        /* Landscape - switch to 16:9 */
+        @media (orientation: landscape) and (max-height: 600px) {
             .video-player-content {
-                width: 80%;
-                max-width: none;
-            }
-
-            .video-player-wrapper {
-                padding-bottom: 45%;
-                /* Slightly taller in landscape */
-            }
-
-            .video-player-close {
-                top: 8px;
-                right: -50px;
+                height: 85vh;
+                aspect-ratio: 16 / 9;
+                max-width: 90vw;
             }
         }
     </style>
@@ -690,12 +719,13 @@
             const t = getCurrentTranslations(); // Use global function from translations.js
 
             let html = portfolioItems.map((item, index) => {
-                // For video items, get YouTube thumbnail if videoUrl exists
-                let thumbnailUrl = item.image;
-                if (item.type === 'video' && item.videoUrl) {
+                // For video items, get YouTube thumbnail (custom > maxresdefault > hqdefault)
+                let thumbnailUrl = item.customThumbnail || item.image;
+                if (item.type === 'video' && item.videoUrl && !item.customThumbnail) {
                     const videoId = getYouTubeId(item.videoUrl);
                     if (videoId) {
-                        thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                        // Use maxresdefault for HD quality, with hqdefault as fallback
+                        thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
                     }
                 }
 
@@ -747,11 +777,17 @@
         function openVideoPlayer(url) {
             const videoId = getYouTubeId(url);
             const wrapper = document.getElementById('videoPlayerWrapper');
+            const isShorts = url.includes('/shorts/');
 
             if (videoId) {
+                // Use embed format that works for both regular videos and Shorts
+                const embedParams = isShorts
+                    ? 'autoplay=1&loop=1&playlist=' + videoId + '&rel=0&modestbranding=1'
+                    : 'autoplay=1&rel=0&modestbranding=1';
+
                 wrapper.innerHTML = `<iframe 
-                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    src="https://www.youtube.com/embed/${videoId}?${embedParams}" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                     allowfullscreen></iframe>`;
             } else {
                 // If not YouTube, try opening as regular video or redirect
@@ -790,10 +826,13 @@
             document.getElementById('portfolioTitle').value = item.title;
             document.getElementById('portfolioPhrase').value = item.phrase;
             document.getElementById('portfolioVideoUrl').value = item.videoUrl || '';
+            document.getElementById('portfolioCustomThumbnail').value = item.customThumbnail || '';
             document.getElementById('btnDelete').style.display = 'block';
 
-            // Show/hide video URL field
-            document.getElementById('videoUrlGroup').style.display = item.type === 'video' ? 'block' : 'none';
+            // Show/hide video URL and custom thumbnail fields
+            const isVideo = item.type === 'video';
+            document.getElementById('videoUrlGroup').style.display = isVideo ? 'block' : 'none';
+            document.getElementById('customThumbnailGroup').style.display = isVideo ? 'block' : 'none';
 
             // Show image preview
             const preview = document.getElementById('imagePreview');
@@ -820,8 +859,10 @@
             document.getElementById('portfolioTitle').value = '';
             document.getElementById('portfolioPhrase').value = '';
             document.getElementById('portfolioVideoUrl').value = '';
+            document.getElementById('portfolioCustomThumbnail').value = '';
             document.getElementById('btnDelete').style.display = 'none';
             document.getElementById('videoUrlGroup').style.display = 'none';
+            document.getElementById('customThumbnailGroup').style.display = 'none';
             document.getElementById('imagePreview').innerHTML = '<span class="image-preview-placeholder">📷</span>';
 
             document.getElementById('portfolioModal').classList.add('active');
@@ -840,6 +881,7 @@
             const title = document.getElementById('portfolioTitle').value.trim();
             const phrase = document.getElementById('portfolioPhrase').value.trim();
             const videoUrl = document.getElementById('portfolioVideoUrl').value.trim();
+            const customThumbnail = document.getElementById('portfolioCustomThumbnail').value.trim();
 
             if (!title) {
                 alert('Por favor, insira um título.');
@@ -852,7 +894,8 @@
                 image: currentImageData || (currentEditIndex !== null ? portfolioItems[currentEditIndex].image : ''),
                 title,
                 phrase,
-                videoUrl: type === 'video' ? videoUrl : ''
+                videoUrl: type === 'video' ? videoUrl : '',
+                customThumbnail: type === 'video' ? customThumbnail : ''
             };
 
             if (currentEditIndex !== null) {
@@ -902,7 +945,9 @@
 
         // Handle type change
         document.getElementById('portfolioType')?.addEventListener('change', (e) => {
-            document.getElementById('videoUrlGroup').style.display = e.target.value === 'video' ? 'block' : 'none';
+            const isVideo = e.target.value === 'video';
+            document.getElementById('videoUrlGroup').style.display = isVideo ? 'block' : 'none';
+            document.getElementById('customThumbnailGroup').style.display = isVideo ? 'block' : 'none';
         });
 
         // Check admin mode and apply class
