@@ -35,23 +35,29 @@
             padding: 60px 32px;
             max-width: 1400px;
             margin: 0 auto;
+            background-color: #ffffff;
+            /* Seamless white */
         }
 
         .portfolio-item {
             aspect-ratio: 4/5;
-            background: var(--color-bg-alt);
+            background: #ffffff;
+            /* White background for items too */
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
+            /* Removed box-shadow transition */
+            box-shadow: none !important;
+            /* Force no shadow */
         }
 
         .portfolio-item:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            /* Removed hover shadow */
         }
 
         .portfolio-item-media {
