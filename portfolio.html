@@ -867,6 +867,7 @@
 
             // Get video ID and play inline
             const videoId = getYouTubeId(item.videoUrl);
+            const tiktokId = getTikTokId(item.videoUrl);
 
             if (videoId) {
                 // YouTube Embed
@@ -876,6 +877,13 @@
                     frameborder="0"
                     style="width:100%;height:100%;position:absolute;top:0;left:0;"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>`;
+            } else if (tiktokId) {
+                // TikTok Embed
+                inlineContainer.innerHTML = `<iframe 
+                    src="https://www.tiktok.com/embed/v2/${tiktokId}" 
+                    frameborder="0"
+                    style="width:100%;height:100%;position:absolute;top:0;left:0;"
                     allowfullscreen></iframe>`;
             } else {
                 // Native HTML5 Video (MP4, etc)
@@ -937,9 +945,19 @@
             return (match && match[2].length === 11) ? match[2] : null;
         }
 
+        // Extract TikTok Video ID
+        function getTikTokId(url) {
+            if (!url) return null;
+            // Support: tiktok.com/@user/video/ID, tiktok.com/v/ID
+            const regExp = /tiktok\.com\/.*\/video\/(\d+)/;
+            const match = url.match(regExp);
+            return match ? match[1] : null;
+        }
+
         // Open video player modal
         function openVideoPlayer(url) {
             const videoId = getYouTubeId(url);
+            const tiktokId = getTikTokId(url);
             const wrapper = document.getElementById('videoPlayerWrapper');
 
             if (videoId) {
@@ -951,6 +969,13 @@
                     frameborder="0"
                     style="width:100%;height:100%;"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>`;
+            } else if (tiktokId) {
+                // TikTok Embed
+                wrapper.innerHTML = `<iframe 
+                    src="https://www.tiktok.com/embed/v2/${tiktokId}" 
+                    frameborder="0"
+                    style="width:100%;height:100%;"
                     allowfullscreen></iframe>`;
             } else {
                 // Native HTML5 Video
