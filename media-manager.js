@@ -156,10 +156,7 @@ async function handleAdminLogin(e) {
             isAdminMode = true;
             enableEditMode();
             closeAdminLogin();
-            showNotification('Login sucesso! Redirecionando para o Portfólio...', 'success');
-            setTimeout(() => {
-                window.location.href = 'portfolio.html';
-            }, 1000);
+            showNotification('Login realizado com sucesso! Modo de edição ativo.', 'success');
         }
     } catch (error) {
         showNotification('Erro ao fazer login: ' + error.message, 'error');
