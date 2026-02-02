@@ -179,6 +179,11 @@ function enableEditMode() {
     fabricVideosBackup = JSON.parse(JSON.stringify(fabricVideos));
     createAdminToolbar();
     updateAdminUI();
+
+    // Trigger portfolio re-render if we are on that page to show edit badges
+    if (typeof renderPortfolio === 'function') {
+        renderPortfolio();
+    }
 }
 
 function updateAdminUI() {

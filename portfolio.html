@@ -762,7 +762,7 @@
         // Render portfolio grid
         function renderPortfolio() {
             const grid = document.getElementById('portfolioGrid');
-            const isAdmin = sessionStorage.getItem('isAdminMode') === 'true';
+            const isAdmin = typeof isAdminMode !== 'undefined' ? isAdminMode : false;
             const t = getCurrentTranslations(); // Use global function from translations.js
 
             let html = portfolioItems.map((item, index) => {
@@ -1167,18 +1167,10 @@
             document.getElementById('customThumbnailGroup').style.display = isVideo ? 'block' : 'none';
         });
 
-        // Check admin mode and apply class
-        function checkAdminMode() {
-            if (sessionStorage.getItem('isAdminMode') === 'true') {
-                document.body.classList.add('edit-mode-active');
-            }
-        }
-
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             loadPortfolioItems();
             renderPortfolio();
-            checkAdminMode();
         });
 
         // Make functions global
