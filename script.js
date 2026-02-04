@@ -588,21 +588,18 @@ document.addEventListener('keydown', e => {
 });
 
 // ==========================================
-// Hero Rotating Text Effect (4 second interval)
-// ==========================================
-// ==========================================
-// Hero Rotating Text Effect (4 second interval)
+// Hero Rotating Text Effect (5 second interval - Crossfade)
 // ==========================================
 const heroRotatingText = document.getElementById('heroRotatingText');
 
-// Dynamic rotating phrases based on language
+// Dynamic rotating phrases - Full width luxury style
 function getRotatingPhrases() {
   const t = typeof getCurrentTranslations === 'function' ? getCurrentTranslations() : (window.translations?.pt || {});
   return [
-    t.rotatingPhrase1 || 'Uma jornada sensorial pela essência do vestuário',
-    t.rotatingPhrase2 || 'Explore texturas que dão vida ao movimento',
-    t.rotatingPhrase3 || 'Descubra a origem nobre e a pureza de cada fibra selecionada',
-    t.rotatingPhrase4 || 'Sinta a suavidade de tramas que abraçam'
+    t.rotatingPhrase1 || 'Onde a arte têxtil encontra a Expressão máxima do design contemporâneo.',
+    t.rotatingPhrase2 || 'Uma biblioteca digital exclusiva para designers de alta costura e curadores.',
+    t.rotatingPhrase3 || 'Sinta a pureza de cada fibra através de uma experiência sensorial e tecnológica.',
+    t.rotatingPhrase4 || 'Transformando a pesquisa de materiais em um ecossistema de luxo e inovação.'
   ];
 }
 
@@ -613,23 +610,63 @@ function rotateHeroText() {
 
   const phrases = getRotatingPhrases();
 
-  heroRotatingText.style.opacity = '0';
-  heroRotatingText.style.transform = 'translateY(10px)';
+  // Crossfade out - remove active class
+  heroRotatingText.classList.remove('active');
 
   setTimeout(() => {
-    // Re-verify phrases length to be safe
+    // Change text
     currentTextIndex = (currentTextIndex + 1) % phrases.length;
     heroRotatingText.textContent = phrases[currentTextIndex];
-    heroRotatingText.style.opacity = '1';
-    heroRotatingText.style.transform = 'translateY(0)';
-  }, 400);
+    // Crossfade in - add active class
+    heroRotatingText.classList.add('active');
+  }, 900); // Wait for fade-out transition
 }
 
-// Start text rotation (4 seconds) - infinite loop
-setInterval(rotateHeroText, 4000);
+// Start text rotation (5 seconds) - infinite loop
+setInterval(rotateHeroText, 5000);
 
 // ==========================================
-// Brand Slide Effect - GRACEXPRESS to GRACEX
+// Parallax Effect for Prestige Cards (Mouse Movement)
+// Disabled on touch devices for performance
+// ==========================================
+const heroSection = document.getElementById('heroSection');
+const parallaxCards = document.getElementById('heroParallaxCards');
+
+// Check if device supports hover (not touch)
+const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+if (heroSection && parallaxCards && !isTouchDevice) {
+  heroSection.addEventListener('mousemove', (e) => {
+    const rect = heroSection.getBoundingClientRect();
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    // Calculate mouse offset from center
+    const mouseX = e.clientX - rect.left - centerX;
+    const mouseY = e.clientY - rect.top - centerY;
+
+    // Apply parallax to each card with different intensities
+    const cards = parallaxCards.querySelectorAll('.hero-prestige-card');
+    cards.forEach(card => {
+      const intensity = parseFloat(card.dataset.parallax) || 0.03;
+      const moveX = mouseX * intensity;
+      const moveY = mouseY * intensity;
+
+      card.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+  });
+
+  // Reset on mouse leave
+  heroSection.addEventListener('mouseleave', () => {
+    const cards = parallaxCards.querySelectorAll('.hero-prestige-card');
+    cards.forEach(card => {
+      card.style.transform = 'translate(0, 0)';
+    });
+  });
+}
+
+// ==========================================
+// Brand Slide Effect - GRACEX ↔ GRACEXPRESS (4 second cycle)
 // ==========================================
 const brandSlide = document.getElementById('brandSlide');
 let isCollapsed = false;
@@ -648,8 +685,8 @@ function toggleBrandSlide() {
   }
 }
 
-// Start brand slide effect (every 5 seconds) - 1.3s duration - infinite loop
-setInterval(toggleBrandSlide, 5000);
+// Start brand slide effect (every 4 seconds) - slow reveal
+setInterval(toggleBrandSlide, 4000);
 
 // ==========================================
 // Dim Light Effect (10 second interval)

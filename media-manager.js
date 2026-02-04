@@ -373,6 +373,16 @@ async function confirmCrop() {
 
     const canvas = cropper.getCroppedCanvas(outputOptions);
 
+    // Convert canvas to blob
+    const blob = await new Promise((resolve) => {
+        canvas.toBlob((b) => resolve(b), 'image/jpeg', 0.92);
+    });
+
+    if (!blob) {
+        showNotification('Erro ao processar imagem. Tente novamente.', 'error');
+        return;
+    }
+
     let finalUrl = null;
     let finalPublicId = null;
 
@@ -395,31 +405,31 @@ async function confirmCrop() {
         finalPublicId = `local_${Date.now()}`;
     }
 
-    // Save URL (Cloudinary or Local) to memory and IndexedDB
-    const imageData = {
-        url: finalUrl,
-        publicId: finalPublicId,
-        uploadedAt: new Date().toISOString()
-    };
-    fabricImages[currentEditFabricId] = imageData;
-    await saveImageToDB(currentEditFabricId, imageData);
+    try {
+        // Save URL (Cloudinary or Local) to memory and IndexedDB
+        const imageData = {
+            url: finalUrl,
+            publicId: finalPublicId,
+            uploadedAt: new Date().toISOString()
+        };
+        fabricImages[currentEditFabricId] = imageData;
+        await saveImageToDB(currentEditFabricId, imageData);
 
-    // Convert to visual update
-    if (currentEditFabricId.startsWith('hero_')) {
-        updateHeroMedia(currentEditFabricId);
-    } else {
-        updateFabricMedia(currentEditFabricId);
+        // Convert to visual update
+        if (currentEditFabricId.startsWith('hero_')) {
+            updateHeroMedia(currentEditFabricId);
+        } else {
+            updateFabricMedia(currentEditFabricId);
+        }
+
+        closeEditModal();
+        if (finalPublicId.startsWith('local_')) {
+            showNotification('Imagem salva apenas neste dispositivo!', 'warning');
+        }
+    } catch (e) {
+        console.error(e);
+        showNotification('Erro crítico ao salvar imagem: ' + e.message, 'error');
     }
-
-    closeEditModal();
-    if (finalPublicId.startsWith('local_')) {
-        showNotification('Imagem salva apenas neste dispositivo!', 'warning');
-    }
-
-} catch (e) {
-    console.error(e);
-    showNotification('Erro crítico ao salvar imagem: ' + e.message, 'error');
-}
 }
 
 // ==========================================
@@ -860,10 +870,25 @@ function updateHeroMedia(heroId) {
     const heroBg = document.querySelector(`[data-hero-page="${page}"]`);
 
     if (heroBg) {
-        heroBg.style.backgroundImage = `url('${data.url}')`;
-        // Ensure cover size
-        heroBg.style.backgroundSize = 'cover';
-        heroBg.style.backgroundPosition = 'center';
+        // Store current background as fallback (don't clear!)
+        const currentBg = heroBg.style.backgroundImage;
+
+        // Add cache-busting timestamp to URL
+        const cacheBuster = `?v=${Date.now()}`;
+        const imageUrl = data.url.includes('?') ? `${data.url}&cb=${Date.now()}` : `${data.url}${cacheBuster}`;
+
+        // Preload image before displaying to prevent flash
+        const img = new Image();
+        img.onload = () => {
+            heroBg.style.backgroundImage = `url('${imageUrl}')`;
+            heroBg.style.backgroundSize = 'cover';
+            heroBg.style.backgroundPosition = 'center';
+        };
+        img.onerror = () => {
+            console.warn('Hero image failed to load:', imageUrl);
+            if (currentBg) heroBg.style.backgroundImage = currentBg;
+        };
+        img.src = imageUrl;
     }
 }
 
@@ -879,3 +904,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         enableEditMode();
     }
 });
+
+// ==========================================
+// Global Exports for onclick handlers
+// ==========================================
+window.openAdminLogin = openAdminLogin;
+window.closeAdminLogin = closeAdminLogin;
+window.handleAdminLogin = handleAdminLogin;
+window.closeEditModal = closeEditModal;
+window.cancelCrop = cancelCrop;
+window.confirmCrop = confirmCrop;
+window.saveVideoLink = saveVideoLink;
+window.deleteMedia = deleteMedia;
+window.onFabricImageSelect = onFabricImageSelect;
