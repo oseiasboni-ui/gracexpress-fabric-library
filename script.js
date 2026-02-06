@@ -91,6 +91,7 @@ function render(list) {
           ${imageContent}
         </div>
         <h3 class="fabric-card-title">${f.name}</h3>
+        <div class="admin-edit-badge" onclick="event.stopPropagation(); handleMediaEditClick(${f.id})">EDIT</div>
       </article>
     `;
   }).join('');

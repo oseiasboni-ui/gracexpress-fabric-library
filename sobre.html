@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="js/force-admin.js"></script>
     <style>
         .page-hero {
             height: 50vh;
@@ -155,8 +156,8 @@
     </footer>
 
     <!-- Admin Login Modal -->
-    <div id="adminLoginModal" class="admin-modal">
-        <div class="admin-modal-content">
+    <div id="adminLoginModal" class="admin-modal" onclick="if(event.target === this) closeAdminLogin()">
+        <div class="admin-modal-content" onclick="event.stopPropagation()">
             <span class="admin-close" onclick="closeAdminLogin()">&times;</span>
             <h3>Acesso Administrativo</h3>
             <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">

@@ -142,7 +142,15 @@ function openAdminLogin() {
 }
 
 function closeAdminLogin() {
-    document.getElementById('adminLoginModal').classList.remove('active');
+    const modal = document.getElementById('adminLoginModal');
+    if (modal) {
+        modal.classList.remove('active');
+        // Reset inline styles that may have been applied by forceOpenAdmin
+        modal.style.display = '';
+        modal.style.visibility = '';
+        modal.style.opacity = '';
+        modal.style.pointerEvents = '';
+    }
 }
 
 async function handleAdminLogin(e) {
@@ -154,6 +162,8 @@ async function handleAdminLogin(e) {
         const user = await AuthService.login(email, pass);
         if (user) {
             isAdminMode = true;
+            // Persist admin state across pages
+            localStorage.setItem('isAdminMode', 'true');
             enableEditMode();
             closeAdminLogin();
             showNotification('Login realizado com sucesso! Modo de edição ativo.', 'success');
@@ -278,6 +288,8 @@ async function discardAdminChanges() {
 async function exitAdminMode() {
     await AuthService.logout();
     isAdminMode = false;
+    // Clear persisted admin state
+    localStorage.removeItem('isAdminMode');
     document.body.classList.remove('edit-mode-active');
     removeAdminToolbar();
 }
@@ -660,6 +672,7 @@ window.onFabricImageSelect = onFabricImageSelect;
 window.saveAdminChanges = saveAdminChanges;
 window.discardAdminChanges = discardAdminChanges;
 window.exitAdminMode = exitAdminMode;
+window.handleMediaEditClick = handleMediaEditClick;
 
 // ==========================================
 // Hero Frame Customizer
@@ -902,11 +915,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     await initDB();
     await loadAllMedia();
 
-    // Check Supabase Auth Status
+    // Check Supabase Auth Status or localStorage fallback
     const isAuth = await AuthService.isAuthenticated();
-    if (isAuth) {
+    const savedAdminMode = localStorage.getItem('isAdminMode') === 'true';
+
+    if (isAuth || savedAdminMode) {
         isAdminMode = true;
         enableEditMode();
+        console.log('Admin mode restored from', isAuth ? 'Supabase' : 'localStorage');
     }
 });
 
