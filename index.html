@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -48,95 +48,50 @@
         </div>
     </header>
 
-    <!-- Hero - 3-Layer Luxury Layout -->
-    <section class="hero hero-ultrawide hero-3layer" id="heroSection">
-        <div class="hero-bg hero-bg-kenburns" style="background-image: url('hero-main.jpg')" data-hero-page="index">
-        </div>
-        <div class="hero-overlay hero-overlay-pearl"></div>
-
-        <!-- 3-Layer Grid Container -->
-        <div class="hero-3layer-grid">
-
-            <!-- CENTER LAYER: Main Focus -->
-            <div class="hero-layer-center">
-
-                <!-- Animated Brand Title with Mask Effect -->
-                <h1 class="hero-brand-title hero-brand-mask" id="heroBrandTitle">
-                    <span class="brand-grace">GRACE</span><span class="brand-x">X</span><span class="brand-press"
-                        id="brandSlide">PRESS</span>
-                </h1>
-
-                <!-- 4 Rotating Texts - Full Width -->
-                <div class="hero-rotating-container hero-rotating-wide">
-                    <p class="hero-rotating-text hero-rotating-luxury active" id="heroRotatingText">Onde a arte têxtil
-                        encontra a Expressão máxima do design contemporâneo.</p>
-                </div>
-
-                <!-- CTA Button - Centered, Wide -->
-                <a href="#collection" class="hero-cta hero-cta-luxury" data-i18n="heroCta">
-                    <span>EXPLORAR O ACERVO</span>
-                    <svg class="cta-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                </a>
+    <!-- Hero - Elegant Slider -->
+    <section class="hero-elegant" id="heroSection">
+        <!-- Slider Container (Background only) -->
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <div class="hero-slide-bg" style="background-image: url('hero-bg.png');"></div>
             </div>
-
-            <!-- PRESTIGE CARDS: Elegant Mosaic Layout -->
-            <div class="hero-prestige-grid" id="heroParallaxCards">
-                <!-- Featured Card (Larger) -->
-                <div class="hero-prestige-card prestige-featured" data-parallax="0.03" data-float-delay="0">
-                    <div class="prestige-icon">🧵</div>
-                    <div class="prestige-number">+500</div>
-                    <div class="prestige-label">Tecidos Curados</div>
-                </div>
-
-                <!-- Standard Cards -->
-                <div class="hero-prestige-card" data-parallax="0.05" data-float-delay="1">
-                    <div class="prestige-seal">✦</div>
-                    <div class="prestige-text">Edição 2026</div>
-                </div>
-
-                <div class="hero-prestige-card prestige-eco" data-parallax="0.04" data-float-delay="2">
-                    <div class="prestige-icon">🌿</div>
-                    <div class="prestige-text">Origem Sustentável</div>
-                </div>
-
-                <div class="hero-prestige-card prestige-global" data-parallax="0.03" data-float-delay="3">
-                    <div class="prestige-icon">🌍</div>
-                    <div class="prestige-text">Envio Global</div>
-                </div>
-
-                <div class="hero-prestige-card prestige-premium" data-parallax="0.04" data-float-delay="4">
-                    <div class="prestige-pulse"></div>
-                    <div class="prestige-label">Suporte Premium</div>
-                </div>
+            <div class="hero-slide">
+                <div class="hero-slide-bg" style="background-image: url('hero-bg.png');"></div>
+            </div>
+            <div class="hero-slide">
+                <div class="hero-slide-bg" style="background-image: url('hero-bg.png');"></div>
+            </div>
+            <div class="hero-slide">
+                <div class="hero-slide-bg" style="background-image: url('hero-bg.png');"></div>
             </div>
         </div>
 
-        <!-- BOTTOM LAYER: Scroll Indicator + Collection Names -->
-        <div class="hero-layer-bottom">
+        <!-- Global Content (Animated) -->
+        <div class="hero-content">
+            <!-- Animated Title -->
+            <h1 class="hero-title">
+                <span class="title-gracex">GRACEX</span><span class="title-press">PRESS</span>
+            </h1>
 
-            <div class="hero-scroll-indicator">
-                <span class="scroll-text">SCROLL</span>
-                <div class="scroll-arrow">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 5v14M19 12l-7 7-7-7" />
-                    </svg>
-                </div>
+            <!-- Rotating Subtitles -->
+            <div class="hero-subtitle-container">
+                <p class="hero-subtitle active">Where textiles become fashion.</p>
+                <p class="hero-subtitle">A complete textile archive designed for clothing creation.</p>
+                <p class="hero-subtitle">From fabric to fashion — all in one catalog.</p>
             </div>
+        </div>
 
+        <!-- Global Button -->
+        <a href="#collection" class="hero-btn">PORTIFOLIO</a>
 
+        <!-- Slider Indicators -->
+        <div class="hero-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
         </div>
     </section>
-
-    <!-- Mobile Filter Toggle Button (floating) -->
-    <button class="mobile-filter-btn" id="mobileFilterBtn" aria-label="Filtros">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-        </svg>
-        <span data-i18n="filterBtn">Filtros</span>
-    </button>
 
 
     <!-- Main Content -->
@@ -418,6 +373,7 @@
     <script src="fabrics-data-en.js"></script>
     <script src="js/services/cloudinary-service.js"></script>
     <script src="media-manager.js?v=2"></script>
+    <script src="js/hero-slider.js"></script>
     <script src="script.js"></script>
 </body>
 

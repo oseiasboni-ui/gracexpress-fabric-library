@@ -670,6 +670,11 @@ let heroFrameConfig = {
 };
 
 function initHeroSystem() {
+    // DISABLED: New slider hero doesn't use this system
+    // The old hero image loading was causing a red overlay issue
+    console.log('[Hero System] Disabled - using new slider hero');
+    return;
+
     // 1. Load saved hero images & configs
     ['index', 'portfolio'].forEach(page => {
         const heroId = `hero_${page}`;
