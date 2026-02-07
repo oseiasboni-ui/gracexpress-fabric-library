@@ -13,6 +13,23 @@
     <link rel="stylesheet" href="styles.css">
     <script src="js/force-admin.js"></script>
     <style>
+        /* Monochrome Theme for Portfolio */
+        /* Monochrome Theme for Portfolio */
+        html body {
+            --color-accent: #000000 !important;
+            --color-accent-dark: #333333 !important;
+            --color-link: #000000 !important;
+        }
+
+        /* Ensure links are black */
+        a {
+            color: inherit;
+        }
+
+        .nav-link.active {
+            color: #000000;
+        }
+
         .page-hero {
             height: 50vh;
             margin-top: var(--header-height);
@@ -426,486 +443,64 @@
         </div>
     </header>
 
-    <section class="hero hero-ultrawide hero-editorial">
-        <div class="hero-bg" style="background-image: url('portfolio-hero-new.png')" data-hero-page="portfolio">
-        </div>
-        <div class="hero-overlay hero-overlay-editorial"></div>
-
-        <!-- Two Column Layout -->
-        <div class="hero-grid">
-            <!-- Left Column: Text Content -->
-            <div class="hero-col-text">
-                <!-- Top Header Bar -->
-                <div class="hero-header-bar">
-                    <span class="hero-header-title">ACERVO TÊXTIL DIGITAL</span>
-                    <span class="hero-header-divider">|</span>
-                    <span class="hero-header-subtitle">BIBLIOTECA DE PESQUISA</span>
-                </div>
-
-                <!-- Overline -->
-                <span class="hero-overline">ESTÉTICA TÊXTIL DE LUXO</span>
-
-                <!-- Main Title - Giant Typography -->
-                <h1 class="hero-title-editorial">
-                    Onde a arte encontra
-                    <br>a <span class="hero-word-highlight">
-                        <span class="hero-word-carousel">
-                            <span class="hero-word-track">
-                                <span class="hero-word">Inovação.</span>
-                                <span class="hero-word">Curadoria.</span>
-                                <span class="hero-word">Excelência.</span>
-                                <span class="hero-word">Expressão.</span>
-                            </span>
-                        </span>
-                    </span>
-                </h1>
-
-                <!-- Vertical Divider Line -->
-                <div class="hero-vertical-line"></div>
-
-                <!-- Descriptive Caption -->
-                <p class="hero-caption-editorial">
-                    Um ecossistema digital exclusivo para designers e curadores.
-                    Transformando a pesquisa de materiais em uma experiência sensorial e tecnológica de alto luxo.
-                </p>
-
-
+    <main class="spacex-light-wrapper">
+        <section class="sx-hero">
+            <h1 class="sx-hero-title">PORTFÓLIO</h1>
+            <div class="sx-hero-subtitle">
+                <span>ACERVO VISUAL</span>
+                <span>//</span>
+                <span>2026</span>
             </div>
+        </section>
 
-            <!-- Right Column: Floating Badges -->
-            <div class="hero-col-visual">
-                <div class="hero-floating-badges">
-                    <div class="hero-badge hero-badge-primary">
-                        <span class="badge-number">+500</span>
-                        <span class="badge-label">Tecidos Curados</span>
-                    </div>
-                    <div class="hero-badge hero-badge-edition">
-                        <span class="badge-text">Edição 2026</span>
-                    </div>
-                    <div class="hero-badge hero-badge-members">
-                        <span class="badge-icon">✦</span>
-                        <span class="badge-label">Disponível para Membros</span>
-                    </div>
-                </div>
+        <!-- Elegant Label -->
+        <div class="nike-tape-label">CANAIS DE DISTRIBUIÇÃO OFICIAIS</div>
+
+        <!-- High Impact Running Text (Infinity Tape) -->
+        <div class="nike-running-tape slim">
+            <div class="nike-tape-track">
+                <!-- 4 Sets of Items for Seamless Infinite Loop -->
+                <span class="tape-item">MERCADO LIVRE</span><span class="tape-item outline">///</span>
+                <span class="tape-item">SHEIN</span><span class="tape-item outline">///</span>
+                <span class="tape-item">TEMU</span><span class="tape-item outline">///</span>
+                <span class="tape-item">SHOPEE</span><span class="tape-item outline">///</span>
+                <span class="tape-item">TIKTOK</span><span class="tape-item outline">///</span>
+
+                <span class="tape-item">MERCADO LIVRE</span><span class="tape-item outline">///</span>
+                <span class="tape-item">SHEIN</span><span class="tape-item outline">///</span>
+                <span class="tape-item">TEMU</span><span class="tape-item outline">///</span>
+                <span class="tape-item">SHOPEE</span><span class="tape-item outline">///</span>
+                <span class="tape-item">TIKTOK</span><span class="tape-item outline">///</span>
+
+                <span class="tape-item">MERCADO LIVRE</span><span class="tape-item outline">///</span>
+                <span class="tape-item">SHEIN</span><span class="tape-item outline">///</span>
+                <span class="tape-item">TEMU</span><span class="tape-item outline">///</span>
+                <span class="tape-item">SHOPEE</span><span class="tape-item outline">///</span>
+                <span class="tape-item">TIKTOK</span><span class="tape-item outline">///</span>
+
+                <span class="tape-item">MERCADO LIVRE</span><span class="tape-item outline">///</span>
+                <span class="tape-item">SHEIN</span><span class="tape-item outline">///</span>
+                <span class="tape-item">TEMU</span><span class="tape-item outline">///</span>
+                <span class="tape-item">SHOPEE</span><span class="tape-item outline">///</span>
+                <span class="tape-item">TIKTOK</span><span class="tape-item outline">///</span>
             </div>
         </div>
 
-        <!-- Scroll Indicator -->
-        <div class="hero-scroll-indicator">
-            <span class="scroll-text">SCROLL</span>
-            <div class="scroll-arrow">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 5v14M19 12l-7 7-7-7" />
-                </svg>
+        <section id="portfolioGrid" class="sx-grid">
+            <!-- Items loaded via JS -->
+        </section>
+
+        <div id="videoPlayerModal" class="video-player-modal">
+            <div class="video-player-overlay" onclick="closeVideoPlayer()"></div>
+            <div class="video-player-content">
+                <button class="video-player-close" onclick="closeVideoPlayer()">&times;</button>
+                <div class="video-player-wrapper" id="videoPlayerWrapper"></div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <style>
-        /* ==========================================
-           EDITORIAL HERO - TWO COLUMN LAYOUT
-           ========================================== */
-
-        .hero-editorial {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-overlay-editorial {
-            background: linear-gradient(to right,
-                    rgba(255, 255, 255, 0.95) 0%,
-                    rgba(255, 255, 255, 0.85) 40%,
-                    rgba(255, 255, 255, 0.3) 70%,
-                    rgba(255, 255, 255, 0) 100%);
-        }
-
-        [data-theme="dark"] .hero-overlay-editorial {
-            background: linear-gradient(to right,
-                    rgba(0, 0, 0, 0.95) 0%,
-                    rgba(0, 0, 0, 0.85) 40%,
-                    rgba(0, 0, 0, 0.3) 70%,
-                    rgba(0, 0, 0, 0) 100%);
-        }
-
-        .hero-grid {
-            position: relative;
-            z-index: 5;
-            display: grid;
-            grid-template-columns: 55% 45%;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 120px 60px 80px;
-            min-height: 100vh;
-            align-items: center;
-        }
-
-        .hero-col-text {
-            padding-right: 60px;
-        }
-
-        .hero-header-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 40px;
-            font-family: 'Inter', sans-serif;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            color: var(--color-text-secondary);
-        }
-
-        .hero-header-divider {
-            opacity: 0.4;
-        }
-
-        .hero-overline {
-            display: inline-block;
-            font-family: 'Inter', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.25em;
-            color: #3b82f6;
-            text-transform: uppercase;
-            margin-bottom: 24px;
-            padding: 8px 16px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 4px;
-        }
-
-        .hero-title-editorial {
-            font-family: 'Playfair Display', 'Georgia', serif;
-            font-size: clamp(2.8rem, 5.5vw, 4.5rem);
-            font-weight: 400;
-            line-height: 1.15;
-            color: var(--color-text);
-            margin-bottom: 32px;
-        }
-
-        .hero-word-highlight {
-            display: inline-block;
-            position: relative;
-        }
-
-        .hero-word-carousel {
-            display: inline-block;
-            height: 1.15em;
-            overflow: hidden;
-            vertical-align: bottom;
-        }
-
-        .hero-word-track {
-            display: flex;
-            flex-direction: column;
-            animation: wordRoll 10s cubic-bezier(0.76, 0, 0.24, 1) infinite;
-        }
-
-        .hero-word {
-            display: block;
-            height: 1.15em;
-            line-height: 1.15;
-            color: #3b82f6;
-            font-style: italic;
-            font-weight: 500;
-            font-size: 1.1em;
-        }
-
-        [data-theme="dark"] .hero-word {
-            color: #60a5fa;
-        }
-
-        @keyframes wordRoll {
-
-            0%,
-            18% {
-                transform: translateY(0);
-            }
-
-            23%,
-            43% {
-                transform: translateY(-25%);
-            }
-
-            48%,
-            68% {
-                transform: translateY(-50%);
-            }
-
-            73%,
-            93% {
-                transform: translateY(-75%);
-            }
-
-            98%,
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        .hero-vertical-line {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #3b82f6, transparent);
-            margin-bottom: 24px;
-            border-radius: 2px;
-        }
-
-        .hero-caption-editorial {
-            font-family: 'Inter', sans-serif;
-            font-size: 17px;
-            line-height: 1.8;
-            color: var(--color-text-secondary);
-            max-width: 480px;
-            margin-bottom: 40px;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .hero-cta-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 18px 32px;
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.35);
-        }
-
-        .hero-cta-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.45);
-        }
-
-        .hero-cta-primary svg {
-            transition: transform 0.3s ease;
-        }
-
-        .hero-cta-primary:hover svg {
-            transform: translateX(5px);
-        }
-
-        .hero-cta-secondary {
-            display: inline-flex;
-            align-items: center;
-            padding: 18px 32px;
-            background: transparent;
-            color: var(--color-text);
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            border: 1.5px solid var(--color-border);
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-
-        .hero-cta-secondary:hover {
-            background: var(--color-text);
-            color: var(--color-bg);
-            border-color: var(--color-text);
-        }
-
-        .hero-col-visual {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 40px;
-        }
-
-        .hero-floating-badges {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .hero-badge {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 16px 24px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            animation: floatBadge 3s ease-in-out infinite;
-        }
-
-        [data-theme="dark"] .hero-badge {
-            background: rgba(30, 30, 30, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-badge-primary {
-            animation-delay: 0s;
-        }
-
-        .hero-badge-edition {
-            animation-delay: 0.5s;
-            align-self: flex-end;
-        }
-
-        .hero-badge-members {
-            animation-delay: 1s;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-        }
-
-        @keyframes floatBadge {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-        }
-
-        .badge-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 600;
-            color: #3b82f6;
-        }
-
-        .badge-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--color-text-secondary);
-            letter-spacing: 0.05em;
-        }
-
-        .badge-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--color-text);
-            letter-spacing: 0.1em;
-        }
-
-        .badge-icon {
-            font-size: 16px;
-            color: #f59e0b;
-        }
-
-        .hero-scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            z-index: 10;
-            animation: pulseScroll 2s ease-in-out infinite;
-        }
-
-        @keyframes pulseScroll {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-
-            50% {
-                opacity: 0.6;
-                transform: translateX(-50%) translateY(5px);
-            }
-        }
-
-        .scroll-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            color: var(--color-text-secondary);
-        }
-
-        .scroll-arrow svg {
-            opacity: 0.6;
-        }
-
-        @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                padding: 100px 32px 80px;
-                text-align: center;
-            }
-
-            .hero-col-text {
-                padding-right: 0;
-            }
-
-            .hero-header-bar {
-                justify-content: center;
-            }
-
-            .hero-vertical-line {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-caption-editorial {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-cta-group {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .hero-col-visual {
-                display: none;
-            }
-
-            .hero-overlay-editorial {
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.5) 100%);
-            }
-
-            [data-theme="dark"] .hero-overlay-editorial {
-                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.5) 100%);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title-editorial {
-                font-size: clamp(2rem, 8vw, 3rem);
-            }
-
-            .hero-cta-primary,
-            .hero-cta-secondary {
-                padding: 14px 24px;
-                font-size: 13px;
-            }
-        }
-    </style>
-
-    <div class="portfolio-grid" id="portfolioGrid">
-        <!-- Items will be rendered by JavaScript -->
-    </div>
+    <!-- Cleaned up -->
+    <!-- Duplicate grid removed -->
 
     <!-- Portfolio Edit Modal -->
     <div class="portfolio-modal" id="portfolioModal">
@@ -966,16 +561,49 @@
         </div>
     </div>
 
-    <!-- Video Player Modal -->
-    <div class="video-player-modal" id="videoPlayerModal">
-        <div class="video-player-overlay" onclick="closeVideoPlayer()"></div>
-        <div class="video-player-content">
-            <button class="video-player-close" onclick="closeVideoPlayer()">×</button>
-            <div class="video-player-wrapper" id="videoPlayerWrapper">
-                <!-- YouTube iframe will be inserted here -->
+    <!-- Duplicate Video Modal Removed -->
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <h3>GraceXpress</h3>
+                    <p data-i18n="footerBrand">Sua referência em tecidos para moda e confecção.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4 data-i18n="navigation">Navegação</h4>
+                        <a href="portfolio.html" data-i18n="portfolio">Portfólio</a>
+                        <a href="sobre.html" data-i18n="about">Sobre</a>
+                        <a href="contato.html" data-i18n="contact">Contato</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
+                <div class="footer-controls">
+                    <div class="lang-selector footer-lang">
+                        <select id="langSelect" aria-label="Idioma">
+                            <option value="pt">PT</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
+                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    </footer>
 
     <!-- Admin Login Modal -->
     <div id="adminLoginModal" class="admin-modal" onclick="if(event.target === this) closeAdminLogin()">
@@ -1130,36 +758,92 @@
         }
     </style>
 
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-bottom">
-                <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
-                <div class="footer-controls">
-                    <div class="lang-selector footer-lang">
-                        <select id="langSelect" aria-label="Idioma">
-                            <option value="pt">PT</option>
-                            <option value="en">EN</option>
-                        </select>
-                    </div>
-                    <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
-                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="5" />
-                            <path
-                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                        </svg>
-                        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                        </svg>
-                    </button>
-                    <!-- Admin Link Removed -->
+    <!-- Official Stores Section (Nike Style Black Cards) -->
+    <section class="official-stores-section" id="officialStores">
+        <div class="nike-section-title centered-title">
+            <h2>COMPRE CONOSCO NO SITE OFICIAL</h2>
+        </div>
+
+        <div class="stores-grid">
+            <!-- MERCADO LIVRE -->
+            <a href="#" class="store-card ml">
+                <div class="store-content">
+                    <span class="store-name">MERCADO<br>LIVRE</span>
+                    <span class="store-arrow">↗</span>
                 </div>
+            </a>
+
+            <!-- SHEIN -->
+            <a href="#" class="store-card shein">
+                <div class="store-content">
+                    <span class="store-name">SHEIN</span>
+                    <span class="store-arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- TEMU -->
+            <a href="#" class="store-card temu">
+                <div class="store-content">
+                    <span class="store-name">TEMU</span>
+                    <span class="store-arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- SHOPEE -->
+            <a href="#" class="store-card shopee">
+                <div class="store-content">
+                    <span class="store-name">SHOPEE</span>
+                    <span class="store-arrow">↗</span>
+                </div>
+            </a>
+
+            <!-- TIKTOK -->
+            <a href="#" class="store-card tiktok">
+                <div class="store-content">
+                    <span class="store-name">TIKTOK<br>SHOP</span>
+                    <span class="store-arrow">↗</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Floating Buy Button -->
+    <button id="floatingBuyBtn" class="floating-buy-pill"
+        onclick="document.getElementById('officialStores').scrollIntoView({behavior: 'smooth'})">
+        COMPRE AQUI
+        <span style="margin-left:8px">↘</span>
+    </button>
+    <div class="footer-container">
+        <div class="footer-bottom">
+            <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
+            <div class="footer-controls">
+                <div class="lang-selector footer-lang">
+                    <select id="langSelect" aria-label="Idioma">
+                        <option value="pt">PT</option>
+                        <option value="en">EN</option>
+                    </select>
+                </div>
+                <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                </button>
+                <!-- Admin Link Removed -->
             </div>
-    </footer>
+        </div>
+        </footer>
 
 
-    <!-- Fixed Admin Floating Button (Bottom Right) -->
+        <!-- Fixed Admin Floating Button (Bottom Right) -->
 
     </div>
     </div>
@@ -1193,33 +877,73 @@
         });
 
         // Portfolio Data Management
-        const PORTFOLIO_STORAGE_KEY = 'portfolioItems';
+        const PORTFOLIO_STORAGE_KEY = 'portfolioItems_v2'; // Updated to v2 to refresh data
         let portfolioItems = [];
+        let currentFilter = 'all';
         let currentEditIndex = null;
         let currentImageData = null;
 
-        // Default items
+        // Default items with Nike-Style Layout
         const defaultPortfolioItems = [
-            { id: 1, type: 'photo', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&q=80', title: 'Coleção Verão 2024', phrase: 'Fluidez que dança com a brisa' },
-            { id: 2, type: 'photo', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80', title: 'Alta Costura', phrase: 'Elegância atemporal em cada detalhe' },
-            { id: 3, type: 'video', image: '', title: 'Desfile Paris 2024', phrase: 'O movimento que inspira', videoUrl: 'https://www.youtube.com/watch?v=6RPdp9U48UE' },
-            { id: 4, type: 'photo', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', title: 'Alfaiataria Moderna', phrase: 'Precisão que define caráter' },
-            { id: 5, type: 'photo', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80', title: 'Coleção Inverno 2024', phrase: 'Calor e sofisticação abraçados' },
-            { id: 6, type: 'photo', image: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600&q=80', title: 'Moda Sustentável', phrase: 'Consciência que veste bem' },
-            { id: 7, type: 'video', image: '', title: 'Backstage Exclusivo', phrase: 'A magia por trás da criação', videoUrl: 'https://www.youtube.com/shorts/6RPdp9U48UE' },
-            { id: 8, type: 'photo', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80', title: 'Linha Esportiva', phrase: 'Performance com estilo' },
-            { id: 9, type: 'photo', image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80', title: 'Noite de Gala', phrase: 'Brilho que encanta olhares' }
+            // 1. Full Width Video Banner (Impact)
+            { id: 201, type: 'video', category: 'editorial', displaySize: 'full', image: '', title: 'MOVE TO ZERO', phrase: 'O futuro do tecido é sustentável.', videoUrl: 'https://www.youtube.com/watch?v=6RPdp9U48UE' },
+
+            // 2. Section Title (Injecting as item for simplicity)
+            { id: 9991, type: 'text', displaySize: 'title', title: 'DESTAQUES DA TEMPORADA', phrase: '' },
+
+            // 3. Two Half-Width Editorial Cards (Image + Text Inside)
+            { id: 202, type: 'photo', category: 'collection', displaySize: 'half', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&q=80', title: 'TECH FLEECE', phrase: 'Calor sem peso.' },
+            { id: 203, type: 'photo', category: 'collection', displaySize: 'half', image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=900&q=80', title: 'URBAN UTILITY', phrase: 'Pronto para a cidade.' },
+
+            // 4. Section Title
+            { id: 9992, type: 'text', displaySize: 'title', title: 'NOVA COLEÇÃO', phrase: '' },
+
+            // 5. Product Grid (Thirds) - Image + Text Below (Shop Style)
+            { id: 204, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1550614000-4b9519e0037a?w=600&q=80', title: 'Seda Tech', phrase: 'Performance' },
+            { id: 205, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80', title: 'Jaqueta Pro', phrase: 'Impermeável' },
+            { id: 206, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&q=80', title: 'Malha Dry', phrase: 'Respirável' },
+
+            // 6. Large Feature with Side Text (Asymmetric)
+            { id: 207, type: 'photo', category: 'editorial', displaySize: 'feature-side', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80', title: 'RUNWAY READY', phrase: 'A intersecção entre alta moda e funcionalidade esportiva.' },
+
+            // 7. More Products
+            { id: 208, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', title: 'Blazer X', phrase: 'Alfaiataria' },
+            { id: 209, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80', title: 'Sport Luxe', phrase: 'Casual' },
+            { id: 210, type: 'video', category: 'video', displaySize: 'third', image: '', title: 'Bastidores', phrase: 'Ver vídeo', videoUrl: 'https://www.youtube.com/shorts/6RPdp9U48UE' }
         ];
 
         // Load portfolio items
         function loadPortfolioItems() {
             const stored = localStorage.getItem(PORTFOLIO_STORAGE_KEY);
             if (stored) {
-                portfolioItems = JSON.parse(stored);
+                // Reset to default for this radical layout change to ensure users see the new structure
+                // In production we would merge carefully, but here we prioritize the new layout.
+                portfolioItems = [...defaultPortfolioItems];
             } else {
                 portfolioItems = [...defaultPortfolioItems];
-                savePortfolioItems();
             }
+            // Always save the reset
+            savePortfolioItems();
+            setupFilters();
+        }
+
+        // Setup Filter Buttons
+        function setupFilters() {
+            const btns = document.querySelectorAll('.sx-filter-btn');
+            btns.forEach(btn => {
+                btn.onclick = () => {
+                    btns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const text = btn.innerText.toUpperCase();
+                    if (text.includes('VISÃO GERAL')) currentFilter = 'all';
+                    else if (text.includes('EDITORIAL')) currentFilter = 'editorial';
+                    else if (text.includes('VÍDEOS')) currentFilter = 'video';
+                    else currentFilter = 'collection';
+
+                    renderPortfolio();
+                };
+            });
         }
 
         // Save portfolio items
@@ -1227,74 +951,94 @@
             localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioItems));
         }
 
-        // Render portfolio grid
+        // Render portfolio grid - NIKE STYLE
         function renderPortfolio() {
             const grid = document.getElementById('portfolioGrid');
-            const isAdmin = typeof isAdminMode !== 'undefined' ? isAdminMode : false;
-            const t = getCurrentTranslations(); // Use global function from translations.js
+            if (!grid) return;
 
-            let html = portfolioItems.map((item, index) => {
-                // For video items, get YouTube thumbnail (custom > maxresdefault > hqdefault)
+            const isAdmin = typeof isAdminMode !== 'undefined' ? isAdminMode : false;
+
+            // Filter logic
+            let filteredItems = currentFilter === 'all'
+                ? portfolioItems
+                : portfolioItems.filter(item => {
+                    if (item.displaySize === 'title') return true; // Keep titles? Maybe not in filtered view. layout might break.
+                    return item.category === currentFilter || (currentFilter === 'video' && item.type === 'video');
+                });
+
+            // If filtering, remove titles to avoid weird gaps
+            if (currentFilter !== 'all') {
+                filteredItems = filteredItems.filter(i => i.displaySize !== 'title');
+            }
+
+            let html = filteredItems.map((item) => {
+                const masterIndex = portfolioItems.findIndex(i => i.id === item.id);
+
+                // Special handling for Title Items
+                if (item.displaySize === 'title') {
+                    return `<div class="nike-section-title"><h2>${item.title}</h2></div>`;
+                }
+
                 let thumbnailUrl = item.customThumbnail || item.image;
                 let videoId = null;
                 if (item.type === 'video' && item.videoUrl) {
                     videoId = getYouTubeId(item.videoUrl);
                     if (videoId && !item.customThumbnail) {
-                        // Use maxresdefault for HD quality
                         thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
                     }
                 }
 
                 const tiktokId = getTikTokId(item.videoUrl);
-
-                // For TikTok, we show the iframe immediately (ready to play)
                 const showIframeImmediately = !!tiktokId;
 
+                // Determine Grid Span Class
+                // Grid is 12 columns
+                let spanClass = 'col-span-4'; // Default (Third)
+                if (item.displaySize === 'full') spanClass = 'col-span-12';
+                if (item.displaySize === 'half') spanClass = 'col-span-6';
+                if (item.displaySize === 'feature-side') spanClass = 'col-span-12 feature-side';
+
+                // Content Placement Class
+                // Products usually have text below. Editorials inside.
+                let contentClass = 'content-inside';
+                if (item.displaySize === 'third' || item.category === 'product') contentClass = 'content-below';
+                if (item.displaySize === 'feature-side') contentClass = 'content-side';
+
                 return `
-                <article class="portfolio-item ${item.type === 'video' ? 'video' : ''}" data-index="${index}" data-video-url="${item.videoUrl || ''}" data-video-id="${videoId || ''}">
-                    <!-- Thumbnail: Hidden if showing iframe immediately -->
-                    <div class="portfolio-item-thumbnail" onclick="handleItemClick(${index})" style="${showIframeImmediately ? 'display:none' : ''}">
-                        ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="portfolio-item-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
-                        <div class="portfolio-item-placeholder" style="${thumbnailUrl ? 'display:none' : ''}">
-                            ${item.type === 'video' ? '🎥' : '📷'}
-                        </div>
+                <article class="nike-card ${spanClass} ${contentClass} ${item.type === 'video' ? 'video' : ''}" data-index="${masterIndex}">
+                    <!-- Thumbnail -->
+                    <div class="nike-media-wrapper" onclick="handleItemClick(${masterIndex})" style="${showIframeImmediately ? 'display:none' : ''}">
+                        ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="nike-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
+                        
+                        ${item.type === 'video' ? '<div class="nike-play-icon">▶</div>' : ''}
                     </div>
                     
-                    <!-- Inline Video: Visible immediately for TikTok -->
-                    <div class="portfolio-inline-video" id="inlineVideo${index}" style="${showIframeImmediately ? 'display:block' : 'display:none;'}">
-                        ${showIframeImmediately ? `<iframe 
-                            src="https://www.tiktok.com/embed/v2/${tiktokId}" 
-                            frameborder="0"
-                            style="width:100%;height:100%;position:absolute;top:0;left:0;"
-                            allowfullscreen></iframe>` : ''}
+                    <!-- Inline Video -->
+                    <div class="portfolio-inline-video" id="inlineVideo${masterIndex}" style="${showIframeImmediately ? 'display:block' : 'display:none;'}">
+                         ${showIframeImmediately ? `<iframe src="https://www.tiktok.com/embed/v2/${tiktokId}" frameborder="0" style="width:100%;height:100%;" allowfullscreen></iframe>` : ''}
                     </div>
 
-                    ${item.type === 'video' ? `<button class="portfolio-expand-btn" onclick="event.stopPropagation(); expandToModal(${index})" title="Expandir" style="${showIframeImmediately ? 'display:flex' : 'display:none;'}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
-                            <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
-                        </svg>
-                    </button>` : ''}
-                    
-                    <div class="portfolio-item-overlay" style="${showIframeImmediately ? 'display:none' : ''}"></div>
-                    <div class="portfolio-item-content" style="${showIframeImmediately ? 'display:none' : ''}">
-                        <h3 class="portfolio-item-title">${item.title}</h3>
-                        <p class="portfolio-item-phrase">"${item.phrase}"</p>
+                    <!-- Text Content -->
+                    <div class="nike-content">
+                        <h3 class="nike-title">${item.title}</h3>
+                        ${item.phrase ? `<p class="nike-subtitle">${item.phrase}</p>` : ''}
+                        <button class="nike-action-btn">Ver Detalhes</button>
                     </div>
-                    <div class="portfolio-edit-badge" onclick="event.stopPropagation(); openEditModal(${index})">EDITAR</div>
+                    
+                    <div class="portfolio-edit-badge" onclick="event.stopPropagation(); openEditModal(${masterIndex})">EDITAR</div>
                 </article>
                 `}).join('');
 
-            // Add "Add New" button for admin
-            html += `
-                <div class="portfolio-add-item" onclick="openAddModal()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 8v8M8 12h8"/>
-                    </svg>
-                    <span data-i18n="addItem">${t.addItem}</span>
-                </div>
-            `;
+            // Admin Add Button (as a simple card at end)
+            if (isAdmin) {
+                html += `
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 8v8M8 12h8"/>
+                        </svg>
+                        <span data-i18n="addItem">${t.addItem}</span>
+                    </div>
+                `;
+            }
 
             grid.innerHTML = html;
         }

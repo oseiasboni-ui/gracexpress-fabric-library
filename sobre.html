@@ -11,76 +11,18 @@
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="js/force-admin.js"></script>
-    <style>
-        .page-hero {
-            height: 50vh;
-            margin-top: var(--header-height);
-        }
-
-        /* Hero title formal style */
-        .hero-title-formal {
-            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-            font-size: clamp(48px, 8vw, 90px);
-            font-weight: 600;
-            color: #ffffff;
-            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            margin: 0;
-            letter-spacing: 0.02em;
-        }
-
-        /* About content centered */
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 100px 40px;
-            text-align: center;
-        }
-
-        .about-main-title {
-            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-            font-size: clamp(32px, 5vw, 48px);
-            font-weight: 600;
-            color: var(--color-text);
-            margin-bottom: 50px;
-            letter-spacing: 0.02em;
-        }
-
-        .about-paragraph {
-            font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-            font-size: clamp(16px, 2vw, 20px);
-            line-height: 2;
-            color: var(--color-text-secondary);
-            margin-bottom: 40px;
-            text-align: justify;
-            text-align-last: center;
-        }
-
-        .about-paragraph:last-child {
-            margin-bottom: 0;
-        }
-
-        @media (max-width: 768px) {
-            .about-content {
-                padding: 60px 24px;
-            }
-
-            .about-paragraph {
-                text-align: left;
-                text-align-last: left;
-            }
-        }
-    </style>
 </head>
 
 <body>
+    <!-- Header -->
     <header class="header">
         <div class="header-container">
             <a href="index.html" class="logo logo-elegant">GRACEXPRESS |</a>
             <div class="header-center">
-                <h1 class="header-title">ACERVO TÊXTIL DIGITAL</h1>
-                <span class="header-subtitle">Biblioteca de Pesquisa</span>
+                <h1 class="header-title" data-i18n="headerTitleText">ACERVO TÊXTIL DIGITAL</h1>
+                <span class="header-subtitle" data-i18n="headerSubtitleText">Biblioteca de Pesquisa</span>
             </div>
-            <nav class="main-nav">
+            <nav class="main-nav" id="mainNav">
                 <a href="sobre.html" class="nav-link active" data-i18n="about">Sobre</a>
                 <a href="portfolio.html" class="nav-link" data-i18n="portfolio">Portfólio</a>
                 <a href="contato.html" class="nav-link" data-i18n="contact">Contato</a>
@@ -102,34 +44,167 @@
             </nav>
         </div>
     </header>
+    <main class="spacex-page-wrapper">
+        <!-- Hero Section -->
+        <section class="spacex-hero">
+            <div class="spacex-hero-overlay"></div>
+            <div class="spacex-hero-content">
+                <h1 class="spacex-title">GRACEXPRESS</h1>
+                <h2 class="spacex-subtitle">THE DIGITAL TEXTILE AUTHORITY</h2>
+                <div class="spacex-divider"></div>
+                <p class="spacex-tagline">Where Creative Vision Meets Material Reality</p>
+            </div>
+        </section>
 
+        <!-- Intro Section -->
+        <section class="spacex-section spacex-intro">
+            <div class="spacex-container">
+                <p class="spacex-lead">
+                    In the delicate space between the warp of history and the weft of innovation, GraceXpress exists as
+                    the definitive bridge. We do not just list fabrics; we curate the tactile universe.
+                </p>
+                <p class="spacex-text">
+                    Founded on the principle that true sartorial excellence begins with a profound understanding of
+                    fiber, we serve as the essential compass for designers, tailors, and fashion visionaries.
+                </p>
+            </div>
+        </section>
 
+        <!-- Ecosystem Section -->
+        <section class="spacex-section spacex-ecosystem">
+            <div class="spacex-container">
+                <div class="spacex-grid-split">
+                    <div class="spacex-col-text">
+                        <h3 class="spacex-heading">THE GRACEXPRESS ECOSYSTEM</h3>
+                        <p class="spacex-text">
+                            We are a Premier Digital Textile Archive and a living library of sensory knowledge. Our
+                            purpose is to demystify the complexities of global textiles, allowing creators to master
+                            their craft before the first cut is ever made.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <div class="about-content">
-        <h2 class="about-main-title" data-i18n="aboutMainTitle">A Alquimia do Vestir</h2>
+        <!-- Stats Section -->
+        <section class="spacex-section spacex-stats">
+            <div class="spacex-container">
+                <h3 class="spacex-heading center">BY THE NUMBERS: OUR IMPACT</h3>
+                <div class="spacex-stats-grid">
+                    <div class="spacex-stat-item">
+                        <span class="spacex-stat-val">120+</span>
+                        <span class="spacex-stat-label">Unique Textures</span>
+                        <p class="spacex-stat-desc">A meticulously curated digital catalog, each with its own technical
+                            biography.</p>
+                    </div>
+                    <div class="spacex-stat-item">
+                        <span class="spacex-stat-val">3</span>
+                        <span class="spacex-stat-label">Fiber Categories</span>
+                        <p class="spacex-stat-desc">Deep-dive intelligence on Natural, Artificial, and Synthetic
+                            compositions.</p>
+                    </div>
+                    <div class="spacex-stat-item">
+                        <span class="spacex-stat-val">4</span>
+                        <span class="spacex-stat-label">Specialist Pillars</span>
+                        <p class="spacex-stat-desc">From high-performance technical fabrics to the world’s most elite
+                            luxury textiles.</p>
+                    </div>
+                    <div class="spacex-stat-item">
+                        <span class="spacex-stat-val">1</span>
+                        <span class="spacex-stat-label">Global Connection</span>
+                        <p class="spacex-stat-desc">Bridging the gap between creative research and the industry's most
+                            trusted suppliers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <p class="about-paragraph" data-i18n="aboutP1">
-            Entre o urdume da história e a trama da inovação, floresceu a GraceXpress. Fundada sob o pilar da paixão,
-            dedicamo-nos a mapear o vasto universo tátil que veste a humanidade.
-        </p>
+        <!-- Empowerment Section -->
+        <section class="spacex-section spacex-features">
+            <div class="spacex-container">
+                <h3 class="spacex-heading center">HOW WE EMPOWER YOUR PROCESS</h3>
+                <p class="spacex-subheading center">GraceXpress isn't just a database—it's a strategic tool designed to
+                    optimize your workflow.</p>
 
-        <p class="about-paragraph" data-i18n="aboutP2">
-            Nossa busca é iluminar os caminhos da criação. Queremos que o designer, o alfaiate e o amante da moda
-            compreendam profundamente o que tocam. Pois sabemos: a verdadeira excelência de uma peça nasce na escolha
-            sábia de sua essência.
-        </p>
+                <div class="spacex-features-grid">
+                    <div class="spacex-feature-card">
+                        <div class="spacex-feature-icon">🔍</div>
+                        <h4 class="spacex-feature-title">Precision Research</h4>
+                        <p class="spacex-feature-desc">Eliminate the guesswork. Identify the exact structure and weight
+                            required for your silhouettes.</p>
+                    </div>
+                    <div class="spacex-feature-card">
+                        <div class="spacex-feature-icon">✨</div>
+                        <h4 class="spacex-feature-title">Sensory Guidance</h4>
+                        <p class="spacex-feature-desc">Understand the drape, breathability, and performance of malhas
+                            and flat-weaves before sourcing.</p>
+                    </div>
+                    <div class="spacex-feature-card">
+                        <div class="spacex-feature-icon">🚀</div>
+                        <h4 class="spacex-feature-title">Seamless Transition</h4>
+                        <p class="spacex-feature-desc">Connect directly to verified online stores, moving from
+                            inspiration to acquisition in a single click.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <p class="about-paragraph" data-i18n="aboutP3">
-            Somos uma biblioteca viva de texturas. Devolvemos ao mundo o conhecimento de mais de 120 materiais
-            distintos, cada um com sua biografia singular. Porque entender o tecido é o primeiro passo para transformar
-            o simples ato de vestir em pura arte.
-        </p>
-    </div>
+        <!-- Integrity Note -->
+        <section class="spacex-section spacex-integrity">
+            <div class="spacex-container">
+                <div class="spacex-integrity-box">
+                    <h4 class="spacex-integrity-title">Note on Integrity</h4>
+                    <p class="spacex-integrity-text">GraceXpress is a hub of knowledge and connection. We curate and
+                        archive the world's finest textiles; we do not manufacture them. We provide the map; you create
+                        the destination.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Footer Info -->
+        <section class="spacex-section spacex-cta">
+            <div class="spacex-container center">
+                <h3 class="spacex-heading big">JOIN THE ARCHIVE</h3>
+                <p class="spacex-text max-600">Whether you are developing a luxury collection or searching for
+                    high-performance activewear, the right material is waiting in our files.</p>
+
+                <div class="spacex-contact-grid">
+                    <div class="spacex-contact-item">
+                        <span class="spacex-contact-label">Partner With Us</span>
+                        <span class="spacex-contact-val">Elevate your brand or showcase your textile manufacturing
+                            within our elite directory.</span>
+                    </div>
+                    <div class="spacex-contact-item">
+                        <span class="spacex-contact-label">Inquiries</span>
+                        <a href="mailto:oseiasboni@gmail.com" class="spacex-contact-link">oseiasboni@gmail.com</a>
+                    </div>
+                    <div class="spacex-contact-item">
+                        <span class="spacex-contact-label">Advertising</span>
+                        <span class="spacex-contact-val">Opportunities available for premier textile suppliers.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <h3>GraceXpress</h3>
+                    <p data-i18n="footerBrand">Sua referência em tecidos para moda e confecção.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4 data-i18n="navigation">Navegação</h4>
+                        <a href="portfolio.html" data-i18n="portfolio">Portfólio</a>
+                        <a href="sobre.html" data-i18n="about">Sobre</a>
+                        <a href="contato.html" data-i18n="contact">Contato</a>
+                    </div>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <p>© 2024 GraceXpress. Todos os direitos reservados.</p>
+                <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
                 <div class="footer-controls">
                     <div class="lang-selector footer-lang">
                         <select id="langSelect" aria-label="Idioma">
@@ -149,7 +224,6 @@
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                         </svg>
                     </button>
-                    <!-- Admin Link Removed -->
                 </div>
             </div>
         </div>

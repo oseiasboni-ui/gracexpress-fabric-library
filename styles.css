@@ -5283,3 +5283,2439 @@ body {
         font-size: 14px;
     }
 }
+
+/* ==========================================
+   SPACEX-INSPIRED ABOUT PAGE STYLES
+   ========================================== */
+
+.spacex-page-wrapper {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    margin-top: var(--header-height);
+}
+
+/* Sections */
+.spacex-section {
+    padding: 100px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spacex-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Typography */
+.spacex-title {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+    margin: 0;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.spacex-subtitle {
+    font-size: clamp(1rem, 3vw, 2rem);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    margin-top: 20px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.spacex-heading {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 0.05em;
+}
+
+.spacex-heading.center {
+    text-align: center;
+}
+
+.spacex-heading.big {
+    font-size: clamp(3rem, 6vw, 5rem);
+}
+
+.spacex-tagline {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 20px;
+}
+
+.spacex-lead {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.4;
+    margin-bottom: 40px;
+    max-width: 1000px;
+}
+
+.spacex-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    font-weight: 300;
+}
+
+.spacex-text.max-600 {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.spacex-subheading {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 60px;
+    font-weight: 300;
+}
+
+.spacex-subheading.center {
+    text-align: center;
+}
+
+/* Hero */
+.spacex-hero {
+    height: 90vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+    text-align: center;
+    padding: 20px;
+}
+
+.spacex-hero-content {
+    z-index: 2;
+    position: relative;
+}
+
+.spacex-divider {
+    width: 60px;
+    height: 4px;
+    background: #fff;
+    margin: 30px auto;
+}
+
+/* Stats Grid */
+.spacex-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.spacex-stat-item {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+    transition: transform 0.3s ease;
+}
+
+.spacex-stat-item:hover {
+    transform: translateY(-10px);
+    border-top-color: #fff;
+}
+
+.spacex-stat-val {
+    display: block;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.spacex-stat-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.spacex-stat-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+}
+
+/* Features Grid */
+.spacex-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.spacex-feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.spacex-feature-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.spacex-feature-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.spacex-feature-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.spacex-feature-desc {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+}
+
+/* Integrity Box */
+.spacex-integrity-box {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 60px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.spacex-integrity-title {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+}
+
+/* Contact Grid */
+.spacex-contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.spacex-contact-label {
+    display: block;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.spacex-contact-val,
+.spacex-contact-link {
+    font-size: 1.125rem;
+    color: #fff;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.spacex-contact-link {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.2s;
+}
+
+.spacex-contact-link:hover {
+    border-bottom-color: #fff;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .spacex-hero {
+        height: auto;
+        padding-top: 100px;
+        padding-bottom: 60px;
+    }
+
+    .spacex-section {
+        padding: 60px 20px;
+    }
+
+    .spacex-integrity-box {
+        padding: 30px;
+    }
+
+    .spacex-stat-val {
+        font-size: 3rem;
+    }
+}
+
+/* ==========================================
+   SPACEX-INSPIRED PORTFOLIO (LIGHT/FUTURISTIC)
+   ========================================== */
+
+.spacex-light-wrapper {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+    padding-top: var(--header-height);
+    min-height: 100vh;
+}
+
+.sx-hero {
+    padding: 120px 20px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.sx-hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    margin-bottom: 20px;
+}
+
+.sx-hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.sx-hero-subtitle::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: #000;
+}
+
+/* Filter Bar */
+.sx-filter-bar {
+    display: flex;
+    gap: 30px;
+    padding: 30px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sx-filter-btn {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #999;
+    cursor: pointer;
+    padding-bottom: 5px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.sx-filter-btn:hover,
+.sx-filter-btn.active {
+    color: #000;
+    border-bottom: 2px solid #000;
+}
+
+/* Portfolio Grid */
+.sx-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2px;
+    /* Ultra thin gap for strict grid look */
+    background: #f0f0f0;
+    /* Color of the gap lines */
+    border-top: 1px solid #f0f0f0;
+}
+
+.sx-item {
+    background: #fff;
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    group: hover;
+}
+
+.sx-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.sx-item:hover .sx-item-img {
+    transform: scale(1.05);
+}
+
+.sx-item-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.sx-item:hover .sx-item-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sx-item-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.sx-item-cat {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #666;
+}
+
+/* Edit Badge override for SX style */
+.sx-item .admin-edit-badge {
+    top: 20px;
+    right: 20px;
+    left: auto;
+    background: #000;
+    color: #fff;
+    border-radius: 0;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+/* ==========================================
+   SPACEX PORTFOLIO OVERRIDES FOR LEGACY JS
+   ========================================== */
+
+/* Map Legacy .portfolio-item inside .sx-grid to new SpaceX Style */
+.sx-grid .portfolio-item {
+    aspect-ratio: 3/4;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 0;
+    /* Removing rounded corners */
+    box-shadow: none;
+    /* Flattening */
+    transition: none;
+    /* Using new hover effects */
+}
+
+/* Image */
+.sx-grid .portfolio-item-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.sx-grid .portfolio-item:hover .portfolio-item-media {
+    transform: scale(1.05);
+    /* Zoom effect */
+}
+
+/* Overlay & Content */
+.sx-grid .portfolio-item-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
+    /* Clean dark gradient */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sx-grid .portfolio-item-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    bottom: 20px;
+    left: 20px;
+    padding: 0;
+}
+
+.sx-grid .portfolio-item:hover .portfolio-item-overlay,
+.sx-grid .portfolio-item:hover .portfolio-item-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Typography Overrides */
+.sx-grid .portfolio-item-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.sx-grid .portfolio-item-phrase {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    font-style: normal;
+}
+
+/* Remove Add Button Circle Style */
+.portfolio-add-item {
+    border: 1px dashed #ccc;
+    border-radius: 0;
+    background: #fafafa;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.portfolio-add-item:hover {
+    background: #eee;
+    border-color: #999;
+}
+
+/* ==========================================
+   EDITORIAL MASONRY GRID LAYOUT
+   ========================================== */
+
+.sx-grid {
+    /* Switch to 4 columns for detailed layout */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 350px;
+    /* Fixed base height for rows */
+    gap: 15px;
+    /* Elegant gap */
+    background: #fff !important;
+    /* Clean background */
+    padding: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+    border: none !important;
+}
+
+/* Grid Spanning Classes */
+.sx-grid .portfolio-item.size-standard {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.sx-grid .portfolio-item.size-large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.sx-grid .portfolio-item.size-wide {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.sx-grid .portfolio-item.size-tall {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .sx-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 300px;
+    }
+
+    /* Modify layout for 3 columns if needed, or keeping flows */
+    .sx-grid .portfolio-item.size-large {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .sx-grid .portfolio-item.size-wide {
+        grid-column: span 2;
+    }
+
+    /* Some items might leave gaps, that's masonry nature or use dense */
+    .sx-grid {
+        grid-auto-flow: dense;
+    }
+}
+
+@media (max-width: 768px) {
+    .sx-grid {
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: auto;
+        gap: 20px;
+    }
+
+    /* Reset spans for mobile */
+    .sx-grid .portfolio-item.size-large,
+    .sx-grid .portfolio-item.size-wide,
+    .sx-grid .portfolio-item.size-tall,
+    .sx-grid .portfolio-item.size-standard {
+        grid-column: span 1;
+        grid-row: span 1;
+        aspect-ratio: 3/4;
+        /* Consistent mobile ratio */
+    }
+
+    .sx-grid .portfolio-item.size-large {
+        aspect-ratio: 1/1;
+        /* Big square for mobile */
+    }
+}
+
+/* Editorial Style Overrides */
+
+/* Make content permanent on large items (Editorial Look) */
+.sx-grid .portfolio-item.size-large .portfolio-item-content,
+.sx-grid .portfolio-item.size-wide .portfolio-item-content {
+    opacity: 1;
+    transform: translateY(0);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+    padding: 30px;
+}
+
+.sx-grid .portfolio-item.size-large .portfolio-item-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.sx-grid .portfolio-item.size-wide .portfolio-item-title {
+    font-size: 2rem;
+}
+
+.portfolio-cat-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    background: #fff;
+    color: #000;
+    padding: 4px 8px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+/* Refined Typography */
+.sx-grid .portfolio-item-phrase {
+    font-family: 'Playfair Display', serif;
+    /* Elegant serif for phrases */
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* ==========================================
+   MAGAZINE EDITORIAL STYLE REFINEMENTS
+   ========================================== */
+
+/* Large Items: "Magazine Cover" Look */
+.sx-grid .portfolio-item.size-large .portfolio-item-content {
+    background: #ffffff;
+    color: #000000;
+    position: absolute;
+    /* Floating above image */
+    bottom: 30px;
+    right: 0;
+    /* Align right to overlap */
+    left: auto;
+    width: 60%;
+    /* Compact block */
+    padding: 30px;
+    opacity: 1 !important;
+    /* Always visible */
+    transform: none !important;
+    box-shadow: -10px 10px 40px rgba(0, 0, 0, 0.15);
+    /* Strong shadow */
+    z-index: 10;
+}
+
+.sx-grid .portfolio-item.size-large .portfolio-cat-label {
+    background: #000;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.sx-grid .portfolio-item.size-large .portfolio-item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: #000;
+    text-transform: none;
+    /* Editorial style allows mixed case */
+    text-shadow: none;
+}
+
+.sx-grid .portfolio-item.size-large .portfolio-item-phrase {
+    color: #555;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    border-left: 2px solid #000;
+    padding-left: 15px;
+    margin-left: -30px;
+    /* Pull out to edge */
+}
+
+/* Tall Items: Vertical Text Side */
+.sx-grid .portfolio-item.size-tall .portfolio-item-content {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, #000 0%, transparent 100%);
+    padding: 30px 20px;
+}
+
+.sx-grid .portfolio-item.size-tall .portfolio-item-title {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+}
+
+/* Standard Items: Minimalist */
+.sx-grid .portfolio-item.size-standard .portfolio-item-content {
+    text-align: center;
+    bottom: 50%;
+    transform: translateY(50%);
+    width: 100%;
+    left: 0;
+    opacity: 0;
+    /* Hidden until hover */
+}
+
+.sx-grid .portfolio-item.size-standard:hover .portfolio-item-content {
+    opacity: 1;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    .sx-grid .portfolio-item.size-large .portfolio-item-content {
+        width: 90%;
+        bottom: 15px;
+        right: 5%;
+    }
+}
+
+/* ==========================================
+   NIKE E-COMMERCE STYLE GRID (Black & White)
+   ========================================== */
+
+/* Grid Container */
+.sx-grid#portfolioGrid {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    grid-auto-rows: auto !important;
+    gap: 24px !important;
+    padding: 60px 24px !important;
+    max-width: 1600px;
+    margin: 0 auto;
+    background: #fff;
+}
+
+/* Section Title Separator */
+.nike-section-title {
+    grid-column: span 12;
+    padding: 60px 0 20px;
+    border-bottom: 2px solid #000;
+    margin-bottom: 24px;
+}
+
+.nike-section-title h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: #000;
+}
+
+/* Grid Spans */
+.col-span-12 {
+    grid-column: span 12 !important;
+}
+
+.col-span-6 {
+    grid-column: span 6 !important;
+}
+
+.col-span-4 {
+    grid-column: span 4 !important;
+}
+
+
+/* CARD BASE */
+.nike-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* MEDIA WRAPPER & HOVER ZOOM */
+.nike-media-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.nike-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nike-card:hover .nike-media {
+    transform: scale(1.05);
+}
+
+
+/* CONTENT TYPES */
+
+/* 1. Content Inside (Hero/Editorial Style) - Text Overlay */
+.nike-card.content-inside .nike-media-wrapper {
+    aspect-ratio: 16/9;
+    /* Cinematic */
+}
+
+.nike-card.col-span-6.content-inside .nike-media-wrapper {
+    aspect-ratio: 4/5;
+    /* Portrait Fashion */
+}
+
+.nike-card.content-inside .nike-content {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    color: #fff;
+    z-index: 2;
+    padding-right: 40px;
+}
+
+.nike-card.content-inside .nike-title {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 12px;
+    color: #fff;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nike-card.content-inside .nike-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 24px;
+}
+
+.nike-card.content-inside .nike-action-btn {
+    background: #fff;
+    color: #000;
+    border: none;
+}
+
+.nike-card.content-inside::after {
+    /* Gradient overlay for readability */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+
+/* 2. Content Below (Product/Collection Style) */
+.nike-card.content-below .nike-media-wrapper {
+    aspect-ratio: 1/1;
+    /* Square for products */
+}
+
+.nike-card.content-below .nike-content {
+    padding-top: 20px;
+    color: #000;
+}
+
+.nike-card.content-below .nike-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #111;
+}
+
+.nike-card.content-below .nike-subtitle {
+    font-size: 1rem;
+    color: #707072;
+    /* Nike Grey */
+    margin-bottom: 12px;
+}
+
+.nike-card.content-below .nike-action-btn {
+    display: inline-block;
+    background: transparent;
+    color: #111;
+    padding: 0;
+    text-decoration: underline;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.nike-card.content-below .nike-action-btn:hover {
+    color: #707072;
+}
+
+/* 3. Feature Side (Asymmetric Split) */
+.nike-card.feature-side {
+    grid-column: span 12 !important;
+    background: #f5f5f5;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 0;
+}
+
+.nike-card.feature-side .nike-media-wrapper {
+    width: 60%;
+    aspect-ratio: 16/9;
+}
+
+.nike-card.feature-side .nike-content {
+    width: 40%;
+    padding: 0 60px;
+}
+
+.nike-card.feature-side .nike-title {
+    font-size: 4rem;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+    color: #000;
+}
+
+.nike-card.feature-side .nike-subtitle {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 32px;
+}
+
+.nike-card.feature-side .nike-action-btn {
+    background: #000;
+    color: #fff;
+    padding: 12px 32px;
+}
+
+.nike-card.feature-side .nike-action-btn:hover {
+    background: #333;
+}
+
+
+/* SHARED TYPOGRAPHY & BUTTONS */
+.nike-title {
+    font-family: 'Inter', Helvetica, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.nike-action-btn {
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .sx-grid#portfolioGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .col-span-12,
+    .col-span-6,
+    .col-span-4 {
+        grid-column: span 2 !important;
+    }
+
+    .nike-card.feature-side {
+        flex-direction: column-reverse;
+    }
+
+    .nike-card.feature-side .nike-media-wrapper,
+    .nike-card.feature-side .nike-content {
+        width: 100%;
+    }
+
+    .nike-card.feature-side .nike-content {
+        padding: 40px 20px;
+    }
+}
+
+/* ==========================================
+   NIKE AESTHETIC TEXT BAR
+   ========================================== */
+
+.nike-text-bar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    padding: 0 24px;
+    /* Align with grid padding */
+    margin: 0 auto 10px;
+    /* Slight margin bottom */
+    max-width: 1600px;
+    font-family: 'Inter', Helvetica, sans-serif;
+    /* Technical look */
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: #111;
+    font-weight: 700;
+    text-transform: uppercase;
+    overflow-x: hidden;
+    border-bottom: 1px solid #eaeaea;
+    /* Subtle divider */
+    padding-bottom: 20px;
+}
+
+.nike-tagline {
+    white-space: nowrap;
+}
+
+.nike-separator {
+    color: #ccc;
+    font-weight: 300;
+    user-select: none;
+}
+
+/* Hide on mobile if too cluttered or scrollable */
+@media (max-width: 768px) {
+    .nike-text-bar {
+        font-size: 0.65rem;
+        gap: 10px;
+        overflow-x: auto;
+        /* Allow scroll on small screens */
+        padding-bottom: 15px;
+    }
+}
+
+/* ==========================================
+   VISUAL IMPACT UPGRADES ("GRATIFYING" LOOK)
+   ========================================== */
+
+/* 1. RUNNING TAPE (MARQUEE) */
+.nike-running-tape {
+    width: 100%;
+    background: #ffffff;
+    /* White clean background, black text */
+    color: #000;
+    padding: 30px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    border-bottom: 2px solid #000;
+    border-top: 2px solid #000;
+    margin-bottom: 40px;
+}
+
+.nike-tape-track {
+    display: inline-block;
+    animation: scrollText 30s linear infinite;
+    padding-left: 100%;
+    /* Start off screen? No, better flow */
+}
+
+/* Duplicate content in HTML is best for seamless loop, but CSS loop works if content is long enough */
+
+.tape-item {
+    font-family: 'Inter', Helvetica, sans-serif;
+    font-size: 4rem;
+    /* Giant Text */
+    font-weight: 900;
+    margin-right: 80px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    display: inline-block;
+}
+
+.tape-item.outline {
+    /* Create outline text effect */
+    -webkit-text-stroke: 1px #000;
+    color: transparent;
+    font-style: italic;
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* Requires duplicated content in HTML to span 200% width effectively */
+}
+
+
+/* 2. TYPOGRAPHY OVERHAUL (Massive & Tight) */
+.nike-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 900 !important;
+    letter-spacing: -0.05em !important;
+    /* Very tight "Nike" tracking */
+    text-transform: uppercase;
+}
+
+/* Card Titles Scale Up */
+.nike-card.content-inside .nike-title {
+    font-size: clamp(2rem, 4vw, 4.5rem) !important;
+    /* Responsive Huge */
+    line-height: 0.85 !important;
+    text-shadow: none !important;
+    /* Clean look */
+}
+
+.nike-card.content-below .nike-title {
+    font-size: 1.2rem !important;
+    letter-spacing: -0.02em !important;
+}
+
+.nike-section-title h2 {
+    font-size: 4rem !important;
+    /* Editorial Section headers */
+    letter-spacing: -0.04em !important;
+}
+
+
+/* 3. VISUAL DRAMA (B&W to Color Hover) */
+.nike-media {
+    filter: grayscale(100%) contrast(1.1);
+    /* High contrast B&W start */
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease !important;
+}
+
+.nike-card:hover .nike-media {
+    transform: scale(1.02);
+    filter: grayscale(0%) contrast(1);
+    /* Full color on hover */
+}
+
+
+/* 4. TECHNICAL DETAILS (Micro-typography) */
+.nike-card::before {
+    content: 'REF. 0' attr(data-index) ' // S26';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: 'Courier New', monospace;
+    /* Monospaced Tech */
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #000;
+    background: #fff;
+    padding: 4px 8px;
+    z-index: 10;
+    pointer-events: none;
+    border: 1px solid #000;
+}
+
+/* ==========================================
+   STYLE UPDATE: COLORFUL MEDIA (NO GRAYSCALE)
+   ========================================== */
+
+.nike-media {
+    filter: none !important;
+    /* Always show true colors */
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.nike-card:hover .nike-media {
+    transform: scale(1.02);
+    /* No filter change needed, just zoom */
+}
+
+/* ==========================================
+   TAPE LOOP & LABEL REFINEMENTS
+   ========================================== */
+
+/* Label Above Tape */
+.nike-tape-label {
+    text-align: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #111;
+    margin: 40px auto 10px;
+    /* Space above and below */
+    max-width: 1400px;
+}
+
+/* Slimmer Tape */
+.nike-running-tape.slim {
+    padding: 12px 0 !important;
+    /* Reduced vertical padding */
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fff;
+    /* Ensure white background */
+    margin-bottom: 60px;
+}
+
+.nike-running-tape.slim .tape-item {
+    font-size: 2.5rem !important;
+    /* Adjusted size */
+    margin-right: 50px !important;
+    font-weight: 800;
+    color: #000;
+}
+
+.nike-running-tape.slim .tape-item.outline {
+    -webkit-text-stroke: 1px #ccc;
+    /* Lighter outline for elegance */
+    color: transparent;
+}
+
+/* Loop Animation Logic */
+/* We have 4 identical sets. Moving -25% moves exactly one set length.
+   This creates a perfect loop if the sets are identical. */
+@keyframes scrollText {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-25%);
+    }
+}
+
+.nike-tape-track {
+    animation: scrollText 20s linear infinite !important;
+    /* Smooth slow speed */
+    width: max-content;
+    /* Ensure track takes full width of text */
+    display: flex;
+}
+
+/* ==========================================
+   CAROUSEL FIXES (INSTANT START & NO LINE)
+   ========================================== */
+
+/* 1. Remove Padding so text starts VISIBLE immediately */
+.nike-tape-track {
+    padding-left: 0 !important;
+    animation-delay: 0s !important;
+}
+
+/* 2. Remove unwanted lines from Label area */
+/* If there was a border on a previous element, allow label to float clean */
+.nike-tape-label {
+    border: none !important;
+    padding-top: 0 !important;
+    margin-top: 20px !important;
+    background: transparent !important;
+}
+
+.nike-running-tape {
+    border-top: none !important;
+    /* Remove line above tape if that was it */
+    margin-top: 10px;
+}
+
+/* Ensure animation is perfectly seamless from frame 1 */
+@keyframes scrollText {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-25%, 0, 0);
+    }
+
+    /* Moves exactly 1 set of items */
+}
+
+/* ==========================================
+   OFFICIAL STORES SECTION (NIKE STYLE)
+   ========================================== */
+
+.official-stores-section {
+    padding: 80px 24px 100px;
+    background: #fff;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.nike-section-title.centered-title {
+    text-align: center;
+    border-bottom: none;
+    padding-bottom: 40px;
+}
+
+.nike-section-title.centered-title h2 {
+    font-size: 2rem !important;
+    letter-spacing: -0.02em;
+}
+
+.stores-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.store-card {
+    background: #000;
+    color: #fff;
+    width: 200px;
+    height: 120px;
+    /* Small and neat */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid #000;
+}
+
+.store-card:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    background: #111;
+}
+
+.store-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.store-name {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    text-align: center;
+}
+
+.store-arrow {
+    display: none;
+    /* Keep it ultra clean usually */
+}
+
+/* Subtle Branding Touches on Hover */
+.store-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Mobile Grid */
+@media (max-width: 768px) {
+    .stores-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .store-card {
+        width: 100%;
+        height: 100px;
+    }
+
+    .store-name {
+        font-size: 1rem;
+    }
+}
+
+/* ==========================================
+   OFFICIAL STORE BRAND COLORS (Applied)
+   ========================================== */
+
+/* 1. MERCADO LIVRE (Yellow & Blue) */
+/* User Image: Yellow Left, Blue Right. We will use Yellow text on Black, Blue accent. */
+.store-card.ml {
+    border-color: #ffe600;
+    /* Subtle border */
+}
+
+.store-card.ml .store-name {
+    color: #ffe600;
+    /* Signature Yellow */
+}
+
+.store-card.ml:hover {
+    box-shadow: 0 0 20px rgba(255, 230, 0, 0.3);
+    border-color: #2d3277;
+    /* Switch to Blue on hover interaction */
+}
+
+/* 2. SHEIN (Classic Black & White) */
+/* User Image: Black & White Stripes. We keep it stark Monochrome. */
+.store-card.shein {
+    border-color: #333;
+}
+
+.store-card.shein .store-name {
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    /* Fashion spacing */
+}
+
+.store-card.shein:hover {
+    background: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.store-card.shein:hover .store-name {
+    color: #000;
+    /* Invert */
+}
+
+/* 3. TEMU (Orange) */
+/* User Image: Orange block. */
+.store-card.temu {
+    border-color: #fb7701;
+}
+
+.store-card.temu .store-name {
+    color: #fb7701;
+}
+
+.store-card.temu:hover {
+    box-shadow: 0 0 20px rgba(251, 119, 1, 0.4);
+    background: #1a0b00;
+    /* Very dark orange tint */
+}
+
+/* 4. SHOPEE (Orange/Red) */
+/* User Image: Orange block (slightly redder). */
+.store-card.shopee {
+    border-color: #ee4d2d;
+}
+
+.store-card.shopee .store-name {
+    color: #ee4d2d;
+}
+
+.store-card.shopee:hover {
+    box-shadow: 0 0 20px rgba(238, 77, 45, 0.4);
+    background: #1a0502;
+}
+
+/* 5. TIKTOK (Glitch Cyan/Pink) */
+/* User Image: Black, Cyan, Pink. */
+.store-card.tiktok {
+    position: relative;
+    border-color: #fe2c55;
+    overflow: visible;
+}
+
+.store-card.tiktok .store-name {
+    color: #fff;
+    text-shadow: -2px -2px 0 #25f4ee, 2px 2px 0 #fe2c55;
+    /* Glitch Effect */
+}
+
+.store-card.tiktok:hover {
+    box-shadow: -5px 0 20px rgba(37, 244, 238, 0.3), 5px 0 20px rgba(254, 44, 85, 0.3);
+}
+
+/* General Hover Movement for all */
+.store-card:hover .store-arrow {
+    opacity: 1;
+    transform: translate(5px, -5px);
+    color: inherit;
+    /* Arrow takes brand color? */
+}
+
+.store-card.ml:hover .store-arrow {
+    color: #ffe600;
+}
+
+.store-card.temu:hover .store-arrow {
+    color: #fb7701;
+}
+
+.store-card.shopee:hover .store-arrow {
+    color: #ee4d2d;
+}
+
+.store-card.tiktok:hover .store-arrow {
+    color: #25f4ee;
+}
+
+/* ==========================================
+   BLOCK COLOR CARDS (RE-DO)
+   ========================================== */
+
+/* 1. MERCADO LIVRE (Yellow Bg / Blue Text) */
+.store-card.ml {
+    background: #ffe600 !important;
+    border: none !important;
+}
+
+.store-card.ml .store-name {
+    color: #2d3277 !important;
+    /* Deep Blue */
+}
+
+/* 2. SHEIN (Black Bg / White Text) */
+.store-card.shein {
+    background: #000 !important;
+    border: 1px solid #222 !important;
+}
+
+.store-card.shein .store-name {
+    color: #fff !important;
+}
+
+/* 3. TEMU (Orange Bg / White Text) */
+.store-card.temu {
+    background: #fb7701 !important;
+    border: none !important;
+}
+
+.store-card.temu .store-name {
+    color: #fff !important;
+}
+
+/* 4. SHOPEE (Red-Orange Bg / White Text) */
+.store-card.shopee {
+    background: #ee4d2d !important;
+    border: none !important;
+}
+
+.store-card.shopee .store-name {
+    color: #fff !important;
+}
+
+/* 5. TIKTOK (Black Bg / Glitch Text) */
+.store-card.tiktok {
+    background: #000000 !important;
+    border: 1px solid #222 !important;
+}
+
+.store-card.tiktok .store-name {
+    color: #fff !important;
+    text-shadow: -2px -1px 0 #25f4ee, 2px 1px 0 #fe2c55 !important;
+}
+
+/* Common Hover Lift */
+.store-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+    filter: brightness(1.05);
+    /* Slight pop */
+}
+
+/* ==========================================
+   FLOATING BUY BUTTON (GHOST PILL)
+   ========================================== */
+
+.floating-buy-pill {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 100px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    /* Animation: "Appears from time to time" */
+    /* Cycle: 12 seconds total. Visible for 6s, Hidden for 6s (or varied) */
+    animation: ghostAppear 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.floating-buy-pill:hover {
+    transform: scale(1.1) translateY(-5px);
+    background: #222;
+    animation-play-state: paused;
+    /* Freeze when interacting */
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+@keyframes ghostAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    5% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    60% {
+        /* Stay visible */
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    70% {
+        /* Start fading out */
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+/* ==========================================
+   FIX: LABEL LINE (FULL WIDTH BELOW TEXT)
+   ========================================== */
+
+.nike-tape-label {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    /* Edge to Edge */
+    margin: 0 !important;
+    padding: 50px 0 20px !important;
+    /* Vertical spacing */
+    border-top: none !important;
+    /* Remove top line */
+    border-bottom: 1px solid #000 !important;
+    /* Line BELOW text, full width */
+    text-align: center;
+    background: #fff;
+    position: relative;
+    z-index: 5;
+}
+
+/* Remove duplicate border from tape */
+.nike-running-tape.slim {
+    border-top: none !important;
+    margin-top: 0 !important;
+    padding-top: 15px !important;
+}
+
+/* ==========================================
+   BORDER READJUSTMENT
+   ========================================== */
+
+/* Remove border from the label (Line between Hero and Carousel) */
+.nike-tape-label {
+    border-bottom: none !important;
+}
+
+/* Thicken the border BELOW the carousel to 2px */
+.nike-running-tape.slim {
+    border-bottom: 2px solid #e0e0e0 !important;
+}
+
+/* ==========================================
+   BORDER CORRECTION: BLACK FRAMING
+   ========================================== */
+
+/* 1. Restore the Top Line (under Label) */
+.nike-tape-label {
+    border-bottom: 2px solid #000 !important;
+}
+
+/* 2. Make Bottom Line Black (was Grey) */
+.nike-running-tape.slim {
+    border-bottom: 2px solid #000 !important;
+}
+
+/* ==========================================
+   CLEANUP: REMOVE UNWANTED LINES IN HERO GAP
+   ========================================== */
+
+/* Garantir que o subtítulo não tenha borda embaixo */
+.sx-hero-subtitle {
+    border-bottom: none !important;
+}
+
+/* Garantir que a Hero Section não tenha borda embaixo */
+.sx-hero {
+    border-bottom: none !important;
+}
+
+/* Se existir alguma linha solta (hr) ou pseudo-elemento, ocultar */
+.sx-hero::after,
+.sx-hero-subtitle::after {
+    display: none !important;
+}
+
+/* A única linha deve ser a do Label abaixo */
+
+/* ==========================================
+   SPACE REDUCTION: HERO TO LABEL
+   ========================================== */
+
+/* Pull elements closer (approx -1cm visual space) */
+
+.sx-hero {
+    padding-bottom: 0 !important;
+}
+
+.sx-hero-subtitle {
+    margin-bottom: 5px !important;
+    /* Tight margin */
+}
+
+.nike-tape-label {
+    padding-top: 15px !important;
+    /* Reduced top padding */
+    margin-top: 0 !important;
+}
+
+/* ==========================================
+   CONTACT PAGE (NIKE AESTHETIC)
+   ========================================== */
+
+.contact-hero {
+    padding: 100px 24px 60px;
+    border-bottom: 2px solid #000;
+    margin-bottom: 60px;
+}
+
+.contact-grid-nike {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 100px;
+}
+
+/* Left Column: Info */
+.contact-info-block {
+    margin-bottom: 50px;
+}
+
+.contact-label-tech {
+    display: block;
+    font-family: 'Inter', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #888;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.contact-link-large {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #000;
+    text-decoration: none;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    transition: opacity 0.3s;
+}
+
+.contact-link-large:hover {
+    opacity: 0.6;
+}
+
+/* Right Column: Form */
+.nike-form {
+    background: #fff;
+}
+
+.nike-input-group {
+    margin-bottom: 30px;
+}
+
+.nike-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+.nike-input,
+.nike-textarea {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #ccc;
+    /* Light grey start */
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000;
+    background: transparent;
+    border-radius: 0;
+    transition: border-color 0.3s;
+}
+
+.nike-input:focus,
+.nike-textarea:focus {
+    outline: none;
+    border-color: #000;
+    /* Black on focus */
+}
+
+.nike-submit-btn {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.nike-submit-btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .contact-grid-nike {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .contact-link-large {
+        font-size: 1.8rem;
+    }
+}
+/* ==========================================
+   CONTACT CARD LAYOUT (RESTORED CARD STYLE)
+   ========================================== */
+
+/* Page Background */
+.contact-page-bg {
+    background-color: #f5f5f7 !important; /* Light grey background */
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+/* White Floating Card */
+.contact-card-container {
+    background: #ffffff;
+    width: 95%;
+    max-width: 1200px;
+    border-radius: 24px; /* Rounded corners like image */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06); /* Soft shadow */
+    padding: 60px 50px;
+    margin: 0 auto;
+}
+
+/* Adjustments for content INSIDE card */
+.contact-card-container .contact-hero {
+    margin-top: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 50px !important;
+    border-bottom: none !important; /* Remove harsh line */
+}
+
+.contact-card-container .sx-hero-title {
+    font-size: 2.5rem !important;
+}
+
+.contact-card-container .contact-grid-nike {
+    padding: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-card-container {
+        padding: 30px 20px;
+        border-radius: 16px;
+    }
+}
+
+/* ==========================================
+   USER ADJUSTMENT: WHITE BACKGROUND
+   ========================================== */
+
+.contact-page-bg {
+    background-color: #ffffff !important; /* Pure white background */
+}
+
+/* Enhancing card definition since functionality is on white */
+.contact-card-container {
+    background: #ffffff;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.08) !important; /* Visible shadow */
+    border: 1px solid #f5f5f5 !important; /* Subtle border */
+}
+
+/* ==========================================
+   NIKE TECH FILTERS (SIDEBAR REDESIGN)
+   ========================================== */
+
+/* Sidebar Container */
+.filters-sidebar {
+    background: #ffffff !important;
+    border-right: 1px solid #e5e5e5 !important; /* Tech line */
+    border-radius: 0 !important; /* Sharp */
+    padding: 40px 24px !important;
+    box-shadow: none !important; /* Flat */
+}
+
+/* Search Bar - Tech Box */
+.sidebar-search-container {
+    background: #fff !important;
+    border: 2px solid #e5e5e5 !important;
+    border-radius: 0 !important;
+    padding: 8px 12px !important;
+    transition: border-color 0.3s ease;
+}
+
+.sidebar-search-container:focus-within {
+    border-color: #000 !important;
+}
+
+#searchInput {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: #000 !important;
+}
+
+#searchInput::placeholder {
+    color: #999 !important;
+    font-weight: 500 !important;
+}
+
+.search-icon {
+    color: #000 !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.search-count {
+    font-family: 'Inter', monospace !important;
+    font-size: 0.7rem !important;
+    color: #666 !important;
+    margin-top: 8px !important;
+    display: block !important;
+    text-align: right !important;
+}
+
+/* Filter Headers */
+.filter-title {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.75rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+    color: #000 !important;
+    border-bottom: 2px solid #000 !important;
+    padding-bottom: 8px !important;
+    margin-top: 30px !important;
+    margin-bottom: 15px !important;
+}
+
+/* Filter Options rows */
+.filter-option {
+    display: flex !important;
+    align-items: center !important;
+    padding: 12px 10px !important;
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    background: transparent !important;
+}
+
+.filter-option:hover {
+    background: #f9f9f9 !important;
+    padding-left: 15px !important;
+}
+
+/* Active State (Black Block) */
+.filter-option:has(input:checked) {
+    background: #000 !important;
+    border-color: #000 !important;
+}
+
+.filter-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 0;
+    height: 0; 
+    margin: 0 !important; /* Hide radio dot */
+}
+
+/* Text Styling */
+.filter-option span {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    color: #333 !important;
+    transition: color 0.2s !important;
+}
+
+.filter-icon {
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 12px !important;
+    stroke: #333 !important;
+    stroke-width: 1.5px !important;
+    transition: stroke 0.2s !important;
+}
+
+/* Active Text colors */
+.filter-option:has(input:checked) span {
+    color: #fff !important;
+}
+
+.filter-option:has(input:checked) .filter-icon {
+    stroke: #fff !important;
+}
+
+
+/* ==========================================
+   SEARCH & COUNT TECH REFINEMENT
+   ========================================== */
+
+/* Placeholder Styling - Force Uppercase Tech Look */
+#searchInput::placeholder {
+    font-family: 'Inter', -apple-system, sans-serif !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.05em !important;
+    color: #888 !important;
+}
+
+/* Search Count - Technical Data Readout */
+.search-count {
+    font-family: 'Courier New', 'Courier', monospace !important; /* Tech/Code font */
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    color: #000 !important; /* Solid Black */
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    
+    /* Layout Details */
+    margin-top: 8px !important;
+    padding-top: 6px !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: right !important;
+    opacity: 1 !important; /* Clear visibility */
+}
+
+/* ==========================================
+   SIDEBAR STICKY FIX
+   ========================================== */
+
+.filters-sidebar {
+    position: -webkit-sticky !important; /* Safari support */
+    position: sticky !important;
+    top: 90px !important; /* 90px from top so it clears the header */
+    height: auto !important;
+    max-height: calc(100vh - 100px) !important; /* Prevent it from being taller than screen */
+    overflow-y: auto !important; /* Add internal scroll if filters are too long */
+    align-self: flex-start !important; /* Critical for Flexbox layouts */
+    z-index: 50 !important; /* Ensure it stays on top */
+    
+    /* Scrollbar aesthetics for the sticking bar */
+    scrollbar-width: thin;
+    scrollbar-color: #000 #f0f0f0;
+}
+
+/* Chrome/Safari Scrollbar Styling */
+.filters-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+.filters-sidebar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.filters-sidebar::-webkit-scrollbar-thumb {
+    background: #000;
+}
+
+
+/* ==========================================
+   FIX STICKY SIDEBAR LAYOUT
+   ========================================== */
+
+/* Ensure Parent Container allows sticky behavior */
+.main-content {
+    display: grid !important;
+    grid-template-columns: 320px 1fr !important; /* Fixed width sidebar / Fluid grid */
+    align-items: start !important; /* CRITICAL: Prevents sidebar from stretching full height */
+    gap: 0 !important; /* Sidebar has internal padding */
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important; /* Critical: hidden overflow breaks sticky */
+    padding: 0 !important;
+}
+
+/* Sidebar Sticky Logic */
+.filters-sidebar {
+    position: -webkit-sticky !important; 
+    position: sticky !important;
+    top: 70px !important; /* Height of header approx */
+    height: auto !important;
+    max-height: calc(100vh - 70px) !important;
+    overflow-y: auto !important;
+    width: 320px !important; /* Match grid column */
+    border-right: 1px solid #e5e5e5 !important;
+    box-sizing: border-box !important;
+}
+
+/* Responsive adjustment */
+@media (max-width: 1024px) {
+    .main-content {
+        display: block !important; /* Stack context on mobile */
+    }
+    .filters-sidebar {
+        position: static !important;
+        width: 100% !important;
+        border-right: none !important;
+        border-bottom: 1px solid #e5e5e5 !important;
+    }
+}
+
+
+/* ==========================================
+   SIDEBAR POLISH & SPACING FIX
+   ========================================== */
+
+/* More breathing room at the top of sticky sidebar */
+.filters-sidebar {
+    padding-top: 60px !important; 
+    padding-right: 30px !important;
+}
+
+/* Separate Grid from Sidebar Line */
+.collection-grid {
+    padding-left: 50px !important; /* Push grid right */
+    padding-top: 60px !important; /* Align top visual start with sidebar content */
+    padding-right: 40px !important;
+}
+
+/* Icon Alignment Fix */
+.filter-option {
+    height: 48px !important; /* Consistent height row */
+    align-items: center !important;
+}
+
+.filter-icon {
+    margin-top: -2px !important; /* Slight vertical optical adjustment */
+}
+
+
+/* ==========================================
+   LAYOUT REFACTOR: HORIZONTAL FILTERS
+   ========================================== */
+
+/* 1. Reset Main Container to Stack Elements */
+.main-content {
+    display: block !important; /* Stack filters on top of grid */
+    padding: 0 !important;
+    max-width: 100% !important;
+}
+
+/* 2. Transform Sidebar into Horizontal Bar */
+.filters-sidebar {
+    position: relative !important; /* Not sticky sidebar anymore */
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    border-right: none !important;
+    border-bottom: 2px solid #000 !important; /* Tech underline */
+    padding: 20px 40px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 30px !important;
+    z-index: 40 !important;
+    background: #fff !important;
+}
+
+/* 3. Search Bar Adjustment for Horizontal Layout */
+.sidebar-search {
+    flex: 0 0 250px !important; /* Fixed width search */
+    margin-right: 20px !important;
+}
+
+.search-count {
+    text-align: left !important; /* Align with input */
+    margin-top: 5px !important;
+}
+
+/* 4. Filter Section (The Options Wrapper) */
+.filter-section {
+    flex: 1 !important; /* Take remaining space */
+    width: auto !important;
+    margin: 0 !important;
+}
+
+.filter-title {
+    display: none !important; /* Hide title 'Filtrar por', cleaner look */
+}
+
+/* 5. Horizontal Filter Chips (Scrollable) */
+.filter-options {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important; /* Scroll if needed */
+    gap: 10px !important;
+    padding-bottom: 5px !important;
+}
+
+/* Hide Scrollbar */
+.filter-options::-webkit-scrollbar {
+    height: 0px;
+    background: transparent;
+}
+
+/* 6. Style Filter Buttons (Chips) */
+.filter-option {
+    flex: 0 0 auto !important; /* Don't shrink */
+    border: 1px solid #e5e5e5 !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+    border-radius: 4px !important; /* Small rounded or sharp */
+    padding: 8px 16px !important;
+    height: 40px !important;
+    background: #fff !important;
+}
+
+.filter-option:hover {
+    border-color: #000 !important;
+    background: #fff !important;
+    padding-left: 16px !important; /* Reset hover movement */
+}
+
+.filter-option:has(input:checked) {
+    background: #000 !important;
+    border-color: #000 !important;
+    color: #fff !important;
+}
+
+/* Icons in horizontal mode - Optional, can hide to save space */
+.filter-icon {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 8px !important;
+}
+
+/* 7. EXPAND GRID TO FULL WIDTH */
+.collection-grid {
+    width: 100% !important;
+    padding: 40px !important; /* Uniform padding */
+    display: grid !important;
+    /* Add extra column! */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; 
+    gap: 20px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .filters-sidebar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 20px !important;
+    }
+    .sidebar-search {
+        flex: 1 !important;
+        width: 100% !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+/* ==========================================
+   DENSE HEADER FILTER LAYOUT
+   ========================================== */
+
+/* 1. Main Bar Container */
+.filters-sidebar {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important; /* Keep search and filters side-by-side */
+    align-items: flex-start !important;
+    padding: 24px 40px !important;
+    background: #fff !important;
+    border-bottom: 2px solid #000 !important;
+    height: auto !important;
+}
+
+/* 2. Search Area (Left Fixed) */
+.sidebar-search {
+    flex: 0 0 240px !important; /* Fixed width */
+    margin-right: 40px !important; /* Space between search and filters */
+    margin-bottom: 0 !important;
+}
+
+.sidebar-search-container {
+    padding: 6px 10px !important; /* Keep it tight */
+}
+
+/* 3. Filter Area (Right Fluid) */
+.filter-section {
+    flex: 1 !important;
+    width: auto !important;
+}
+
+/* 4. The Grid of Filters (Dense) */
+.filter-options {
+    display: grid !important;
+    /* Create a dense grid with minimum width columns to fit all */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important; 
+    gap: 8px !important; /* Tight formatting */
+    overflow: visible !important; /* Show all, no scroll */
+    padding-bottom: 0 !important;
+}
+
+/* 5. Compact Filter Buttons */
+.filter-option {
+    height: 34px !important; /* Slower height */
+    padding: 0 10px !important;
+    border: 1px solid #e0e0e0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    background: #fff !important;
+    border-radius: 2px !important; /* Sharper */
+}
+
+/* Small Font Size */
+.filter-option span {
+    font-size: 0.75rem !important; /* Smaller text */
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.filter-icon {
+    width: 14px !important;
+    height: 14px !important;
+    margin-right: 8px !important;
+}
+
+/* Grid adjustment */
+.collection-grid {
+    padding-top: 30px !important; /* Reduce gap to content */
+}
+
+/* Mobile Fallback */
+@media (max-width: 900px) {
+    .filters-sidebar {
+        flex-direction: column !important;
+    }
+    .sidebar-search {
+        width: 100% !important;
+        margin-right: 0 !important;
+        margin-bottom: 15px !important;
+    }
+}
+
+/* ==========================================
+   STICKY HORIZONTAL FILTERS
+   ========================================== */
+
+.filters-sidebar {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important; /* Stick to VERY top if header scrolls away, or adjust if header is sticky */
+    z-index: 999 !important; /* High Z-index */
+    background: #ffffff !important; /* Ensure opacity */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important; /* Visibility shadow */
+    transition: top 0.3s ease;
+}
+
+/* If header is also sticky fixed at 80px, uncomment this: */
+/* .filters-sidebar { top: 80px !important; } */
+

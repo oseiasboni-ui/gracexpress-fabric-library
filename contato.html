@@ -3,379 +3,215 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato | GraceXpress</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="js/force-admin.js"></script>
-    <style>
-        /* ==========================================
-           FLUID RESPONSIVE CSS - No Fixed Dimensions
-           Works on all Android and iOS devices
-           ========================================== */
-
-        /* Base Reset */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            font-size: 100%;
-            /* 16px base */
-            -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-        }
-
-        body {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden;
-            min-height: 100vh;
-            min-height: 100dvh;
-            /* Dynamic viewport for mobile */
-        }
-
-        /* ==========================================
-           Contact Page Wrapper - Fluid Container
-           ========================================== */
-        .contact-page-wrapper {
-            width: 100%;
-            min-height: calc(100vh - 4rem);
-            min-height: calc(100dvh - 4rem);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: clamp(1rem, 4vw, 4rem) clamp(1rem, 3vw, 2rem);
-            margin-top: var(--header-height, 4rem);
-        }
-
-        /* ==========================================
-           Contact Content Box - Fluid Width
-           ========================================== */
-        .contact-content {
-            width: 100%;
-            max-width: min(62.5rem, 95vw);
-            /* 1000px max, 95vw on small screens */
-            margin: 0 auto;
-            padding: clamp(1.5rem, 5vw, 3.75rem) clamp(1.25rem, 4vw, 3.125rem);
-            background: var(--color-bg);
-            border-radius: clamp(0.75rem, 2vw, 1.25rem);
-            box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.08);
-        }
-
-        /* ==========================================
-           Contact Grid - Responsive Columns
-           ========================================== */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-            gap: clamp(2rem, 6vw, 5rem);
-            align-items: start;
-            width: 100%;
-        }
-
-        /* ==========================================
-           Contact Info Section
-           ========================================== */
-        .contact-info h2 {
-            font-size: clamp(1.375rem, 4vw, 1.75rem);
-            font-weight: 700;
-            margin-bottom: clamp(1rem, 3vw, 1.5rem);
-            line-height: 1.2;
-            word-wrap: break-word;
-        }
-
-        .contact-info>p {
-            font-size: clamp(0.875rem, 2.5vw, 1rem);
-            color: var(--color-text-secondary);
-            margin-bottom: clamp(1.5rem, 4vw, 2rem);
-            line-height: 1.7;
-            word-wrap: break-word;
-        }
-
-        /* ==========================================
-           Contact Items - Touch Friendly
-           ========================================== */
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: clamp(0.75rem, 2vw, 1rem);
-            margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
-            padding: clamp(0.875rem, 2.5vw, 1rem);
-            background: var(--color-bg-alt);
-            border-radius: clamp(0.5rem, 1.5vw, 0.75rem);
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-            width: 100%;
-            min-height: 3rem;
-            /* Touch target minimum */
-        }
-
-        .contact-link:hover,
-        .contact-link:focus {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
-            border-color: rgba(102, 126, 234, 0.3);
-            transform: translateX(0.5rem);
-            box-shadow: 0 0.25rem 0.9375rem rgba(102, 126, 234, 0.15);
-        }
-
-        .contact-link:active {
-            transform: scale(0.98);
-        }
-
-        .contact-item-icon {
-            font-size: clamp(1.25rem, 3.5vw, 1.5rem);
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-link:hover .contact-item-icon {
-            transform: scale(1.2);
-        }
-
-        .contact-item-text {
-            flex: 1;
-            min-width: 0;
-            /* Allow text truncation */
-        }
-
-        .contact-item-text h4 {
-            font-size: clamp(0.8125rem, 2vw, 0.875rem);
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            word-wrap: break-word;
-        }
-
-        .contact-item-text p {
-            font-size: clamp(0.75rem, 2vw, 0.875rem);
-            color: var(--color-text-secondary);
-            margin: 0;
-            word-wrap: break-word;
-            overflow-wrap: anywhere;
-        }
-
-        .contact-link:hover .contact-item-text h4 {
-            color: #667eea;
-        }
-
-        /* ==========================================
-           Contact Form - Fluid Inputs
-           ========================================== */
-        .contact-form h3 {
-            font-size: clamp(1.125rem, 3vw, 1.25rem);
-            font-weight: 600;
-            margin-bottom: clamp(1rem, 3vw, 1.5rem);
-        }
-
-        .form-group {
-            margin-bottom: clamp(1rem, 3vw, 1.25rem);
-            width: 100%;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: clamp(0.6875rem, 1.8vw, 0.75rem);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-            color: var(--color-text-secondary);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: clamp(0.75rem, 2.5vw, 0.875rem);
-            border: 1px solid var(--color-border);
-            background: var(--color-bg);
-            color: var(--color-text);
-            font-family: inherit;
-            font-size: 1rem;
-            /* 16px - prevents zoom on iOS */
-            border-radius: clamp(0.375rem, 1vw, 0.5rem);
-            transition: border-color 0.2s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--color-accent);
-        }
-
-        .form-group textarea {
-            min-height: clamp(6rem, 15vw, 7.5rem);
-            resize: vertical;
-        }
-
-        .form-submit {
-            width: 100%;
-            padding: clamp(0.875rem, 3vw, 1rem) clamp(1.5rem, 4vw, 2rem);
-            background: var(--color-accent);
-            color: #fff;
-            border: none;
-            font-size: clamp(0.875rem, 2.5vw, 1rem);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-radius: clamp(0.375rem, 1vw, 0.5rem);
-            min-height: 3rem;
-            /* Touch target */
-        }
-
-        .form-submit:hover {
-            background: var(--color-accent-dark, #6b5a45);
-        }
-
-        .form-submit:active {
-            transform: scale(0.98);
-        }
-
-        /* ==========================================
-           Mobile Adjustments - Fine Tuning
-           ========================================== */
-        @media (max-width: 48em) {
-
-            /* 768px */
-            .contact-page-wrapper {
-                padding: clamp(0.75rem, 3vw, 1.25rem);
-                margin-top: 3.5rem;
-                min-height: auto;
-                align-items: flex-start;
-                padding-top: 1.5rem;
-            }
-
-            .contact-info h2,
-            .contact-form h3 {
-                text-align: center;
-            }
-
-            .contact-info>p {
-                text-align: center;
-            }
-        }
-
-        /* Extra small screens */
-        @media (max-width: 22.5em) {
-
-            /* 360px */
-            .contact-content {
-                padding: 1rem 0.875rem;
-            }
-        }
-    </style>
 </head>
 
-<body>
-    <header class="header header-hero">
+<body class="light-mode">
+    <header class="header">
         <div class="header-container">
             <a href="index.html" class="logo logo-elegant">GRACEXPRESS |</a>
             <div class="header-center">
-                <h1 class="header-title">ACERVO TÊXTIL DIGITAL</h1>
-                <span class="header-subtitle">Biblioteca de Pesquisa</span>
+                <h1 class="header-title" data-i18n="headerTitleText">ACERVO TÊXTIL DIGITAL</h1>
+                <span class="header-subtitle" data-i18n="headerSubtitleText">Biblioteca de Pesquisa</span>
             </div>
-            <nav class="main-nav">
+            <nav class="main-nav" id="mainNav">
                 <a href="sobre.html" class="nav-link" data-i18n="about">Sobre</a>
                 <a href="portfolio.html" class="nav-link" data-i18n="portfolio">Portfólio</a>
                 <a href="contato.html" class="nav-link active" data-i18n="contact">Contato</a>
             </nav>
-            <!-- Mobile Menu Button -->
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 12h18M3 6h18M3 18h18" />
                 </svg>
             </button>
         </div>
-        <!-- Mobile Navigation Overlay -->
         <div class="mobile-nav-overlay" id="mobileNavOverlay">
             <nav class="mobile-nav">
                 <a href="index.html" class="mobile-nav-link" data-i18n="home">Início</a>
                 <a href="sobre.html" class="mobile-nav-link" data-i18n="about">Sobre</a>
                 <a href="portfolio.html" class="mobile-nav-link" data-i18n="portfolio">Portfólio</a>
-                <a href="contato.html" class="mobile-nav-link" data-i18n="contact">Contato</a>
+                <a href="contato.html" class="mobile-nav-link active" data-i18n="contact">Contato</a>
             </nav>
         </div>
     </header>
 
-    <div class="contact-page-wrapper">
-        <div class="contact-content">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h2 data-i18n="contactTitle">Fale Conosco</h2>
-                    <p data-i18n="contactDesc">Tem alguma dúvida sobre tecidos ou quer saber mais sobre nosso trabalho?
-                        Entre em contato através
-                        de
-                        um dos canais abaixo.</p>
+    <main class="spacex-page-wrapper" style="background: #ffffff; padding-top: 60px;">
 
-                    <a href="mailto:gracexpressbr@gmail.com" class="contact-item contact-link">
-                        <span class="contact-item-icon">📧</span>
-                        <div class="contact-item-text">
-                            <h4 data-i18n="emailLabel">E-mail</h4>
-                            <p>gracexpressbr@gmail.com</p>
-                        </div>
-                    </a>
+        <!-- GRID DE CONTATO -->
+        <section class="contact-grid-nike"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; padding: 0 24px 30px;">
 
-                    <a href="https://wa.me/5511978577389" target="_blank" class="contact-item contact-link">
-                        <span class="contact-item-icon">📱</span>
-                        <div class="contact-item-text">
-                            <h4 data-i18n="whatsappLabel">WhatsApp</h4>
-                            <p>+55 11 97857-7389</p>
-                        </div>
-                    </a>
+            <!-- ESQUERDA: INFOS -->
+            <div class="contact-info-col">
+                <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: 700; color: #000;">Fale Conosco</h2>
+                <p class="nike-subtitle"
+                    style="font-size: 1rem; line-height: 1.5; font-weight: 500; margin-bottom: 40px; color: #333;">
+                    Tem alguma dúvida sobre tecidos ou quer saber mais sobre nosso trabalho? Entre em contato através de
+                    um dos canais abaixo.
+                </p>
 
-                    <a href="https://maps.google.com/?q=São+Paulo,+Brasil" target="_blank"
-                        class="contact-item contact-link">
-                        <span class="contact-item-icon">📍</span>
-                        <div class="contact-item-text">
-                            <h4 data-i18n="locationLabel">Localização</h4>
-                            <p data-i18n="locationValue">São Paulo, Brasil</p>
-                        </div>
-                    </a>
-
-                    <a href="https://instagram.com/gracexpressbr" target="_blank" class="contact-item contact-link">
-                        <span class="contact-item-icon">📸</span>
-                        <div class="contact-item-text">
-                            <h4 data-i18n="instagramLabel">Instagram</h4>
-                            <p>@gracexpressbr</p>
-                        </div>
+                <!-- EMAIL COMERCIAL -->
+                <div class="contact-info-block" style="margin-bottom: 30px;">
+                    <span class="contact-label-tech"
+                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;">EMAIL
+                        COMERCIAL</span>
+                    <a href="mailto:gracexpressbr@gmail.com"
+                        style="font-size: 1.25rem; font-weight: 700; color: #000; text-decoration: none; line-height: 1.2;">
+                        gracexpressbr@<br>gmail.com
                     </a>
                 </div>
 
-                <div class="contact-form">
-                    <h3 data-i18n="formTitle">Envie uma mensagem</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="name" data-i18n="nameLabel">Nome</label>
-                            <input type="text" id="name" placeholder="Seu nome" data-i18n-placeholder="namePlaceholder">
-                        </div>
-                        <div class="form-group">
-                            <label for="email" data-i18n="emailFormLabel">E-mail</label>
-                            <input type="email" id="email" placeholder="seu@email.com"
-                                data-i18n-placeholder="emailPlaceholder">
-                        </div>
-                        <div class="form-group">
-                            <label for="message" data-i18n="messageLabel">Mensagem</label>
-                            <textarea id="message" placeholder="Como podemos ajudar?"
-                                data-i18n-placeholder="messagePlaceholder"></textarea>
-                        </div>
-                        <button type="submit" class="form-submit" data-i18n="sendMessageBtn">Enviar Mensagem</button>
-                    </form>
+                <!-- WHATSAPP -->
+                <div class="contact-info-block" style="margin-bottom: 30px;">
+                    <span class="contact-label-tech"
+                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;">WHATSAPP</span>
+                    <a href="https://wa.me/5511978577389"
+                        style="font-size: 1.25rem; font-weight: 700; color: #000; text-decoration: none;">
+                        +55 11 97857-7389
+                    </a>
                 </div>
+
+                <!-- INSTAGRAM -->
+                <div class="contact-info-block" style="margin-bottom: 30px;">
+                    <span class="contact-label-tech"
+                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;">INSTAGRAM</span>
+                    <a href="https://instagram.com/gracexpressbr"
+                        style="font-size: 1.25rem; font-weight: 700; color: #000; text-decoration: none;">
+                        @gracexpressbr ↗
+                    </a>
+                </div>
+
+                <!-- LOCALIZAÇÃO -->
+                <div class="contact-info-block">
+                    <span class="contact-label-tech"
+                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;">LOCALIZAÇÃO</span>
+                    <p style="font-size: 1.25rem; font-weight: 700; color: #000; margin: 0;">São Paulo, Brasil</p>
+                </div>
+
             </div>
-        </div>
-    </div>
+
+            <!-- DIREITA: FORMULÁRIO -->
+            <div class="contact-form-col">
+                <h2
+                    style="font-size: 1.5rem; margin-bottom: 20px; font-weight: 700; color: #000; opacity: 0; visibility: hidden;">
+                    Envie</h2>
+
+                <form class="nike-form" action="#" method="POST"
+                    style="background: #f9f9f9; padding: 30px; border: 1px solid #eee;">
+                    <div style="margin-bottom: 25px;">
+                        <label class="nike-label"
+                            style="display: block; font-size: 0.7rem; font-weight: 800; color: #000; margin-bottom: 8px;">NOME
+                            COMPLETO</label>
+                        <input type="text" class="nike-input" required
+                            style="width: 100%; padding: 15px; font-size: 0.9rem; background: #fff; border: 1px solid #ddd;">
+                    </div>
+                    <div style="margin-bottom: 25px;">
+                        <label class="nike-label"
+                            style="display: block; font-size: 0.7rem; font-weight: 800; color: #000; margin-bottom: 8px;">EMAIL</label>
+                        <input type="email" class="nike-input" required
+                            style="width: 100%; padding: 15px; font-size: 0.9rem; background: #fff; border: 1px solid #ddd;">
+                    </div>
+                    <div style="margin-bottom: 25px;">
+                        <label class="nike-label"
+                            style="display: block; font-size: 0.7rem; font-weight: 800; color: #000; margin-bottom: 8px;">MENSAGEM</label>
+                        <textarea class="nike-textarea" required
+                            style="width: 100%; padding: 15px; font-size: 0.9rem; background: #fff; border: 1px solid #ddd; min-height: 120px;"></textarea>
+                    </div>
+                    <button type="submit" class="nike-submit-btn"
+                        style="width: 100%; padding: 15px; font-size: 0.9rem; background: #000; color: #fff; border: none; font-weight: 700; cursor: pointer;">ENVIAR
+                        MENSAGEM</button>
+                </form>
+            </div>
+
+        </section>
+
+        <!-- SEÇÃO CANAIS OFICIAIS (LEVANTADA) -->
+        <section class="official-stores-section"
+            style="border-top: 1px solid #eee; padding: 30px 24px 60px; text-align: center; max-width: 1200px; margin: 0 auto 40px;">
+            <h3
+                style="font-size: 1rem; letter-spacing: 0.1em; color: #000; font-weight: 800; margin-bottom: 30px; text-transform: uppercase;">
+                CANAIS OFICIAIS</h3>
+
+            <div class="stores-grid-centered"
+                style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+
+                <!-- MERCADO LIVRE -->
+                <a href="#" class="store-card ml"
+                    style="width: 140px; height: 90px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;">
+                    <div class="store-content" style="text-align: center;">
+                        <span class="store-name"
+                            style="font-weight: 800; font-size: 0.8rem; line-height: 1;">MERCADO<br>LIVRE</span>
+                    </div>
+                    <span style="position: absolute; top: 5px; right: 5px; font-size: 0.7rem;">↗</span>
+                </a>
+
+                <!-- SHEIN -->
+                <a href="#" class="store-card shein"
+                    style="width: 140px; height: 90px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;">
+                    <div class="store-content" style="text-align: center;">
+                        <span class="store-name" style="font-weight: 800; font-size: 0.8rem;">SHEIN</span>
+                    </div>
+                    <span style="position: absolute; top: 5px; right: 5px; font-size: 0.7rem;">↗</span>
+                </a>
+
+                <!-- TEMU -->
+                <a href="#" class="store-card temu"
+                    style="width: 140px; height: 90px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;">
+                    <div class="store-content" style="text-align: center;">
+                        <span class="store-name" style="font-weight: 800; font-size: 0.8rem;">TEMU</span>
+                    </div>
+                    <span style="position: absolute; top: 5px; right: 5px; font-size: 0.7rem;">↗</span>
+                </a>
+
+                <!-- SHOPEE -->
+                <a href="#" class="store-card shopee"
+                    style="width: 140px; height: 90px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;">
+                    <div class="store-content" style="text-align: center;">
+                        <span class="store-name" style="font-weight: 800; font-size: 0.8rem;">SHOPEE</span>
+                    </div>
+                    <span style="position: absolute; top: 5px; right: 5px; font-size: 0.7rem;">↗</span>
+                </a>
+
+                <!-- TIKTOK -->
+                <a href="#" class="store-card tiktok"
+                    style="width: 140px; height: 90px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;">
+                    <div class="store-content" style="text-align: center;">
+                        <span class="store-name"
+                            style="font-weight: 800; font-size: 0.8rem; line-height: 1;">TIKTOK<br>SHOP</span>
+                    </div>
+                    <span style="position: absolute; top: 5px; right: 5px; font-size: 0.7rem;">↗</span>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
 
     <footer class="footer">
         <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <h3>GraceXpress</h3>
+                    <p data-i18n="footerBrand">Sua referência em tecidos para moda e confecção.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4 data-i18n="navigation">Navegação</h4>
+                        <a href="portfolio.html" data-i18n="portfolio">Portfólio</a>
+                        <a href="sobre.html" data-i18n="about">Sobre</a>
+                        <a href="contato.html" data-i18n="contact">Contato</a>
+                    </div>
+                </div>
+            </div>
             <div class="footer-bottom">
-                <p>© 2024 GraceXpress. Todos os direitos reservados.</p>
+                <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
                 <div class="footer-controls">
                     <div class="lang-selector footer-lang">
                         <select id="langSelect" aria-label="Idioma">
@@ -395,103 +231,17 @@
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                         </svg>
                     </button>
-                    <!-- Admin Link (Dedicated Contact Trigger) -->
-                    <span role="button" tabindex="0" onclick="forceOpenAdmin(event)"
-                        style="color: inherit; opacity: 0.8; font-size: 13px; margin-left: 15px; font-weight: 700; text-transform: uppercase; cursor: pointer; position: relative; z-index: 2147483647; padding: 15px; display: inline-block; user-select: none; border-bottom: 2px solid transparent;"
-                        onmouseover="this.style.opacity='1'; this.style.borderBottomColor='currentColor'"
-                        onmouseout="this.style.opacity='0.8'; this.style.borderBottomColor='transparent'">
-                        Admin
-                    </span>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Emergency Admin Trigger Script -->
+    <script src="js/i18n/i18n.js"></script>
+    <script src="script.js"></script>
     <script>
-        function forceOpenAdmin(e) {
-            if (e) e.preventDefault();
-            console.log('Force opening admin modal...');
-            const modal = document.getElementById('adminLoginModal');
-            if (modal) {
-                // Remove any state that might hide it
-                modal.style.display = 'flex';
-                modal.style.visibility = 'visible';
-                modal.style.opacity = '1';
-                modal.style.pointerEvents = 'all';
-                modal.classList.add('active');
-
-                // Focus email input
-                setTimeout(() => {
-                    const emailInput = document.getElementById('adminEmail');
-                    if (emailInput) emailInput.focus();
-                }, 100);
-            } else {
-                alert('Erro crítico: Modal de login não encontrado. Recarregue a página.');
-            }
-        }
-    </script>
-
-    <!-- Admin Login Modal -->
-    <div id="adminLoginModal" class="admin-modal" onclick="if(event.target === this) closeAdminLogin()">
-        <div class="admin-modal-content" onclick="event.stopPropagation()">
-            <span class="admin-close" onclick="closeAdminLogin()">&times;</span>
-            <h3>Acesso Administrativo</h3>
-            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="adminEmail" required placeholder="seu-email@exemplo.com">
-                </div>
-                <div class="form-group">
-                    <label>Senha</label>
-                    <input type="password" id="adminPassword" required placeholder="Sua senha">
-                </div>
-                <button type="submit" class="admin-btn">Entrar</button>
-                <a href="#" class="admin-forgot" onclick="resetAdminPassword()">Esqueci minha senha</a>
-            </form>
-        </div>
-    </div>
-
-    <!-- Scripts needed for Admin Login -->
-    <!-- Scripts needed for Admin Login -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <script src="js/supabase-config.js"></script>
-    <script src="js/auth-service.js"></script>
-    <script src="translations.js"></script>
-    <script src="media-manager.js?v=2"></script>
-
-    <script>
-        // Footer Admin Link Injection
-        document.addEventListener('DOMContentLoaded', () => {
-            // Footer Admin Link Injection removed - already in static HTML
-            const copyrightDiv = document.querySelector('.copyright');
-            if (copyrightDiv) {
-                // ...
-            }
-        });
-
-        const themeToggle = document.getElementById('themeToggle');
-        if (localStorage.getItem('theme') === 'dark') document.body.dataset.theme = 'dark';
-        themeToggle?.addEventListener('click', () => {
-            const isDark = document.body.dataset.theme === 'dark';
-            document.body.dataset.theme = isDark ? '' : 'dark';
-            localStorage.setItem('theme', isDark ? 'light' : 'dark');
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
-
-        function toggleMobileMenu() {
-            mobileNavOverlay?.classList.toggle('active');
-            const isOpen = mobileNavOverlay?.classList.contains('active');
-            mobileMenuBtn.innerHTML = isOpen ?
-                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>' :
-                '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
-        }
-
-        mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+        const btn = document.getElementById('mobileMenuBtn');
+        const overlay = document.getElementById('mobileNavOverlay');
+        if (btn && overlay) { btn.addEventListener('click', () => overlay.classList.toggle('active')); }
     </script>
 </body>
 
