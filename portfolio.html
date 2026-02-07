@@ -563,47 +563,6 @@
 
     <!-- Duplicate Video Modal Removed -->
 
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-main">
-                <div class="footer-brand">
-                    <h3>GraceXpress</h3>
-                    <p data-i18n="footerBrand">Sua referência em tecidos para moda e confecção.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-col">
-                        <h4 data-i18n="navigation">Navegação</h4>
-                        <a href="portfolio.html" data-i18n="portfolio">Portfólio</a>
-                        <a href="sobre.html" data-i18n="about">Sobre</a>
-                        <a href="contato.html" data-i18n="contact">Contato</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
-                <div class="footer-controls">
-                    <div class="lang-selector footer-lang">
-                        <select id="langSelect" aria-label="Idioma">
-                            <option value="pt">PT</option>
-                            <option value="en">EN</option>
-                        </select>
-                    </div>
-                    <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
-                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="5" />
-                            <path
-                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                        </svg>
-                        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <!-- Admin Login Modal -->
     <div id="adminLoginModal" class="admin-modal" onclick="if(event.target === this) closeAdminLogin()">
@@ -809,44 +768,56 @@
 
     </main>
 
-    <!-- Floating Buy Button -->
+
+    <!-- FOOTER ÚNICO -->
+    <!-- Floating Buy Button (Restored) -->
     <button id="floatingBuyBtn" class="floating-buy-pill"
         onclick="document.getElementById('officialStores').scrollIntoView({behavior: 'smooth'})">
         COMPRE AQUI
         <span style="margin-left:8px">↘</span>
     </button>
-    <div class="footer-container">
-        <div class="footer-bottom">
-            <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
-            <div class="footer-controls">
-                <div class="lang-selector footer-lang">
-                    <select id="langSelect" aria-label="Idioma">
-                        <option value="pt">PT</option>
-                        <option value="en">EN</option>
-                    </select>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <h3>GraceXpress</h3>
+                    <p data-i18n="footerBrand">Sua referência em tecidos para moda e confecção.</p>
                 </div>
-                <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
-                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <circle cx="12" cy="12" r="5" />
-                        <path
-                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-                    </svg>
-                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                    </svg>
-                </button>
-                <!-- Admin Link Removed -->
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4 data-i18n="navigation">Navegação</h4>
+                        <a href="portfolio.html" data-i18n="portfolio">Portfólio</a>
+                        <a href="sobre.html" data-i18n="about">Sobre</a>
+                        <a href="contato.html" data-i18n="contact">Contato</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="rights">© 2024 GraceXpress. Todos os direitos reservados.</p>
+                <div class="footer-controls">
+                    <div class="lang-selector footer-lang">
+                        <select id="langSelect" aria-label="Idioma">
+                            <option value="pt">PT</option>
+                            <option value="en">EN</option>
+                        </select>
+                    </div>
+                    <button class="theme-toggle footer-theme" id="themeToggle" aria-label="Alternar tema">
+                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <path
+                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                        </svg>
+                        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    </button>
+                    <!-- Admin Link Removed -->
+                </div>
             </div>
         </div>
-        </footer>
-
-
-        <!-- Fixed Admin Floating Button (Bottom Right) -->
-
-    </div>
-    </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
