@@ -26,6 +26,19 @@
                 <a href="portfolio.html" class="nav-link" data-i18n="portfolio">Portfólio</a>
                 <a href="contato.html" class="nav-link active" data-i18n="contact">Contato</a>
             </nav>
+            <div class="lang-selector header-lang-floating">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                    </path>
+                </svg>
+                <select aria-label="Idioma">
+                    <option value="pt">PT</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 12h18M3 6h18M3 18h18" />
@@ -50,9 +63,11 @@
 
             <!-- ESQUERDA: INFOS -->
             <div class="contact-info-col">
-                <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: 700; color: #000;">Fale Conosco</h2>
+                <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: 700; color: #000;"
+                    data-i18n="contactTitle">Fale Conosco</h2>
                 <p class="nike-subtitle"
-                    style="font-size: 1rem; line-height: 1.5; font-weight: 500; margin-bottom: 40px; color: #333;">
+                    style="font-size: 1rem; line-height: 1.5; font-weight: 500; margin-bottom: 40px; color: #333;"
+                    data-i18n="contactDesc">
                     Tem alguma dúvida sobre tecidos ou quer saber mais sobre nosso trabalho? Entre em contato através de
                     um dos canais abaixo.
                 </p>
@@ -60,7 +75,8 @@
                 <!-- EMAIL COMERCIAL -->
                 <div class="contact-info-block" style="margin-bottom: 30px;">
                     <span class="contact-label-tech"
-                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;">EMAIL
+                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;"
+                        data-i18n="contactLabelEmail">EMAIL
                         COMERCIAL</span>
                     <a href="mailto:gracexpressbr@gmail.com"
                         style="font-size: 1.25rem; font-weight: 700; color: #000; text-decoration: none; line-height: 1.2;">
@@ -71,7 +87,8 @@
                 <!-- WHATSAPP -->
                 <div class="contact-info-block" style="margin-bottom: 30px;">
                     <span class="contact-label-tech"
-                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;">WHATSAPP</span>
+                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;"
+                        data-i18n="contactLabelWhatsapp">WHATSAPP</span>
                     <a href="https://wa.me/5511978577389"
                         style="font-size: 1.25rem; font-weight: 700; color: #000; text-decoration: none;">
                         +55 11 97857-7389
@@ -81,7 +98,8 @@
                 <!-- INSTAGRAM -->
                 <div class="contact-info-block" style="margin-bottom: 30px;">
                     <span class="contact-label-tech"
-                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;">INSTAGRAM</span>
+                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;"
+                        data-i18n="contactLabelInstagram">INSTAGRAM</span>
                     <a href="https://instagram.com/gracexpressbr"
                         style="font-size: 1.25rem; font-weight: 700; color: #000; text-decoration: none;">
                         @gracexpressbr ↗
@@ -91,8 +109,10 @@
                 <!-- LOCALIZAÇÃO -->
                 <div class="contact-info-block">
                     <span class="contact-label-tech"
-                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;">LOCALIZAÇÃO</span>
-                    <p style="font-size: 1.25rem; font-weight: 700; color: #000; margin: 0;">São Paulo, Brasil</p>
+                        style="display: block; font-size: 0.75rem; letter-spacing: 0.1em; color: #888; font-weight: 700; margin-bottom: 5px;"
+                        data-i18n="contactLabelLocation">LOCALIZAÇÃO</span>
+                    <p style="font-size: 1.25rem; font-weight: 700; color: #000; margin: 0;"
+                        data-i18n="contactLocationValue">São Paulo, Brasil</p>
                 </div>
 
             </div>
@@ -107,25 +127,29 @@
                     style="background: #f9f9f9; padding: 30px; border: 1px solid #eee;">
                     <div style="margin-bottom: 25px;">
                         <label class="nike-label"
-                            style="display: block; font-size: 0.7rem; font-weight: 800; color: #000; margin-bottom: 8px;">NOME
+                            style="display: block; font-size: 0.7rem; font-weight: 800; color: #000; margin-bottom: 8px;"
+                            data-i18n="formName">NOME
                             COMPLETO</label>
                         <input type="text" class="nike-input" required
                             style="width: 100%; padding: 15px; font-size: 0.9rem; background: #fff; border: 1px solid #ddd;">
                     </div>
                     <div style="margin-bottom: 25px;">
                         <label class="nike-label"
-                            style="display: block; font-size: 0.7rem; font-weight: 800; color: #000; margin-bottom: 8px;">EMAIL</label>
+                            style="display: block; font-size: 0.7rem; font-weight: 800; color: #000; margin-bottom: 8px;"
+                            data-i18n="formEmail">EMAIL</label>
                         <input type="email" class="nike-input" required
                             style="width: 100%; padding: 15px; font-size: 0.9rem; background: #fff; border: 1px solid #ddd;">
                     </div>
                     <div style="margin-bottom: 25px;">
                         <label class="nike-label"
-                            style="display: block; font-size: 0.7rem; font-weight: 800; color: #000; margin-bottom: 8px;">MENSAGEM</label>
+                            style="display: block; font-size: 0.7rem; font-weight: 800; color: #000; margin-bottom: 8px;"
+                            data-i18n="formMessage">MENSAGEM</label>
                         <textarea class="nike-textarea" required
                             style="width: 100%; padding: 15px; font-size: 0.9rem; background: #fff; border: 1px solid #ddd; min-height: 120px;"></textarea>
                     </div>
                     <button type="submit" class="nike-submit-btn"
-                        style="width: 100%; padding: 15px; font-size: 0.9rem; background: #000; color: #fff; border: none; font-weight: 700; cursor: pointer;">ENVIAR
+                        style="width: 100%; padding: 15px; font-size: 0.9rem; background: #000; color: #fff; border: none; font-weight: 700; cursor: pointer;"
+                        data-i18n="formSubmit">ENVIAR
                         MENSAGEM</button>
                 </form>
             </div>
@@ -135,9 +159,8 @@
         <!-- SEÇÃO CANAIS OFICIAIS (LEVANTADA) -->
         <section class="official-stores-section"
             style="border-top: 1px solid #eee; padding: 30px 24px 60px; text-align: center; max-width: 1200px; margin: 0 auto 40px;">
-            <h3
-                style="font-size: 1rem; letter-spacing: 0.1em; color: #000; font-weight: 800; margin-bottom: 30px; text-transform: uppercase;">
-                CANAIS OFICIAIS</h3>
+            <h3 style="font-size: 1rem; letter-spacing: 0.1em; color: #000; font-weight: 800; margin-bottom: 30px; text-transform: uppercase;"
+                data-i18n="officialChannelsShort">CANAIS OFICIAIS</h3>
 
             <div class="stores-grid-centered"
                 style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
@@ -326,6 +349,7 @@
             }
         }
     </script>
+    <script src="translations.js"></script>
 </body>
 
 </html>

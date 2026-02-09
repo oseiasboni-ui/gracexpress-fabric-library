@@ -6,8 +6,9 @@
 (function () {
     'use strict';
 
-    const SLIDE_INTERVAL = 5000; // 5 seconds (reduced for better visibility)
-    const SUBTITLE_INTERVAL = 3500; // 3.5 seconds for subtitles
+    const SLIDE_INTERVAL = 5000;
+    const FIRST_SLIDE_INTERVAL = 10000; // 10 seconds for first slide
+    const SUBTITLE_INTERVAL = 3500;
 
     let currentSlide = 0;
     let currentSubtitle = 0;
@@ -110,12 +111,18 @@
 
     function startAutoSlide() {
         if (slideInterval) return;
-        slideInterval = setInterval(nextSlide, SLIDE_INTERVAL);
+
+        // Variable duration: 10s for first slide (index 0), 5s for others
+        const delay = (currentSlide === 0) ? FIRST_SLIDE_INTERVAL : SLIDE_INTERVAL;
+
+        slideInterval = setTimeout(() => {
+            nextSlide();
+        }, delay);
     }
 
     function stopAutoSlide() {
         if (slideInterval) {
-            clearInterval(slideInterval);
+            clearTimeout(slideInterval);
             slideInterval = null;
         }
     }

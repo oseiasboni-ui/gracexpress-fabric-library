@@ -27,6 +27,19 @@
                 <a href="portfolio.html" class="nav-link" data-i18n="portfolio">Portfólio</a>
                 <a href="contato.html" class="nav-link" data-i18n="contact">Contato</a>
             </nav>
+            <div class="lang-selector header-lang-floating">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                    </path>
+                </svg>
+                <select aria-label="Idioma">
+                    <option value="pt">PT</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
             <!-- Mobile Menu Button -->
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -50,21 +63,23 @@
             <div class="spacex-hero-overlay"></div>
             <div class="spacex-hero-content">
                 <h1 class="spacex-title fade-in-up">GRACEXPRESS</h1>
-                <h2 class="spacex-subtitle slide-in-short" style="transition-delay: 0.2s;">THE DIGITAL TEXTILE AUTHORITY
+                <h2 class="spacex-subtitle slide-in-short" style="transition-delay: 0.2s;" data-i18n="aboutSubtitle">THE
+                    DIGITAL TEXTILE AUTHORITY
                 </h2>
                 <div class="spacex-divider reveal-width" style="transition-delay: 0.3s;"></div>
-                <p class="spacex-tagline slide-in-short" style="transition-delay: 0.4s;">Where Creative Vision Meets
+                <p class="spacex-tagline slide-in-short" style="transition-delay: 0.4s;" data-i18n="aboutTagline">Where
+                    Creative Vision Meets
                     Material Reality</p>
             </div>
         </section>
 
         <!-- Intro Section -->
         <div class="spacex-container">
-            <p class="spacex-lead slide-in-long">
+            <p class="spacex-lead slide-in-long" data-i18n="aboutLead">
                 In the delicate space between the warp of history and the weft of innovation, GraceXpress exists as
                 the definitive bridge. We do not just list fabrics; we curate the tactile universe.
             </p>
-            <p class="spacex-text slide-in-short" style="transition-delay: 0.2s;">
+            <p class="spacex-text slide-in-short" style="transition-delay: 0.2s;" data-i18n="aboutText1">
                 Founded on the principle that true sartorial excellence begins with a profound understanding of
                 fiber, we serve as the essential compass for designers, tailors, and fashion visionaries.
             </p>
@@ -76,8 +91,9 @@
             <div class="spacex-container">
                 <div class="spacex-grid-split slide-in-long">
                     <div class="spacex-col-text">
-                        <h3 class="spacex-heading fade-in-up">THE GRACEXPRESS ECOSYSTEM</h3>
-                        <p class="spacex-text">
+                        <h3 class="spacex-heading fade-in-up" data-i18n="aboutEcosystemTitle">THE GRACEXPRESS ECOSYSTEM
+                        </h3>
+                        <p class="spacex-text" data-i18n="aboutEcosystemText">
                             We are a Premier Digital Textile Archive and a living library of sensory knowledge. Our
                             purpose is to demystify the complexities of global textiles, allowing creators to master
                             their craft before the first cut is ever made.
@@ -90,30 +106,34 @@
         <!-- Stats Section -->
         <section class="spacex-section spacex-stats">
             <div class="spacex-container">
-                <h3 class="spacex-heading center">BY THE NUMBERS: OUR IMPACT</h3>
+                <h3 class="spacex-heading center" data-i18n="aboutStatsTitle">BY THE NUMBERS: OUR IMPACT</h3>
                 <div class="spacex-stats-grid stagger-container">
                     <div class="spacex-stat-item stagger-item">
                         <span class="spacex-stat-val count-up">120+</span>
-                        <span class="spacex-stat-label">Unique Textures</span>
-                        <p class="spacex-stat-desc">A meticulously curated digital catalog, each with its own technical
+                        <span class="spacex-stat-label" data-i18n="statTextures">Unique Textures</span>
+                        <p class="spacex-stat-desc" data-i18n="statTexturesDesc">A meticulously curated digital catalog,
+                            each with its own technical
                             biography.</p>
                     </div>
                     <div class="spacex-stat-item">
                         <span class="spacex-stat-val">3</span>
-                        <span class="spacex-stat-label">Fiber Categories</span>
-                        <p class="spacex-stat-desc">Deep-dive intelligence on Natural, Artificial, and Synthetic
+                        <span class="spacex-stat-label" data-i18n="statCategories">Fiber Categories</span>
+                        <p class="spacex-stat-desc" data-i18n="statCategoriesDesc">Deep-dive intelligence on Natural,
+                            Artificial, and Synthetic
                             compositions.</p>
                     </div>
                     <div class="spacex-stat-item">
                         <span class="spacex-stat-val">4</span>
-                        <span class="spacex-stat-label">Specialist Pillars</span>
-                        <p class="spacex-stat-desc">From high-performance technical fabrics to the world’s most elite
+                        <span class="spacex-stat-label" data-i18n="statPillars">Specialist Pillars</span>
+                        <p class="spacex-stat-desc" data-i18n="statPillarsDesc">From high-performance technical fabrics
+                            to the world’s most elite
                             luxury textiles.</p>
                     </div>
                     <div class="spacex-stat-item">
                         <span class="spacex-stat-val">1</span>
-                        <span class="spacex-stat-label">Global Connection</span>
-                        <p class="spacex-stat-desc">Bridging the gap between creative research and the industry's most
+                        <span class="spacex-stat-label" data-i18n="statGlobal">Global Connection</span>
+                        <p class="spacex-stat-desc" data-i18n="statGlobalDesc">Bridging the gap between creative
+                            research and the industry's most
                             trusted suppliers.</p>
                     </div>
                 </div>
@@ -123,27 +143,31 @@
         <!-- Empowerment Section -->
         <section class="spacex-section spacex-features">
             <div class="spacex-container">
-                <h3 class="spacex-heading center">HOW WE EMPOWER YOUR PROCESS</h3>
-                <p class="spacex-subheading center">GraceXpress isn't just a database—it's a strategic tool designed to
+                <h3 class="spacex-heading center" data-i18n="aboutEmpowerTitle">HOW WE EMPOWER YOUR PROCESS</h3>
+                <p class="spacex-subheading center" data-i18n="aboutEmpowerSub">GraceXpress isn't just a database—it's a
+                    strategic tool designed to
                     optimize your workflow.</p>
 
                 <div class="spacex-features-grid">
                     <div class="spacex-feature-card">
                         <div class="spacex-feature-icon">🔍</div>
-                        <h4 class="spacex-feature-title">Precision Research</h4>
-                        <p class="spacex-feature-desc">Eliminate the guesswork. Identify the exact structure and weight
+                        <h4 class="spacex-feature-title" data-i18n="featureResearch">Precision Research</h4>
+                        <p class="spacex-feature-desc" data-i18n="featureResearchDesc">Eliminate the guesswork. Identify
+                            the exact structure and weight
                             required for your silhouettes.</p>
                     </div>
                     <div class="spacex-feature-card">
                         <div class="spacex-feature-icon">✨</div>
-                        <h4 class="spacex-feature-title">Sensory Guidance</h4>
-                        <p class="spacex-feature-desc">Understand the drape, breathability, and performance of malhas
+                        <h4 class="spacex-feature-title" data-i18n="featureSensory">Sensory Guidance</h4>
+                        <p class="spacex-feature-desc" data-i18n="featureSensoryDesc">Understand the drape,
+                            breathability, and performance of malhas
                             and flat-weaves before sourcing.</p>
                     </div>
                     <div class="spacex-feature-card">
                         <div class="spacex-feature-icon">🚀</div>
-                        <h4 class="spacex-feature-title">Seamless Transition</h4>
-                        <p class="spacex-feature-desc">Connect directly to verified online stores, moving from
+                        <h4 class="spacex-feature-title" data-i18n="featureTransition">Seamless Transition</h4>
+                        <p class="spacex-feature-desc" data-i18n="featureTransitionDesc">Connect directly to verified
+                            online stores, moving from
                             inspiration to acquisition in a single click.</p>
                     </div>
                 </div>
@@ -154,8 +178,9 @@
         <section class="spacex-section spacex-integrity">
             <div class="spacex-container">
                 <div class="spacex-integrity-box">
-                    <h4 class="spacex-integrity-title">Note on Integrity</h4>
-                    <p class="spacex-integrity-text">GraceXpress is a hub of knowledge and connection. We curate and
+                    <h4 class="spacex-integrity-title" data-i18n="integrityTitle">Note on Integrity</h4>
+                    <p class="spacex-integrity-text" data-i18n="integrityText">GraceXpress is a hub of knowledge and
+                        connection. We curate and
                         archive the world's finest textiles; we do not manufacture them. We provide the map; you create
                         the destination.</p>
                 </div>
@@ -165,14 +190,16 @@
         <!-- CTA / Footer Info -->
         <section class="spacex-section spacex-cta">
             <div class="spacex-container center">
-                <h3 class="spacex-heading big">JOIN THE ARCHIVE</h3>
-                <p class="spacex-text max-600">Whether you are developing a luxury collection or searching for
+                <h3 class="spacex-heading big" data-i18n="ctaJoin">JOIN THE ARCHIVE</h3>
+                <p class="spacex-text max-600" data-i18n="ctaJoinText">Whether you are developing a luxury collection or
+                    searching for
                     high-performance activewear, the right material is waiting in our files.</p>
 
                 <div class="spacex-contact-grid">
                     <div class="spacex-contact-item">
-                        <span class="spacex-contact-label">Partner With Us</span>
-                        <span class="spacex-contact-val">Elevate your brand or showcase your textile manufacturing
+                        <span class="spacex-contact-label" data-i18n="ctaPartner">Partner With Us</span>
+                        <span class="spacex-contact-val" data-i18n="ctaPartnerDesc">Elevate your brand or showcase your
+                            textile manufacturing
                             within our elite directory.</span>
                     </div>
                     <div class="spacex-contact-item">
@@ -180,8 +207,9 @@
                         <a href="mailto:oseiasboni@gmail.com" class="spacex-contact-link">oseiasboni@gmail.com</a>
                     </div>
                     <div class="spacex-contact-item">
-                        <span class="spacex-contact-label">Advertising</span>
-                        <span class="spacex-contact-val">Opportunities available for premier textile suppliers.</span>
+                        <span class="spacex-contact-label" data-i18n="ctaAd">Advertising</span>
+                        <span class="spacex-contact-val" data-i18n="ctaAdDesc">Opportunities available for premier
+                            textile suppliers.</span>
                     </div>
                 </div>
             </div>

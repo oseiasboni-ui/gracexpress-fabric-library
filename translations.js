@@ -112,6 +112,57 @@ const translations = {
         aboutP1: "Entre o urdume da história e a trama da inovação, floresceu a GraceXpress. Fundada sob o pilar da paixão, dedicamo-nos a mapear o vasto universo tátil que veste a humanidade.",
         aboutP2: "Nossa busca é iluminar os caminhos da criação. Queremos que o designer, o alfaiate e o amante da moda compreendam profundamente o que tocam. Pois sabemos: a verdadeira excelência de uma peça nasce na escolha sábia de sua essência.",
         aboutP3: "Somos uma biblioteca viva de texturas. Devolvemos ao mundo o conhecimento de mais de 120 materiais distintos, cada um com sua biografia singular. Porque entender o tecido é o primeiro passo para transformar o simples ato de vestir em pura arte.",
+        // SpaceX About
+        aboutSubtitle: "A AUTORIDADE TÊXTIL DIGITAL",
+        aboutTagline: "Onde a Visão Criativa Encontra a Realidade Material",
+        aboutLead: "No espaço delicado entre a trama da história e a teia da inovação, a GraceXpress existe como a ponte definitiva. Não apenas listamos tecidos; curamos o universo tátil.",
+        aboutText1: "Fundada no princípio de que a verdadeira excelência no vestuário começa com uma compreensão profunda da fibra, servimos como a bússola essencial para designers, alfaiates e visionários da moda.",
+        aboutEcosystemTitle: "O ECOSSISTEMA GRACEXPRESS",
+        aboutEcosystemText: "Somos um Arquivo Têxtil Digital Premier e uma biblioteca viva de conhecimento sensorial. Nosso propósito é desmistificar as complexidades dos têxteis globais, permitindo que criadores dominem sua arte antes mesmo do primeiro corte.",
+        aboutStatsTitle: "PELOS NÚMEROS: NOSSO IMPACTO",
+        statTextures: "Texturas Únicas",
+        statTexturesDesc: "Um catálogo digital meticulosamente curado, cada um com sua própria biografia técnica.",
+        statCategories: "Categorias de Fibras",
+        statCategoriesDesc: "Inteligência aprofundada em composições Naturais, Artificiais e Sintéticas.",
+        statPillars: "Pilares Especialistas",
+        statPillarsDesc: "De tecidos técnicos de alta performance aos têxteis de luxo mais elitizados do mundo.",
+        statGlobal: "Conexão Global",
+        statGlobalDesc: "Unindo a pesquisa criativa aos fornecedores mais confiáveis da indústria.",
+        aboutEmpowerTitle: "COMO POTENCIALIZAMOS SEU PROCESSO",
+        aboutEmpowerSub: "GraceXpress não é apenas um banco de dados — é uma ferramenta estratégica projetada para otimizar seu fluxo de trabalho.",
+        featureResearch: "Pesquisa de Precisão",
+        featureResearchDesc: "Elimine as suposições. Identifique a estrutura e gramatura exatas necessárias para suas silhuetas.",
+        featureSensory: "Orientação Sensorial",
+        featureSensoryDesc: "Entenda o caimento, respirabilidade e desempenho de malhas e tecidos planos antes de comprar.",
+        featureTransition: "Transição Perfeita",
+        featureTransitionDesc: "Conecte-se diretamente a lojas online verificadas, indo da inspiração à aquisição em um clique.",
+        integrityTitle: "Nota sobre Integridade",
+        integrityText: "GraceXpress é um hub de conhecimento e conexão. Curamos e arquivamos os melhores têxteis do mundo; não os fabricamos. Nós fornecemos o mapa; você cria o destino.",
+        ctaJoin: "JUNTE-SE AO ARQUIVO",
+        ctaJoinText: "Seja desenvolvendo uma coleção de luxo ou buscando activewear de alta performance, o material certo espera em nossos arquivos.",
+        ctaPartner: "Seja Nosso Parceiro",
+        ctaPartnerDesc: "Eleve sua marca ou mostre sua manufatura têxtil em nosso diretório de elite.",
+        ctaAd: "Publicidade",
+        ctaAdDesc: "Oportunidades disponíveis para fornecedores têxteis premier.",
+        // Portfolio Page
+        portfolioPageTitle: "PORTFÓLIO",
+        visualArchive: "ACERVO VISUAL",
+        officialChannels: "CANAIS DE DISTRIBUIÇÃO OFICIAIS",
+        officialChannelsShort: "CANAIS OFICIAIS",
+        shopOfficial: "COMPRE CONOSCO NO SITE OFICIAL",
+        detailsBtn: "Ver Detalhes",
+        // Contact Page
+        contactTitle: "Fale Conosco",
+        contactDesc: "Tem alguma dúvida sobre tecidos ou quer saber mais sobre nosso trabalho? Entre em contato através de um dos canais abaixo.",
+        contactLabelEmail: "EMAIL COMERCIAL",
+        contactLabelWhatsapp: "WHATSAPP",
+        contactLabelInstagram: "INSTAGRAM",
+        contactLabelLocation: "LOCALIZAÇÃO",
+        contactLocationValue: "São Paulo, Brasil",
+        formName: "NOME COMPLETO",
+        formEmail: "EMAIL",
+        formMessage: "MENSAGEM",
+        formSubmit: "ENVIAR MENSAGEM",
         // Admin & Modals
         adminTitle: "Acesso Administrativo",
         email: "Email",
@@ -134,10 +185,9 @@ const translations = {
         noFabricsTitle: "Nenhum tecido encontrado",
         noFabricsMsg: "Tente ajustar sua busca ou selecionar outra categoria.",
         viewAllFabrics: "Ver todos os tecidos",
-        rotatingPhrase1: "Uma jornada sensorial pela essência do vestuário",
-        rotatingPhrase2: "Explore texturas que dão vida ao movimento",
-        rotatingPhrase3: "Descubra a origem nobre e a pureza de cada fibra selecionada",
-        rotatingPhrase4: "Sinta a suavidade de tramas que abraçam",
+        rotatingPhrase1: "Onde os tecidos se tornam moda",
+        rotatingPhrase2: "Um acervo têxtil completo para criação de moda",
+        rotatingPhrase3: "Do tecido à moda — tudo em um catálogo",
         // Ad Bar
         ad1: "Anuncie Sua Marca Aqui",
         ad2: "Alcance Clientes Premium",
@@ -255,6 +305,57 @@ const translations = {
         aboutP1: "Between the warp of history and the weft of innovation, GraceXpress blossomed. Founded on the pillar of passion, we dedicate ourselves to mapping the vast tactile universe that clothes humanity.",
         aboutP2: "Our quest is to illuminate the paths of creation. We want the designer, the tailor, and the fashion lover to deeply understand what they touch. For we know: the true excellence of a piece is born in the wise choice of its essence.",
         aboutP3: "We are a living library of textures. We return to the world the knowledge of over 120 distinct materials, each with its singular biography. Because understanding fabric is the first step to transforming the simple act of dressing into pure art.",
+        // SpaceX About
+        aboutSubtitle: "THE DIGITAL TEXTILE AUTHORITY",
+        aboutTagline: "Where Creative Vision Meets Material Reality",
+        aboutLead: "In the delicate space between the warp of history and the weft of innovation, GraceXpress exists as the definitive bridge. We do not just list fabrics; we curate the tactile universe.",
+        aboutText1: "Founded on the principle that true sartorial excellence begins with a profound understanding of fiber, we serve as the essential compass for designers, tailors, and fashion visionaries.",
+        aboutEcosystemTitle: "THE GRACEXPRESS ECOSYSTEM",
+        aboutEcosystemText: "We are a Premier Digital Textile Archive and a living library of sensory knowledge. Our purpose is to demystify the complexities of global textiles, allowing creators to master their craft before the first cut is ever made.",
+        aboutStatsTitle: "BY THE NUMBERS: OUR IMPACT",
+        statTextures: "Unique Textures",
+        statTexturesDesc: "A meticulously curated digital catalog, each with its own technical biography.",
+        statCategories: "Fiber Categories",
+        statCategoriesDesc: "Deep-dive intelligence on Natural, Artificial, and Synthetic compositions.",
+        statPillars: "Specialist Pillars",
+        statPillarsDesc: "From high-performance technical fabrics to the world's most elite luxury textiles.",
+        statGlobal: "Global Connection",
+        statGlobalDesc: "Bridging the gap between creative research and the industry's most trusted suppliers.",
+        aboutEmpowerTitle: "HOW WE EMPOWER YOUR PROCESS",
+        aboutEmpowerSub: "GraceXpress isn't just a database—it's a strategic tool designed to optimize your workflow.",
+        featureResearch: "Precision Research",
+        featureResearchDesc: "Eliminate the guesswork. Identify the exact structure and weight required for your silhouettes.",
+        featureSensory: "Sensory Guidance",
+        featureSensoryDesc: "Understand the drape, breathability, and performance of malhas and flat-weaves before sourcing.",
+        featureTransition: "Seamless Transition",
+        featureTransitionDesc: "Connect directly to verified online stores, moving from inspiration to acquisition in a single click.",
+        integrityTitle: "Note on Integrity",
+        integrityText: "GraceXpress is a hub of knowledge and connection. We curate and archive the world's finest textiles; we do not manufacture them. We provide the map; you create the destination.",
+        ctaJoin: "JOIN THE ARCHIVE",
+        ctaJoinText: "Whether you are developing a luxury collection or searching for high-performance activewear, the right material is waiting in our files.",
+        ctaPartner: "Partner With Us",
+        ctaPartnerDesc: "Elevate your brand or showcase your textile manufacturing within our elite directory.",
+        ctaAd: "Advertising",
+        ctaAdDesc: "Opportunities available for premier textile suppliers.",
+        // Portfolio Page
+        portfolioPageTitle: "PORTFOLIO",
+        visualArchive: "VISUAL ARCHIVE",
+        officialChannels: "OFFICIAL DISTRIBUTION CHANNELS",
+        officialChannelsShort: "OFFICIAL CHANNELS",
+        shopOfficial: "SHOP WITH US ON THE OFFICIAL SITE",
+        detailsBtn: "View Details",
+        // Contact Page
+        contactTitle: "Contact Us",
+        contactDesc: "Have any questions about fabrics or want to know more about our work? Get in touch through one of the channels below.",
+        contactLabelEmail: "COMMERCIAL EMAIL",
+        contactLabelWhatsapp: "WHATSAPP",
+        contactLabelInstagram: "INSTAGRAM",
+        contactLabelLocation: "LOCATION",
+        contactLocationValue: "São Paulo, Brazil",
+        formName: "FULL NAME",
+        formEmail: "EMAIL",
+        formMessage: "MESSAGE",
+        formSubmit: "SEND MESSAGE",
         // Admin & Modals
         adminTitle: "Administrative Access",
         email: "Email",
@@ -277,10 +378,9 @@ const translations = {
         noFabricsTitle: "No fabrics found",
         noFabricsMsg: "Try adjusting your search or selecting another category.",
         viewAllFabrics: "View all fabrics",
-        rotatingPhrase1: "A sensory journey through the essence of clothing",
-        rotatingPhrase2: "Explore textures that bring life to movement",
-        rotatingPhrase3: "Discover the noble origin and purity of each selected fiber",
-        rotatingPhrase4: "Feel the softness of weaves that embrace",
+        rotatingPhrase1: "Where textiles become fashion",
+        rotatingPhrase2: "A complete textile archive designed for clothing creation",
+        rotatingPhrase3: "From fabric to fashion — all in one catalog",
         // Ad Bar
         ad1: "Advertise Your Brand Here",
         ad2: "Reach Premium Clients",
@@ -333,10 +433,18 @@ function getCurrentTranslations() {
 document.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('lang') || 'pt';
     currentLang = savedLang;
-    const langSelect = document.getElementById('langSelect');
-    if (langSelect) {
-        langSelect.value = savedLang;
-        langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
-    }
+
+    // Sync all language selectors
+    const selectors = document.querySelectorAll('.lang-selector select');
+    selectors.forEach(sel => {
+        sel.value = savedLang;
+        sel.addEventListener('change', (e) => {
+            const val = e.target.value;
+            setLanguage(val);
+            // Sync all other selectors
+            document.querySelectorAll('.lang-selector select').forEach(s => s.value = val);
+        });
+    });
+
     updatePageLanguage();
 });

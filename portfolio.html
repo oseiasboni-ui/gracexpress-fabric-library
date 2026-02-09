@@ -742,8 +742,8 @@
         <div class="header-container">
             <a href="index.html" class="logo logo-elegant">GRACEXPRESS |</a>
             <div class="header-center">
-                <h1 class="header-title">ACERVO TÊXTIL DIGITAL</h1>
-                <span class="header-subtitle">Biblioteca de Pesquisa</span>
+                <h1 class="header-title" data-i18n="headerTitleText">ACERVO TÊXTIL DIGITAL</h1>
+                <span class="header-subtitle" data-i18n="headerSubtitleText">Biblioteca de Pesquisa</span>
             </div>
             <nav class="main-nav">
                 <a href="sobre.html" class="nav-link" data-i18n="about">Sobre</a>
@@ -751,6 +751,19 @@
 
                 <a href="contato.html" class="nav-link" data-i18n="contact">Contato</a>
             </nav>
+            <div class="lang-selector header-lang-floating">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                    </path>
+                </svg>
+                <select aria-label="Idioma">
+                    <option value="pt">PT</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
             <!-- Mobile Menu Button -->
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -771,16 +784,16 @@
 
     <main class="spacex-light-wrapper">
         <section class="sx-hero">
-            <h1 class="sx-hero-title">PORTFÓLIO</h1>
+            <h1 class="sx-hero-title" data-i18n="portfolioPageTitle">PORTFÓLIO</h1>
             <div class="sx-hero-subtitle">
-                <span>ACERVO VISUAL</span>
+                <span data-i18n="visualArchive">ACERVO VISUAL</span>
                 <span>//</span>
                 <span>2026</span>
             </div>
         </section>
 
         <!-- Elegant Label -->
-        <div class="nike-tape-label">CANAIS DE DISTRIBUIÇÃO OFICIAIS</div>
+        <div class="nike-tape-label" data-i18n="officialChannels">CANAIS DE DISTRIBUIÇÃO OFICIAIS</div>
 
         <!-- High Impact Running Text (Infinity Tape) -->
         <div class="nike-running-tape slim">
@@ -1062,7 +1075,7 @@
     <!-- Official Stores Section (Nike Style Black Cards) -->
     <section class="official-stores-section" id="officialStores">
         <div class="nike-section-title centered-title">
-            <h2>COMPRE CONOSCO NO SITE OFICIAL</h2>
+            <h2 data-i18n="shopOfficial">COMPRE CONOSCO NO SITE OFICIAL</h2>
         </div>
 
         <div class="stores-grid">
@@ -1195,7 +1208,7 @@
         });
 
         // Portfolio Data Management
-        const PORTFOLIO_STORAGE_KEY = 'portfolioItems_v5'; // Updated to v5 to revert links
+        const PORTFOLIO_STORAGE_KEY = 'portfolioItems_v6'; // Updated to v6 to include EN translations
         let portfolioItems = [];
         let currentFilter = 'all';
         let currentEditIndex = null;
@@ -1204,31 +1217,37 @@
         // Default items with Nike-Style Layout
         const defaultPortfolioItems = [
             // 1. Full Width Video Banner (Impact)
-            { id: 201, type: 'video', category: 'editorial', displaySize: 'full', image: '', title: 'MOVE TO ZERO', phrase: 'O futuro do tecido é sustentável.', videoUrl: 'https://www.youtube.com/watch?v=6RPdp9U48UE' },
+            { id: 201, type: 'video', category: 'editorial', displaySize: 'full', image: '', title: 'MOVE TO ZERO', phrase: 'O futuro do tecido é sustentável.', phrase_en: 'The future of fabric is sustainable.', videoUrl: 'https://www.youtube.com/watch?v=6RPdp9U48UE' },
 
-            // 2. Section Title (Injecting as item for simplicity)
-            { id: 9991, type: 'text', displaySize: 'title', title: 'DESTAQUES DA TEMPORADA', phrase: '' },
+            // 2. Section Title
+            { id: 9991, type: 'text', displaySize: 'title', title: 'DESTAQUES DA TEMPORADA', title_en: 'SEASON HIGHLIGHTS', phrase: '' },
 
-            // 3. Two Half-Width Editorial Cards (Image + Text Inside)
-            { id: 202, type: 'photo', category: 'collection', displaySize: 'half', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&q=80', title: 'TECH FLEECE', phrase: 'Calor sem peso.' },
-            { id: 203, type: 'photo', category: 'collection', displaySize: 'half', image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=900&q=80', title: 'URBAN UTILITY', phrase: 'Pronto para a cidade.' },
+            // 3. Two Half-Width Editorial Cards
+            { id: 202, type: 'photo', category: 'collection', displaySize: 'half', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&q=80', title: 'TECH FLEECE', phrase: 'Calor sem peso.', phrase_en: 'Warmth without weight.' },
+            { id: 203, type: 'photo', category: 'collection', displaySize: 'half', image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=900&q=80', title: 'URBAN UTILITY', phrase: 'Pronto para a cidade.', phrase_en: 'Ready for the city.' },
 
             // 4. Section Title
-            { id: 9992, type: 'text', displaySize: 'title', title: 'NOVA COLEÇÃO', phrase: '' },
+            { id: 9992, type: 'text', displaySize: 'title', title: 'NOVA COLEÇÃO', title_en: 'NEW COLLECTION', phrase: '' },
 
-            // 5. Product Grid (Thirds) - Image + Text Below (Shop Style)
-            { id: 204, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&q=80', title: 'Seda Tech', phrase: 'Performance & Leveza' },
-            { id: 205, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=800&q=80', title: 'Jaqueta Pro', phrase: 'Barreira Impermeável' },
-            { id: 206, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&q=80', title: 'Malha Dry', phrase: 'Controle de Umidade' },
+            // 5. Product Grid
+            { id: 204, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&q=80', title: 'Seda Tech', phrase: 'Performance & Leveza', title_en: 'Silk Tech', phrase_en: 'Performance & Lightness' },
+            { id: 205, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=800&q=80', title: 'Jaqueta Pro', phrase: 'Barreira Impermeável', title_en: 'Pro Jacket', phrase_en: 'Waterproof Barrier' },
+            { id: 206, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&q=80', title: 'Malha Dry', phrase: 'Controle de Umidade', title_en: 'Dry Mesh', phrase_en: 'Moisture Control' },
 
-            // 6. Large Feature with Side Text (Asymmetric)
-            { id: 207, type: 'photo', category: 'editorial', displaySize: 'feature-side', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80', title: 'RUNWAY READY', phrase: 'A intersecção entre alta moda e funcionalidade esportiva.' },
+            // 6. Large Feature
+            { id: 207, type: 'photo', category: 'editorial', displaySize: 'feature-side', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80', title: 'RUNWAY READY', phrase: 'A intersecção entre alta moda e funcionalidade esportiva.', phrase_en: 'The intersection between high fashion and sportswear.' },
 
             // 7. More Products
-            { id: 208, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', title: 'Blazer X', phrase: 'Alfaiataria' },
+            { id: 208, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', title: 'Blazer X', phrase: 'Alfaiataria', phrase_en: 'Tailoring' },
             { id: 209, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80', title: 'Sport Luxe', phrase: 'Casual' },
-            { id: 210, type: 'video', category: 'video', displaySize: 'third', image: '', title: 'Bastidores', phrase: 'Ver vídeo', videoUrl: 'https://www.youtube.com/shorts/6RPdp9U48UE' }
+            { id: 210, type: 'video', category: 'video', displaySize: 'third', image: '', title: 'Bastidores', title_en: 'Backstage', phrase: 'Ver vídeo', phrase_en: 'Watch video', videoUrl: 'https://www.youtube.com/shorts/6RPdp9U48UE' }
         ];
+
+        // Hook for translations.js to trigger re-render
+        window.updateFabricsLanguage = (lang) => {
+            console.log('Portfolio refreshing for language:', lang);
+            renderPortfolio();
+        };
 
         // Load portfolio items with error handling
         function loadPortfolioItems() {
@@ -1326,12 +1345,17 @@
 
             let html = filteredItems.map((item) => {
                 try {
-                    // ... (rest of the mapping code is fine, relying on previous definition)
+                    // Language Logic
+                    const lang = window.currentLang || localStorage.getItem('lang') || 'pt';
+                    const displayTitle = (lang === 'en' && item.title_en) ? item.title_en : item.title;
+                    const displayPhrase = (lang === 'en' && item.phrase_en) ? item.phrase_en : item.phrase;
+                    const detailsText = (lang === 'en') ? 'View Details' : 'Ver Detalhes';
+
                     const masterIndex = portfolioItems.findIndex(i => i.id === item.id);
 
                     // Special handling for Title Items
                     if (item.displaySize === 'title') {
-                        return `<div class="nike-section-title"><h2>${item.title || ''}</h2></div>`;
+                        return `<div class="nike-section-title"><h2>${displayTitle || ''}</h2></div>`;
                     }
 
                     // Thumbnail Logic
@@ -1364,7 +1388,7 @@
                     <article class="nike-card ${spanClass} ${contentClass} ${item.type === 'video' ? 'video' : ''}" data-index="${masterIndex}">
                         <!-- Thumbnail -->
                         <div class="nike-media-wrapper" onclick="handleItemClick(${masterIndex})" style="${showIframeImmediately ? 'display:none' : ''}">
-                            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title || 'Item'}" class="nike-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
+                            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${displayTitle || 'Item'}" class="nike-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
                             
                             ${item.type === 'video' ? '<div class="nike-play-icon">▶</div>' : ''}
                         </div>
@@ -1376,9 +1400,9 @@
 
                         <!-- Text Content -->
                         <div class="nike-content">
-                            <h3 class="nike-title">${item.title || ''}</h3>
-                            ${item.phrase ? `<p class="nike-subtitle">${item.phrase}</p>` : ''}
-                            ${item.link ? `<button class="nike-action-btn" onclick="event.stopPropagation(); window.open('${item.link}', '_blank')">Ver Detalhes</button>` : '<button class="nike-action-btn" onclick="handleItemClick(' + masterIndex + ')">Ver Detalhes</button>'}
+                            <h3 class="nike-title">${displayTitle || ''}</h3>
+                            ${displayPhrase ? `<p class="nike-subtitle">${displayPhrase}</p>` : ''}
+                            ${item.link ? `<button class="nike-action-btn" onclick="event.stopPropagation(); window.open('${item.link}', '_blank')">${detailsText}</button>` : '<button class="nike-action-btn" onclick="handleItemClick(' + masterIndex + ')">' + detailsText + '</button>'}
                         </div>
                         
                         ${isAdmin ? `<div class="portfolio-edit-badge" onclick="event.stopPropagation(); openEditModal(${masterIndex})">EDITAR</div>` : ''}
