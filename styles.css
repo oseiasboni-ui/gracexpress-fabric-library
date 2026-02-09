@@ -228,6 +228,7 @@ body {
     color: #333;
     text-decoration: none;
     letter-spacing: 0.05em;
+    text-transform: uppercase;
     transition: color 0.2s ease;
     position: relative;
 }
