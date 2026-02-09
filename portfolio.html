@@ -54,7 +54,28 @@
             max-width: 1400px;
             margin: 0 auto;
             background-color: #ffffff;
-            /* Seamless white */
+            position: relative;
+        }
+
+        /* White overlay strips on sides */
+        .portfolio-grid::before,
+        .portfolio-grid::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            background: #ffffff;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .portfolio-grid::before {
+            left: 0;
+        }
+
+        .portfolio-grid::after {
+            right: 0;
         }
 
         .portfolio-item {
@@ -157,7 +178,8 @@
             inset: 0;
             background: #000;
             /* Prevent white flash */
-            z-index: 10;
+            z-index: 5;
+            /* Lower z-index so content can be on top if needed, but video usually needs to be seen */
         }
 
         .portfolio-inline-video iframe {
@@ -165,6 +187,249 @@
             height: 100%;
             border: none;
         }
+
+        /* =========================================
+           NIKE STYLE LAYOUT CSS
+           ========================================= */
+
+        /* Main Grid Overrides */
+        .sx-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+            /* 16px gap like standard design systems */
+            padding: 24px 4%;
+            /* Side padding */
+            max-width: 1920px;
+            margin: 0 auto;
+            grid-auto-flow: dense;
+        }
+
+        /* Column Spans */
+        .col-span-12 {
+            grid-column: span 12;
+        }
+
+        .col-span-6 {
+            grid-column: span 6;
+        }
+
+        .col-span-4 {
+            grid-column: span 4;
+        }
+
+        .col-span-8 {
+            grid-column: span 8;
+        }
+
+        /* Card Base */
+        .nike-card {
+            position: relative;
+            background: #f5f5f5;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            /* Standards aspect ratio */
+            transition: transform 0.3s ease;
+        }
+
+        .nike-card.col-span-12 {
+            aspect-ratio: 21/9;
+            /* Banner style for full width */
+        }
+
+        @media (max-width: 768px) {
+            .sx-grid {
+                grid-template-columns: repeat(4, 1fr);
+                padding: 16px !important;
+            }
+
+            .col-span-12,
+            .col-span-6,
+            .col-span-4 {
+                grid-column: span 4;
+                /* Full width on mobile */
+            }
+
+            .nike-card.col-span-12 {
+                aspect-ratio: 16/9;
+            }
+        }
+
+        /* Media Wrapper */
+        .nike-media-wrapper {
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .nike-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .nike-card:hover .nike-media {
+            transform: scale(1.03);
+        }
+
+        /* Play Icon */
+        .nike-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            pointer-events: none;
+            transition: background 0.3s;
+        }
+
+        .nike-card:hover .nike-play-icon {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Content Positioning */
+        .nike-content {
+            position: absolute;
+            z-index: 10;
+            padding: 32px;
+            pointer-events: none;
+            /* Let clicks pass to image/video unless on button */
+        }
+
+        /* Content Inside (Overlay) */
+        .content-inside .nike-content {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            color: white;
+            padding: 24px;
+        }
+
+        /* Content Below (Shop Style) - Layout fix */
+        .content-below {
+            aspect-ratio: auto;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-below .nike-media-wrapper {
+            position: relative;
+            aspect-ratio: 4/5;
+            width: 100%;
+        }
+
+        .content-below .nike-content {
+            position: static;
+            padding: 16px 0;
+            color: #000;
+            width: 100%;
+        }
+
+        .content-below .nike-title {
+            color: #111;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .content-below .nike-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .nike-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 0 8px 0;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+        }
+
+        .col-span-12 .nike-title {
+            font-size: clamp(32px, 5vw, 48px);
+        }
+
+        .nike-subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+
+        .nike-action-btn {
+            pointer-events: auto;
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .content-below .nike-action-btn {
+            background: transparent;
+            color: #000;
+            padding: 0;
+            border-bottom: 1.5px solid #000;
+            border-radius: 0;
+            font-size: 12px;
+        }
+
+        .nike-action-btn:hover {
+            opacity: 0.7;
+            transform: translateY(-1px);
+        }
+
+        /* Section Title */
+        .nike-section-title {
+            grid-column: span 12;
+            padding: 60px 0 30px;
+            text-align: left;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+        }
+
+        .nike-section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 42px);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #111;
+        }
+
+        @media (max-width: 768px) {
+            .nike-section-title {
+                grid-column: span 4;
+                padding: 40px 0 20px;
+            }
+
+            .nike-title {
+                font-size: 20px;
+            }
+        }
+
 
         /* Expand button */
         .portfolio-expand-btn {
@@ -357,6 +622,66 @@
             opacity: 0.3;
         }
 
+        /* Cropper Modal */
+        .crop-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .crop-modal.active {
+            display: flex;
+        }
+
+        .crop-container {
+            max-width: 90%;
+            max-height: 70vh;
+            overflow: hidden;
+        }
+
+        .crop-container img {
+            max-width: 100%;
+            max-height: 70vh;
+            display: block;
+        }
+
+        .crop-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .crop-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .crop-btn.confirm {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .crop-btn.cancel {
+            background: #666;
+            color: white;
+        }
+
+        .crop-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
         .btn-upload {
             width: 100%;
             padding: 12px;
@@ -423,6 +748,7 @@
             <nav class="main-nav">
                 <a href="sobre.html" class="nav-link" data-i18n="about">Sobre</a>
                 <a href="portfolio.html" class="nav-link active" data-i18n="portfolio">Portfólio</a>
+
                 <a href="contato.html" class="nav-link" data-i18n="contact">Contato</a>
             </nav>
             <!-- Mobile Menu Button -->
@@ -541,6 +867,11 @@
                     <label data-i18n="phraseLabel">Frase</label>
                     <input type="text" id="portfolioPhrase" placeholder="Ex: Elegância atemporal">
                 </div>
+                <div class="form-group">
+                    <label>Link de Redirecionamento (opcional)</label>
+                    <input type="text" id="portfolioLink" placeholder="https://exemplo.com/produto">
+                    <small style="color: #888; font-size: 12px;">URL que abrirá ao clicar em "Detalhes"</small>
+                </div>
                 <div class="form-group" id="videoUrlGroup" style="display: none;">
                     <label data-i18n="videoUrlLabel">URL do Vídeo (YouTube/Vimeo)</label>
                     <input type="text" id="portfolioVideoUrl" placeholder="https://youtube.com/watch?v=...">
@@ -562,6 +893,17 @@
     </div>
 
     <!-- Duplicate Video Modal Removed -->
+
+    <!-- Crop Modal -->
+    <div class="crop-modal" id="cropModal">
+        <div class="crop-container">
+            <img id="cropImage" src="" alt="Crop">
+        </div>
+        <div class="crop-buttons">
+            <button class="crop-btn confirm" onclick="confirmCrop()">✓ Confirmar Corte</button>
+            <button class="crop-btn cancel" onclick="cancelCrop()">✕ Cancelar</button>
+        </div>
+    </div>
 
 
     <!-- Admin Login Modal -->
@@ -725,7 +1067,8 @@
 
         <div class="stores-grid">
             <!-- MERCADO LIVRE -->
-            <a href="#" class="store-card ml">
+            <a href="https://lista.mercadolivre.com.br/_CustId_226215703?item_id=MLB6040622010&category_id=MLB27250&seller_id=226215703&client=recoview-selleritems&recos_listing=true#origin=vip&component=sellerData&typeSeller=classic"
+                target="_blank" class="store-card ml">
                 <div class="store-content">
                     <span class="store-name">MERCADO<br>LIVRE</span>
                     <span class="store-arrow">↗</span>
@@ -733,7 +1076,8 @@
             </a>
 
             <!-- SHEIN -->
-            <a href="#" class="store-card shein">
+            <a href="https://br.shein.com/store/home?ici=PageGoodsDetail&main_cate_id=1740&main_goods_id=175528887&page_from=PageGoodsDetail&rule_poskey=DetailShopItemList&src_identifier=on%3Dstore%60cn%3DAVELUNE%20MODAS%60hz%3D0%60ps%3D1_1%60jc%3DthirdPartyStoreHome_7709578899&src_module=DetailBrand&src_tab_page_id=page_goods_detail1770595882223&store_code=7709578899&tab=items"
+                target="_blank" class="store-card shein">
                 <div class="store-content">
                     <span class="store-name">SHEIN</span>
                     <span class="store-arrow">↗</span>
@@ -749,7 +1093,8 @@
             </a>
 
             <!-- SHOPEE -->
-            <a href="#" class="store-card shopee">
+            <a href="https://shopee.com.br/oseiassilvadossantos134#product_list" target="_blank"
+                class="store-card shopee">
                 <div class="store-content">
                     <span class="store-name">SHOPEE</span>
                     <span class="store-arrow">↗</span>
@@ -757,7 +1102,8 @@
             </a>
 
             <!-- TIKTOK -->
-            <a href="#" class="store-card tiktok">
+            <a href="https://www.tiktok.com/@gracexpressbr?_r=1&_t=ZS-93lOFXPQC26" target="_blank"
+                class="store-card tiktok">
                 <div class="store-content">
                     <span class="store-name">TIKTOK<br>SHOP</span>
                     <span class="store-arrow">↗</span>
@@ -824,6 +1170,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="js/supabase-config.js"></script>
     <script src="js/auth-service.js"></script>
+    <script src="js/services/cloudinary-service.js"></script>
     <script src="translations.js"></script>
     <script src="media-manager.js?v=2"></script>
     <script>
@@ -848,7 +1195,7 @@
         });
 
         // Portfolio Data Management
-        const PORTFOLIO_STORAGE_KEY = 'portfolioItems_v2'; // Updated to v2 to refresh data
+        const PORTFOLIO_STORAGE_KEY = 'portfolioItems_v5'; // Updated to v5 to revert links
         let portfolioItems = [];
         let currentFilter = 'all';
         let currentEditIndex = null;
@@ -870,9 +1217,9 @@
             { id: 9992, type: 'text', displaySize: 'title', title: 'NOVA COLEÇÃO', phrase: '' },
 
             // 5. Product Grid (Thirds) - Image + Text Below (Shop Style)
-            { id: 204, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1550614000-4b9519e0037a?w=600&q=80', title: 'Seda Tech', phrase: 'Performance' },
-            { id: 205, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80', title: 'Jaqueta Pro', phrase: 'Impermeável' },
-            { id: 206, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&q=80', title: 'Malha Dry', phrase: 'Respirável' },
+            { id: 204, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&q=80', title: 'Seda Tech', phrase: 'Performance & Leveza' },
+            { id: 205, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=800&q=80', title: 'Jaqueta Pro', phrase: 'Barreira Impermeável' },
+            { id: 206, type: 'photo', category: 'product', displaySize: 'third', image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&q=80', title: 'Malha Dry', phrase: 'Controle de Umidade' },
 
             // 6. Large Feature with Side Text (Asymmetric)
             { id: 207, type: 'photo', category: 'editorial', displaySize: 'feature-side', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80', title: 'RUNWAY READY', phrase: 'A intersecção entre alta moda e funcionalidade esportiva.' },
@@ -883,18 +1230,28 @@
             { id: 210, type: 'video', category: 'video', displaySize: 'third', image: '', title: 'Bastidores', phrase: 'Ver vídeo', videoUrl: 'https://www.youtube.com/shorts/6RPdp9U48UE' }
         ];
 
-        // Load portfolio items
+        // Load portfolio items with error handling
         function loadPortfolioItems() {
-            const stored = localStorage.getItem(PORTFOLIO_STORAGE_KEY);
-            if (stored) {
-                // Reset to default for this radical layout change to ensure users see the new structure
-                // In production we would merge carefully, but here we prioritize the new layout.
-                portfolioItems = [...defaultPortfolioItems];
-            } else {
+            try {
+                const stored = localStorage.getItem(PORTFOLIO_STORAGE_KEY);
+                if (stored) {
+                    portfolioItems = JSON.parse(stored);
+                    console.log('✅ Portfolio items loaded from storage:', portfolioItems.length);
+                } else {
+                    console.log('ℹ️ No stored items, using default');
+                    portfolioItems = [...defaultPortfolioItems];
+                }
+            } catch (e) {
+                console.error('❌ Error loading portfolio items:', e);
+                // Fallback to default if storage is corrupted
                 portfolioItems = [...defaultPortfolioItems];
             }
-            // Always save the reset
-            savePortfolioItems();
+
+            // Ensure we have items
+            if (!portfolioItems || !Array.isArray(portfolioItems)) {
+                portfolioItems = [...defaultPortfolioItems];
+            }
+
             setupFilters();
         }
 
@@ -919,7 +1276,12 @@
 
         // Save portfolio items
         function savePortfolioItems() {
-            localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioItems));
+            try {
+                localStorage.setItem(PORTFOLIO_STORAGE_KEY, JSON.stringify(portfolioItems));
+            } catch (e) {
+                console.error('Error saving portfolio:', e);
+                alert('Erro ao salvar alterações no navegador. Espaço cheio?');
+            }
         }
 
         // Render portfolio grid - NIKE STYLE
@@ -927,13 +1289,14 @@
             const grid = document.getElementById('portfolioGrid');
             if (!grid) return;
 
-            const isAdmin = typeof isAdminMode !== 'undefined' ? isAdminMode : false;
+            // Check admin mode dynamically
+            const isAdmin = document.body.classList.contains('edit-mode-active') || localStorage.getItem('isAdminMode') === 'true';
 
             // Filter logic
             let filteredItems = currentFilter === 'all'
                 ? portfolioItems
                 : portfolioItems.filter(item => {
-                    if (item.displaySize === 'title') return true; // Keep titles? Maybe not in filtered view. layout might break.
+                    if (item.displaySize === 'title') return true;
                     return item.category === currentFilter || (currentFilter === 'video' && item.type === 'video');
                 });
 
@@ -942,71 +1305,100 @@
                 filteredItems = filteredItems.filter(i => i.displaySize !== 'title');
             }
 
+            let t = {};
+            try {
+                if (typeof getCurrentTranslations === 'function') {
+                    t = getCurrentTranslations() || {};
+                }
+            } catch (e) {
+                console.warn('Translations not available:', e);
+            }
+
+            console.log('Rendering portfolio with items:', filteredItems.length);
+
+            if (filteredItems.length === 0) {
+                grid.innerHTML = `<div class="col-span-12" style="text-align:center; padding:100px;">
+                    <h3 style="font-family:'Playfair Display',serif; font-size:24px; color:#666;">Nenhum item encontrado</h3>
+                    <p style="color:#888; margin-top:10px;">Ajuste o filtro ou adicione novos projetos.</p>
+                </div>`;
+                return;
+            }
+
             let html = filteredItems.map((item) => {
-                const masterIndex = portfolioItems.findIndex(i => i.id === item.id);
+                try {
+                    // ... (rest of the mapping code is fine, relying on previous definition)
+                    const masterIndex = portfolioItems.findIndex(i => i.id === item.id);
 
-                // Special handling for Title Items
-                if (item.displaySize === 'title') {
-                    return `<div class="nike-section-title"><h2>${item.title}</h2></div>`;
-                }
-
-                let thumbnailUrl = item.customThumbnail || item.image;
-                let videoId = null;
-                if (item.type === 'video' && item.videoUrl) {
-                    videoId = getYouTubeId(item.videoUrl);
-                    if (videoId && !item.customThumbnail) {
-                        thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                    // Special handling for Title Items
+                    if (item.displaySize === 'title') {
+                        return `<div class="nike-section-title"><h2>${item.title || ''}</h2></div>`;
                     }
-                }
 
-                const tiktokId = getTikTokId(item.videoUrl);
-                const showIframeImmediately = !!tiktokId;
+                    // Thumbnail Logic
+                    let thumbnailUrl = item.customThumbnail || item.image || 'https://placehold.co/600x800?text=No+Image';
+                    let videoId = null;
+                    if (item.type === 'video' && item.videoUrl) {
+                        try {
+                            videoId = getYouTubeId(item.videoUrl);
+                            if (videoId && !item.customThumbnail) {
+                                thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                            }
+                        } catch (e) { console.warn('Error extracting video ID', e); }
+                    }
 
-                // Determine Grid Span Class
-                // Grid is 12 columns
-                let spanClass = 'col-span-4'; // Default (Third)
-                if (item.displaySize === 'full') spanClass = 'col-span-12';
-                if (item.displaySize === 'half') spanClass = 'col-span-6';
-                if (item.displaySize === 'feature-side') spanClass = 'col-span-12 feature-side';
+                    const tiktokId = getTikTokId(item.videoUrl);
+                    const showIframeImmediately = !!tiktokId;
 
-                // Content Placement Class
-                // Products usually have text below. Editorials inside.
-                let contentClass = 'content-inside';
-                if (item.displaySize === 'third' || item.category === 'product') contentClass = 'content-below';
-                if (item.displaySize === 'feature-side') contentClass = 'content-side';
+                    // Grid Span Class
+                    let spanClass = 'col-span-4'; // Default (Third)
+                    if (item.displaySize === 'full') spanClass = 'col-span-12';
+                    if (item.displaySize === 'half') spanClass = 'col-span-6';
+                    if (item.displaySize === 'feature-side') spanClass = 'col-span-12 feature-side';
 
-                return `
-                <article class="nike-card ${spanClass} ${contentClass} ${item.type === 'video' ? 'video' : ''}" data-index="${masterIndex}">
-                    <!-- Thumbnail -->
-                    <div class="nike-media-wrapper" onclick="handleItemClick(${masterIndex})" style="${showIframeImmediately ? 'display:none' : ''}">
-                        ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title}" class="nike-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
+                    // Content Placement Class
+                    let contentClass = 'content-inside';
+                    if (item.displaySize === 'third' || item.category === 'product') contentClass = 'content-below';
+                    if (item.displaySize === 'feature-side') contentClass = 'content-side';
+
+                    return `
+                    <article class="nike-card ${spanClass} ${contentClass} ${item.type === 'video' ? 'video' : ''}" data-index="${masterIndex}">
+                        <!-- Thumbnail -->
+                        <div class="nike-media-wrapper" onclick="handleItemClick(${masterIndex})" style="${showIframeImmediately ? 'display:none' : ''}">
+                            ${thumbnailUrl ? `<img src="${thumbnailUrl}" alt="${item.title || 'Item'}" class="nike-media" loading="lazy" ${videoId ? `onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg';"` : ''}>` : ''}
+                            
+                            ${item.type === 'video' ? '<div class="nike-play-icon">▶</div>' : ''}
+                        </div>
                         
-                        ${item.type === 'video' ? '<div class="nike-play-icon">▶</div>' : ''}
-                    </div>
-                    
-                    <!-- Inline Video -->
-                    <div class="portfolio-inline-video" id="inlineVideo${masterIndex}" style="${showIframeImmediately ? 'display:block' : 'display:none;'}">
-                         ${showIframeImmediately ? `<iframe src="https://www.tiktok.com/embed/v2/${tiktokId}" frameborder="0" style="width:100%;height:100%;" allowfullscreen></iframe>` : ''}
-                    </div>
+                        <!-- Inline Video -->
+                        <div class="portfolio-inline-video" id="inlineVideo${masterIndex}" style="${showIframeImmediately ? 'display:block' : 'display:none;'}">
+                             ${showIframeImmediately ? `<iframe src="https://www.tiktok.com/embed/v2/${tiktokId}" frameborder="0" style="width:100%;height:100%;" allowfullscreen></iframe>` : ''}
+                        </div>
 
-                    <!-- Text Content -->
-                    <div class="nike-content">
-                        <h3 class="nike-title">${item.title}</h3>
-                        ${item.phrase ? `<p class="nike-subtitle">${item.phrase}</p>` : ''}
-                        <button class="nike-action-btn">Ver Detalhes</button>
-                    </div>
-                    
-                    <div class="portfolio-edit-badge" onclick="event.stopPropagation(); openEditModal(${masterIndex})">EDITAR</div>
-                </article>
-                `}).join('');
+                        <!-- Text Content -->
+                        <div class="nike-content">
+                            <h3 class="nike-title">${item.title || ''}</h3>
+                            ${item.phrase ? `<p class="nike-subtitle">${item.phrase}</p>` : ''}
+                            ${item.link ? `<button class="nike-action-btn" onclick="event.stopPropagation(); window.open('${item.link}', '_blank')">Ver Detalhes</button>` : '<button class="nike-action-btn" onclick="handleItemClick(' + masterIndex + ')">Ver Detalhes</button>'}
+                        </div>
+                        
+                        ${isAdmin ? `<div class="portfolio-edit-badge" onclick="event.stopPropagation(); openEditModal(${masterIndex})">EDITAR</div>` : ''}
+                    </article>
+                    `;
+                } catch (err) {
+                    console.error('Error rendering item:', err);
+                    return '';
+                }
+            }).join('');
 
-            // Admin Add Button (as a simple card at end)
+            // Admin Add Button
             if (isAdmin) {
                 html += `
+                    <div class="portfolio-add-item col-span-4" onclick="openAddModal()" style="min-height:300px; display:flex; flex-direction:column; align-items:center; justify-content:center; border: 2px dashed #ccc; cursor:pointer;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="10"/>
                             <path d="M12 8v8M8 12h8"/>
                         </svg>
-                        <span data-i18n="addItem">${t.addItem}</span>
+                        <span style="margin-top:10px; font-weight:bold;">${t.addItem || 'Adicionar Item'}</span>
                     </div>
                 `;
             }
@@ -1025,9 +1417,13 @@
             if (item.type !== 'video' || !item.videoUrl) return;
 
             const article = document.querySelector(`[data-index="${index}"]`);
+            if (!article) return;
+
             const inlineContainer = document.getElementById(`inlineVideo${index}`);
-            const thumbnail = article.querySelector('.portfolio-item-thumbnail');
-            const expandBtn = article.querySelector('.portfolio-expand-btn');
+            // Support both new Nike layout and old layout classes
+            const thumbnail = article.querySelector('.nike-media-wrapper') || article.querySelector('.portfolio-item-thumbnail');
+            const content = article.querySelector('.nike-content') || article.querySelector('.portfolio-item-content');
+            const editBadge = article.querySelector('.portfolio-edit-badge');
 
             // If already playing this video, toggle off
             if (currentPlayingIndex === index) {
@@ -1072,17 +1468,13 @@
                 </video>`;
             }
 
-            const overlay = article.querySelector('.portfolio-item-overlay');
-            const content = article.querySelector('.portfolio-item-content');
+            // Show inline video, hide thumbnail/overlay
+            if (inlineContainer) inlineContainer.style.display = 'block';
+            if (thumbnail) thumbnail.style.opacity = '0'; // Use opacity instead of display none to keep layout size
+            if (content) content.style.opacity = '0';
+            if (editBadge) editBadge.style.display = 'none';
 
-            // Show inline video, hide thumbnail/overlay, show expand button
-            inlineContainer.style.display = 'block';
-            thumbnail.style.display = 'none';
-            if (overlay) overlay.style.display = 'none';
-            if (content) content.style.display = 'none';
-            if (expandBtn) expandBtn.style.display = 'flex';
             article.classList.add('playing');
-
             currentPlayingIndex = index;
         }
 
@@ -1092,19 +1484,20 @@
             if (!article) return;
 
             const inlineContainer = document.getElementById(`inlineVideo${index}`);
-            const thumbnail = article.querySelector('.portfolio-item-thumbnail');
-            const expandBtn = article.querySelector('.portfolio-expand-btn');
-            const overlay = article.querySelector('.portfolio-item-overlay');
-            const content = article.querySelector('.portfolio-item-content');
+            const thumbnail = article.querySelector('.nike-media-wrapper') || article.querySelector('.portfolio-item-thumbnail');
+            const content = article.querySelector('.nike-content') || article.querySelector('.portfolio-item-content');
+            const editBadge = article.querySelector('.portfolio-edit-badge');
 
-            inlineContainer.innerHTML = '';
-            inlineContainer.style.display = 'none';
-            thumbnail.style.display = 'block';
-            if (overlay) overlay.style.display = 'block';
-            if (content) content.style.display = 'block';
-            if (expandBtn) expandBtn.style.display = 'none';
+            if (inlineContainer) {
+                inlineContainer.innerHTML = '';
+                inlineContainer.style.display = 'none';
+            }
+
+            if (thumbnail) thumbnail.style.opacity = '1';
+            if (content) content.style.opacity = '1';
+            if (editBadge) editBadge.style.display = 'block';
+
             article.classList.remove('playing');
-
             currentPlayingIndex = null;
         }
 
@@ -1203,6 +1596,7 @@
 
             document.getElementById('portfolioTitle').value = item.title;
             document.getElementById('portfolioPhrase').value = item.phrase;
+            document.getElementById('portfolioLink').value = item.link || '';
             document.getElementById('portfolioVideoUrl').value = item.videoUrl || '';
             document.getElementById('portfolioCustomThumbnail').value = item.customThumbnail || '';
             document.getElementById('btnDelete').style.display = 'block';
@@ -1236,6 +1630,7 @@
             document.getElementById('portfolioType').value = 'photo';
             document.getElementById('portfolioTitle').value = '';
             document.getElementById('portfolioPhrase').value = '';
+            document.getElementById('portfolioLink').value = '';
             document.getElementById('portfolioVideoUrl').value = '';
             document.getElementById('portfolioCustomThumbnail').value = '';
             document.getElementById('btnDelete').style.display = 'none';
@@ -1258,6 +1653,7 @@
             const type = document.getElementById('portfolioType').value;
             const title = document.getElementById('portfolioTitle').value.trim();
             const phrase = document.getElementById('portfolioPhrase').value.trim();
+            const link = document.getElementById('portfolioLink').value.trim();
             const videoUrl = document.getElementById('portfolioVideoUrl').value.trim();
             let customThumbnail = document.getElementById('portfolioCustomThumbnail').value.trim();
 
@@ -1266,10 +1662,42 @@
                 return;
             }
 
+            // Upload image to Cloudinary if new image was selected
+            let finalImageUrl = currentEditIndex !== null ? portfolioItems[currentEditIndex].image : '';
+
+            if (currentImageData && currentImageData.startsWith('data:')) {
+                // New image selected - upload to Cloudinary
+                const saveBtn = document.querySelector('.btn-save');
+                const originalText = saveBtn.textContent;
+                saveBtn.textContent = 'Enviando imagem...';
+                saveBtn.disabled = true;
+
+                try {
+                    if (typeof CloudinaryService !== 'undefined') {
+                        const itemId = currentEditIndex !== null ? portfolioItems[currentEditIndex].id : Date.now();
+                        const result = await CloudinaryService.uploadBase64Image(currentImageData, `portfolio - ${itemId} `);
+                        finalImageUrl = result.url;
+                        console.log('✅ Image uploaded to Cloudinary:', result.url);
+                    } else {
+                        console.warn('CloudinaryService not available, using base64');
+                        finalImageUrl = currentImageData;
+                    }
+                } catch (uploadError) {
+                    console.error('❌ Cloudinary upload failed:', uploadError);
+                    // Fallback to base64
+                    finalImageUrl = currentImageData;
+                }
+
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+            } else if (currentImageData) {
+                finalImageUrl = currentImageData;
+            }
+
             // Auto-fetch TikTok thumbnail if not provided
             if (type === 'video' && videoUrl && !customThumbnail && getTikTokId(videoUrl)) {
                 try {
-                    const saveBtn = document.querySelector('.portfolio-modal-footer .btn-primary');
+                    const saveBtn = document.querySelector('.btn-save');
                     const originalText = saveBtn.textContent;
                     saveBtn.textContent = 'Buscando capa...';
                     saveBtn.disabled = true;
@@ -1291,9 +1719,10 @@
             const item = {
                 id: currentEditIndex !== null ? portfolioItems[currentEditIndex].id : Date.now(),
                 type,
-                image: currentImageData || (currentEditIndex !== null ? portfolioItems[currentEditIndex].image : ''),
+                image: finalImageUrl,
                 title,
                 phrase,
+                link,
                 videoUrl: type === 'video' ? videoUrl : '',
                 customThumbnail: type === 'video' ? customThumbnail : ''
             };
@@ -1329,19 +1758,86 @@
             }
         }
 
-        // Handle image upload
-        document.getElementById('portfolioImageInput')?.addEventListener('change', (e) => {
+        // Handle image upload with Cropper
+        let portfolioCropper = null;
+        let tempImageData = null;
+
+        // Image upload handler with cropping
+        const imageInput = document.getElementById('portfolioImage');
+        imageInput?.addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (!file) return;
 
             const reader = new FileReader();
-            reader.onload = (event) => {
-                currentImageData = event.target.result;
-                document.getElementById('imagePreview').innerHTML = `<img src="${currentImageData}" alt="Preview">`;
+            reader.onload = function (event) {
+                tempImageData = event.target.result;
+                openCropModal(tempImageData);
             };
             reader.readAsDataURL(file);
-            e.target.value = '';
         });
+
+        function openCropModal(imageSource) {
+            const modal = document.getElementById('cropModal');
+            const container = document.getElementById('cropContainer');
+            if (!modal || !container) return;
+
+            modal.classList.add('active');
+            container.innerHTML = `<img src="${imageSource}" id="cropperImage" style="max-width: 100%;">`;
+
+            const image = document.getElementById('cropperImage');
+
+            if (portfolioCropper) {
+                portfolioCropper.destroy();
+            }
+
+            // Initialize Cropper 
+            portfolioCropper = new Cropper(image, {
+                aspectRatio: 4 / 5, // Match portfolio item ratio
+                viewMode: 1,
+                dragMode: 'move',
+                autoCropArea: 1,
+                restore: false,
+                guides: true,
+                center: true,
+                highlight: false,
+                cropBoxMovable: true,
+                cropBoxResizable: true,
+                toggleDragModeOnDblclick: false,
+            });
+        }
+
+        function confirmCrop() {
+            if (!portfolioCropper) return;
+
+            const canvas = portfolioCropper.getCroppedCanvas({
+                width: 800, // Reasonable size for web
+                height: 1000, // 4:5 ratio
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high'
+            });
+
+            currentImageData = canvas.toDataURL('image/jpeg', 0.9);
+            document.getElementById('imagePreview').innerHTML = `<img src="${currentImageData}" alt="Preview">`;
+
+            closeCropModal();
+        }
+
+        function cancelCrop() {
+            closeCropModal();
+        }
+
+        function closeCropModal() {
+            if (portfolioCropper) {
+                portfolioCropper.destroy();
+                portfolioCropper = null;
+            }
+            document.getElementById('cropModal').classList.remove('active');
+            tempImageData = null;
+        }
+
+        // Make crop functions global
+        window.confirmCrop = confirmCrop;
+        window.cancelCrop = cancelCrop;
 
         // Handle type change
         document.getElementById('portfolioType')?.addEventListener('change', (e) => {

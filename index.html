@@ -14,6 +14,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/hero-arrows.css">
     <script src="js/force-admin.js"></script>
 </head>
 
@@ -52,18 +53,19 @@
     <!-- Hero - Elegant Slider -->
     <section class="hero-elegant" id="heroSection">
         <!-- Slider Container (Background only) -->
+        <!-- Slider Container -->
         <div class="hero-slider">
             <div class="hero-slide active">
-                <div class="hero-slide-bg" style="background-image: url('hero-bg.png');"></div>
+                <div class="hero-slide-bg" style="background-image: url('hero-slide-1.png');"></div>
             </div>
             <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('hero-bg.png');"></div>
+                <div class="hero-slide-bg" style="background-image: url('hero-slide-2.jpg');"></div>
             </div>
             <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('hero-bg.png');"></div>
+                <div class="hero-slide-bg" style="background-image: url('hero-slide-3.png');"></div>
             </div>
             <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('hero-bg.png');"></div>
+                <div class="hero-slide-bg" style="background-image: url('hero-slide-4.png');"></div>
             </div>
         </div>
 
@@ -83,7 +85,7 @@
         </div>
 
         <!-- Global Button -->
-        <a href="#collection" class="hero-btn">PORTIFOLIO</a>
+        <a href="#collection" class="hero-btn">PORTFÓLIO</a>
 
         <!-- Slider Indicators -->
         <div class="hero-indicators">
@@ -92,6 +94,18 @@
             <span class="indicator" data-slide="2"></span>
             <span class="indicator" data-slide="3"></span>
         </div>
+
+        <!-- Slider Arrows -->
+        <button class="hero-arrow prev" aria-label="Previous Slide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </button>
+        <button class="hero-arrow next" aria-label="Next Slide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+        </button>
     </section>
 
 
@@ -375,6 +389,7 @@
     <script src="js/services/cloudinary-service.js"></script>
     <script src="media-manager.js?v=2"></script>
     <script src="js/hero-slider.js"></script>
+    <script src="js/hero-admin-manager.js"></script>
     <script src="script.js"></script>
 </body>
 

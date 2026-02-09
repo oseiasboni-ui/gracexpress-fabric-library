@@ -101,7 +101,7 @@ html {
     /* Mobile viewport fix */
     width: 100%;
     max-width: 100vw;
-    overflow-x: hidden;
+    /* overflow-x: hidden; REMOVED - breaks sticky */
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
 }
@@ -116,7 +116,7 @@ body {
     /* Mobile viewport fix */
     width: 100%;
     max-width: 100vw;
-    overflow-x: hidden;
+    /* overflow-x: hidden; REMOVED - breaks sticky */
     min-height: 100vh;
     min-height: 100dvh;
 }
@@ -165,7 +165,8 @@ body {
 .logo.logo-elegant {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 24px;
-    font-weight: 800;
+    font-weight: 400;
+    /* Normal */
     letter-spacing: 0.02em;
     color: #1a1a1a;
     text-transform: uppercase;
@@ -222,7 +223,8 @@ body {
 .nav-link {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 700;
+    /* Bold */
     color: #333;
     text-decoration: none;
     letter-spacing: 0.05em;
@@ -1718,12 +1720,12 @@ body {
 }
 
 /* ============================
-   Collection Grid - 4 columns
+   Collection Grid - 5 columns
    ============================ */
 .collection-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     padding: 28px;
     align-content: start;
@@ -4738,8 +4740,8 @@ body {
    ========================================= */
 .hero-elegant {
     position: relative;
-    width: 100%;
     margin-top: var(--header-height);
+    width: 100%;
     background: #0d0d0d;
     overflow: hidden;
 }
@@ -4750,7 +4752,7 @@ body {
     /* Aspect ratio matching the background image */
     aspect-ratio: 1024 / 292;
     min-height: 250px;
-    max-height: 350px;
+    /* max-height removed to allow full 3.5:1 scaling */
 }
 
 .hero-slide {
@@ -5648,6 +5650,9 @@ body {
     background: #f0f0f0;
     /* Color of the gap lines */
     border-top: 1px solid #f0f0f0;
+    /* White gap on sides */
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .sx-item {
@@ -7164,13 +7169,15 @@ body {
         font-size: 1.8rem;
     }
 }
+
 /* ==========================================
    CONTACT CARD LAYOUT (RESTORED CARD STYLE)
    ========================================== */
 
 /* Page Background */
 .contact-page-bg {
-    background-color: #f5f5f7 !important; /* Light grey background */
+    background-color: #f5f5f7 !important;
+    /* Light grey background */
     min-height: calc(100vh - 60px);
     display: flex;
     justify-content: center;
@@ -7184,8 +7191,10 @@ body {
     background: #ffffff;
     width: 95%;
     max-width: 1200px;
-    border-radius: 24px; /* Rounded corners like image */
-    box-shadow: 0 10px 40px rgba(0,0,0,0.06); /* Soft shadow */
+    border-radius: 24px;
+    /* Rounded corners like image */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    /* Soft shadow */
     padding: 60px 50px;
     margin: 0 auto;
 }
@@ -7195,7 +7204,8 @@ body {
     margin-top: 0 !important;
     padding: 0 !important;
     margin-bottom: 50px !important;
-    border-bottom: none !important; /* Remove harsh line */
+    border-bottom: none !important;
+    /* Remove harsh line */
 }
 
 .contact-card-container .sx-hero-title {
@@ -7220,14 +7230,17 @@ body {
    ========================================== */
 
 .contact-page-bg {
-    background-color: #ffffff !important; /* Pure white background */
+    background-color: #ffffff !important;
+    /* Pure white background */
 }
 
 /* Enhancing card definition since functionality is on white */
 .contact-card-container {
     background: #ffffff;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.08) !important; /* Visible shadow */
-    border: 1px solid #f5f5f5 !important; /* Subtle border */
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08) !important;
+    /* Visible shadow */
+    border: 1px solid #f5f5f5 !important;
+    /* Subtle border */
 }
 
 /* ==========================================
@@ -7237,10 +7250,13 @@ body {
 /* Sidebar Container */
 .filters-sidebar {
     background: #ffffff !important;
-    border-right: 1px solid #e5e5e5 !important; /* Tech line */
-    border-radius: 0 !important; /* Sharp */
+    border-right: 1px solid #e5e5e5 !important;
+    /* Tech line */
+    border-radius: 0 !important;
+    /* Sharp */
     padding: 40px 24px !important;
-    box-shadow: none !important; /* Flat */
+    box-shadow: none !important;
+    /* Flat */
 }
 
 /* Search Bar - Tech Box */
@@ -7327,8 +7343,9 @@ body {
     appearance: none;
     -webkit-appearance: none;
     width: 0;
-    height: 0; 
-    margin: 0 !important; /* Hide radio dot */
+    height: 0;
+    margin: 0 !important;
+    /* Hide radio dot */
 }
 
 /* Text Styling */
@@ -7377,20 +7394,23 @@ body {
 
 /* Search Count - Technical Data Readout */
 .search-count {
-    font-family: 'Courier New', 'Courier', monospace !important; /* Tech/Code font */
+    font-family: 'Courier New', 'Courier', monospace !important;
+    /* Tech/Code font */
     font-size: 0.7rem !important;
     font-weight: 700 !important;
-    color: #000 !important; /* Solid Black */
+    color: #000 !important;
+    /* Solid Black */
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
-    
+
     /* Layout Details */
     margin-top: 8px !important;
     padding-top: 6px !important;
     display: block !important;
     width: 100% !important;
     text-align: right !important;
-    opacity: 1 !important; /* Clear visibility */
+    opacity: 1 !important;
+    /* Clear visibility */
 }
 
 /* ==========================================
@@ -7398,15 +7418,21 @@ body {
    ========================================== */
 
 .filters-sidebar {
-    position: -webkit-sticky !important; /* Safari support */
+    position: -webkit-sticky !important;
+    /* Safari support */
     position: sticky !important;
-    top: 90px !important; /* 90px from top so it clears the header */
+    top: 90px !important;
+    /* 90px from top so it clears the header */
     height: auto !important;
-    max-height: calc(100vh - 100px) !important; /* Prevent it from being taller than screen */
-    overflow-y: auto !important; /* Add internal scroll if filters are too long */
-    align-self: flex-start !important; /* Critical for Flexbox layouts */
-    z-index: 50 !important; /* Ensure it stays on top */
-    
+    max-height: calc(100vh - 100px) !important;
+    /* Prevent it from being taller than screen */
+    overflow-y: auto !important;
+    /* Add internal scroll if filters are too long */
+    align-self: flex-start !important;
+    /* Critical for Flexbox layouts */
+    z-index: 50 !important;
+    /* Ensure it stays on top */
+
     /* Scrollbar aesthetics for the sticking bar */
     scrollbar-width: thin;
     scrollbar-color: #000 #f0f0f0;
@@ -7416,9 +7442,11 @@ body {
 .filters-sidebar::-webkit-scrollbar {
     width: 4px;
 }
+
 .filters-sidebar::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
+
 .filters-sidebar::-webkit-scrollbar-thumb {
     background: #000;
 }
@@ -7431,24 +7459,30 @@ body {
 /* Ensure Parent Container allows sticky behavior */
 .main-content {
     display: grid !important;
-    grid-template-columns: 320px 1fr !important; /* Fixed width sidebar / Fluid grid */
-    align-items: start !important; /* CRITICAL: Prevents sidebar from stretching full height */
-    gap: 0 !important; /* Sidebar has internal padding */
+    grid-template-columns: 320px 1fr !important;
+    /* Fixed width sidebar / Fluid grid */
+    align-items: start !important;
+    /* CRITICAL: Prevents sidebar from stretching full height */
+    gap: 0 !important;
+    /* Sidebar has internal padding */
     width: 100% !important;
     max-width: 100% !important;
-    overflow: visible !important; /* Critical: hidden overflow breaks sticky */
+    overflow: visible !important;
+    /* Critical: hidden overflow breaks sticky */
     padding: 0 !important;
 }
 
 /* Sidebar Sticky Logic */
 .filters-sidebar {
-    position: -webkit-sticky !important; 
+    position: -webkit-sticky !important;
     position: sticky !important;
-    top: 70px !important; /* Height of header approx */
+    top: 70px !important;
+    /* Height of header approx */
     height: auto !important;
     max-height: calc(100vh - 70px) !important;
     overflow-y: auto !important;
-    width: 320px !important; /* Match grid column */
+    width: 320px !important;
+    /* Match grid column */
     border-right: 1px solid #e5e5e5 !important;
     box-sizing: border-box !important;
 }
@@ -7456,8 +7490,10 @@ body {
 /* Responsive adjustment */
 @media (max-width: 1024px) {
     .main-content {
-        display: block !important; /* Stack context on mobile */
+        display: block !important;
+        /* Stack context on mobile */
     }
+
     .filters-sidebar {
         position: static !important;
         width: 100% !important;
@@ -7473,25 +7509,29 @@ body {
 
 /* More breathing room at the top of sticky sidebar */
 .filters-sidebar {
-    padding-top: 60px !important; 
+    padding-top: 60px !important;
     padding-right: 30px !important;
 }
 
 /* Separate Grid from Sidebar Line */
 .collection-grid {
-    padding-left: 50px !important; /* Push grid right */
-    padding-top: 60px !important; /* Align top visual start with sidebar content */
+    padding-left: 50px !important;
+    /* Push grid right */
+    padding-top: 60px !important;
+    /* Align top visual start with sidebar content */
     padding-right: 40px !important;
 }
 
 /* Icon Alignment Fix */
 .filter-option {
-    height: 48px !important; /* Consistent height row */
+    height: 48px !important;
+    /* Consistent height row */
     align-items: center !important;
 }
 
 .filter-icon {
-    margin-top: -2px !important; /* Slight vertical optical adjustment */
+    margin-top: -2px !important;
+    /* Slight vertical optical adjustment */
 }
 
 
@@ -7501,20 +7541,23 @@ body {
 
 /* 1. Reset Main Container to Stack Elements */
 .main-content {
-    display: block !important; /* Stack filters on top of grid */
+    display: block !important;
+    /* Stack filters on top of grid */
     padding: 0 !important;
     max-width: 100% !important;
 }
 
 /* 2. Transform Sidebar into Horizontal Bar */
 .filters-sidebar {
-    position: relative !important; /* Not sticky sidebar anymore */
+    position: relative !important;
+    /* Not sticky sidebar anymore */
     top: 0 !important;
     width: 100% !important;
     height: auto !important;
     max-height: none !important;
     border-right: none !important;
-    border-bottom: 2px solid #000 !important; /* Tech underline */
+    border-bottom: 2px solid #000 !important;
+    /* Tech underline */
     padding: 20px 40px !important;
     display: flex !important;
     flex-wrap: wrap !important;
@@ -7526,31 +7569,36 @@ body {
 
 /* 3. Search Bar Adjustment for Horizontal Layout */
 .sidebar-search {
-    flex: 0 0 250px !important; /* Fixed width search */
+    flex: 0 0 250px !important;
+    /* Fixed width search */
     margin-right: 20px !important;
 }
 
 .search-count {
-    text-align: left !important; /* Align with input */
+    text-align: left !important;
+    /* Align with input */
     margin-top: 5px !important;
 }
 
 /* 4. Filter Section (The Options Wrapper) */
 .filter-section {
-    flex: 1 !important; /* Take remaining space */
+    flex: 1 !important;
+    /* Take remaining space */
     width: auto !important;
     margin: 0 !important;
 }
 
 .filter-title {
-    display: none !important; /* Hide title 'Filtrar por', cleaner look */
+    display: none !important;
+    /* Hide title 'Filtrar por', cleaner look */
 }
 
 /* 5. Horizontal Filter Chips (Scrollable) */
 .filter-options {
     display: flex !important;
     flex-direction: row !important;
-    overflow-x: auto !important; /* Scroll if needed */
+    overflow-x: auto !important;
+    /* Scroll if needed */
     gap: 10px !important;
     padding-bottom: 5px !important;
 }
@@ -7563,10 +7611,12 @@ body {
 
 /* 6. Style Filter Buttons (Chips) */
 .filter-option {
-    flex: 0 0 auto !important; /* Don't shrink */
+    flex: 0 0 auto !important;
+    /* Don't shrink */
     border: 1px solid #e5e5e5 !important;
     border-bottom: 1px solid #e5e5e5 !important;
-    border-radius: 4px !important; /* Small rounded or sharp */
+    border-radius: 4px !important;
+    /* Small rounded or sharp */
     padding: 8px 16px !important;
     height: 40px !important;
     background: #fff !important;
@@ -7575,7 +7625,8 @@ body {
 .filter-option:hover {
     border-color: #000 !important;
     background: #fff !important;
-    padding-left: 16px !important; /* Reset hover movement */
+    padding-left: 16px !important;
+    /* Reset hover movement */
 }
 
 .filter-option:has(input:checked) {
@@ -7594,10 +7645,11 @@ body {
 /* 7. EXPAND GRID TO FULL WIDTH */
 .collection-grid {
     width: 100% !important;
-    padding: 40px !important; /* Uniform padding */
+    padding: 40px !important;
+    /* Uniform padding */
     display: grid !important;
     /* Add extra column! */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
     gap: 20px !important;
 }
 
@@ -7608,6 +7660,7 @@ body {
         align-items: stretch !important;
         padding: 20px !important;
     }
+
     .sidebar-search {
         flex: 1 !important;
         width: 100% !important;
@@ -7623,7 +7676,8 @@ body {
 .filters-sidebar {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important; /* Keep search and filters side-by-side */
+    flex-wrap: nowrap !important;
+    /* Keep search and filters side-by-side */
     align-items: flex-start !important;
     padding: 24px 40px !important;
     background: #fff !important;
@@ -7633,13 +7687,16 @@ body {
 
 /* 2. Search Area (Left Fixed) */
 .sidebar-search {
-    flex: 0 0 240px !important; /* Fixed width */
-    margin-right: 40px !important; /* Space between search and filters */
+    flex: 0 0 240px !important;
+    /* Fixed width */
+    margin-right: 40px !important;
+    /* Space between search and filters */
     margin-bottom: 0 !important;
 }
 
 .sidebar-search-container {
-    padding: 6px 10px !important; /* Keep it tight */
+    padding: 6px 10px !important;
+    /* Keep it tight */
 }
 
 /* 3. Filter Area (Right Fluid) */
@@ -7651,28 +7708,32 @@ body {
 /* 4. The Grid of Filters (Dense) */
 .filter-options {
     display: grid !important;
-    /* Create a dense grid with minimum width columns to fit all */
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important; 
-    gap: 8px !important; /* Tight formatting */
-    overflow: visible !important; /* Show all, no scroll */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+    gap: 8px !important;
+    /* Tight formatting */
+    overflow: visible !important;
+    /* Show all, no scroll */
     padding-bottom: 0 !important;
 }
 
 /* 5. Compact Filter Buttons */
 .filter-option {
-    height: 34px !important; /* Slower height */
+    height: 34px !important;
+    /* Slower height */
     padding: 0 10px !important;
     border: 1px solid #e0e0e0 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
     background: #fff !important;
-    border-radius: 2px !important; /* Sharper */
+    border-radius: 2px !important;
+    /* Sharper */
 }
 
 /* Small Font Size */
 .filter-option span {
-    font-size: 0.75rem !important; /* Smaller text */
+    font-size: 0.75rem !important;
+    /* Smaller text */
     font-weight: 600 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
@@ -7687,7 +7748,8 @@ body {
 
 /* Grid adjustment */
 .collection-grid {
-    padding-top: 30px !important; /* Reduce gap to content */
+    padding-top: 30px !important;
+    /* Reduce gap to content */
 }
 
 /* Mobile Fallback */
@@ -7695,6 +7757,7 @@ body {
     .filters-sidebar {
         flex-direction: column !important;
     }
+
     .sidebar-search {
         width: 100% !important;
         margin-right: 0 !important;
@@ -7709,13 +7772,269 @@ body {
 .filters-sidebar {
     position: -webkit-sticky !important;
     position: sticky !important;
-    top: 0 !important; /* Stick to VERY top if header scrolls away, or adjust if header is sticky */
-    z-index: 999 !important; /* High Z-index */
-    background: #ffffff !important; /* Ensure opacity */
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important; /* Visibility shadow */
+    top: 0 !important;
+    /* Stick to VERY top if header scrolls away, or adjust if header is sticky */
+    z-index: 999 !important;
+    /* High Z-index */
+    background: #ffffff !important;
+    /* Ensure opacity */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+    /* Visibility shadow */
     transition: top 0.3s ease;
 }
 
 /* If header is also sticky fixed at 80px, uncomment this: */
 /* .filters-sidebar { top: 80px !important; } */
+/* =========================================
+   ANIMATIONS: IDEAL EFFECTS
+   ========================================= */
 
+/* 1. Fade In Suave (Essencial) */
+/* Opacidade: 0 -> 100, Duração: 0.8s - 1s */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: opacity, transform;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 2. Slide In MUITO Curto (Subtítulos) */
+/* Movimento: 10-20px apenas, Duração: 0.5s */
+.slide-in-short {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.slide-in-short.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 3. Stagger (Entrada em sequência) */
+/* Delay: 0.1s - 0.15s entre itens */
+.stagger-container .stagger-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.stagger-container.visible .stagger-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger Delays (Up to 6 items) */
+.stagger-container.visible .stagger-item:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.stagger-container.visible .stagger-item:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.stagger-container.visible .stagger-item:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.stagger-container.visible .stagger-item:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.stagger-container.visible .stagger-item:nth-child(5) {
+    transition-delay: 0.5s;
+}
+
+.stagger-container.visible .stagger-item:nth-child(6) {
+    transition-delay: 0.6s;
+}
+
+/* 4. Number Count (bem discreto) */
+/* JS cuida da animação numérica aqui */
+.count-up {
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s ease;
+}
+
+/* 5. Parallax MUITO LEVE (Fundo) */
+/* Movimento quase imperceptível */
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Optimizations for mobile can disable fixed attachment depending on use case */
+}
+
+@media (hover: none) {
+
+    /* Disable parallax on touch devices for performance */
+    .parallax-bg {
+        background-attachment: scroll;
+    }
+}
+
+/* 6. Reveal Width (para Divider) */
+/* Efeito de linha sendo desenhada */
+.reveal-width {
+    width: 0 !important;
+    /* Começa invisível */
+    transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: width;
+}
+
+.reveal-width.visible {
+    width: 60px !important;
+    /* Tamanho final (ajuste se necessário) */
+}
+
+/* 7. Slide In Long (Entrada Dramática de Seção) */
+/* Movimento mais longo para blocos grandes */
+.slide-in-long {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1.2s cubic-bezier(0.2, 1, 0.3, 1), transform 1.2s cubic-bezier(0.2, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.slide-in-long.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Gap for Hero */
+@media (max-width: 768px) {
+    .hero-elegant {
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+        padding: 0 !important;
+        /* Ensure no double padding if any */
+    }
+}
+
+/* End of Portfolio styles */
+/* White Gaps Overlay specific for Portfolio Grid and Video Modal */
+#portfolioGrid::before,
+#portfolioGrid::after,
+.video-player-modal.active::before,
+.video-player-modal.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: #ffffff;
+    z-index: 10000;
+    /* Extremely high z-index to sit on top of video */
+    pointer-events: none;
+}
+
+#portfolioGrid::before {
+    left: 0;
+}
+
+#portfolioGrid::after {
+    right: 0;
+}
+
+.video-player-modal.active::before {
+    left: 0;
+}
+
+.video-player-modal.active::after {
+    right: 0;
+}
+
+/* Ensure modal content respects these bounds */
+.video-player-content {
+    max-width: calc(100vw - 40px) !important;
+}
+
+/* =========================================================
+
+/* ====================================
+   APPLY GRAY BACKGROUND (User Approved)
+   ==================================== */
+.filters-sidebar,
+aside.filters-sidebar,
+.filters-sidebar-sticky {
+    background-color: #d0d0d0 !important;
+    /* Cor cinza da imagem */
+    padding: 12px 12px 6px 12px !important;
+    /* Top 12, Bottom 6 */
+    /* Reduced from 24px */
+    border-radius: 8px !important;
+    margin-bottom: 20px !important;
+}
+
+/* Ensure Search Input has white background */
+#searchInput {
+    background-color: #ffffff !important;
+    border: 1px solid transparent !important;
+}
+
+/* Ensure Filter Buttons contrast nicely */
+.filter-option {
+    background-color: #ffffff !important;
+    border: none !important;
+}
+
+.filter-option:hover {
+    background-color: #f0f0f0 !important;
+}
+
+.filter-option:has(input:checked) {
+    background-color: #333 !important;
+    color: #fff !important;
+}
+
+/* ====================================
+   CENTER FILTERS IN SIDEBAR (FLEXBOX)
+   ==================================== */
+.filter-options {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    /* Centraliza a última linha */
+    gap: 8px !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.filter-option {
+    flex: 0 1 auto !important;
+    /* Não estica demais */
+    width: auto !important;
+    min-width: unset !important;
+    /* Respeita o conteúdo */
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+/* ====================================
+   FORCE STICKY SIDEBAR
+   ==================================== */
+.filters-sidebar,
+aside.filters-sidebar,
+.filters-sidebar-sticky {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: var(--header-height, 70px) !important;
+    /* Remove gap */
+    align-self: flex-start !important;
+    /* CRITICAL for sticky in flex */
+}
+
+/* ====================================
+   FORCE 5 COLUMNS GRID (FINAL OVERRIDE)
+   ==================================== */
+.collection-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+}

@@ -143,7 +143,8 @@
                 style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
 
                 <!-- MERCADO LIVRE -->
-                <a href="#" class="store-card ml"
+                <a href="https://lista.mercadolivre.com.br/_CustId_226215703?item_id=MLB6040622010&category_id=MLB27250&seller_id=226215703&client=recoview-selleritems&recos_listing=true#origin=vip&component=sellerData&typeSeller=classic"
+                    target="_blank" class="store-card ml"
                     style="width: 140px; height: 90px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;">
                     <div class="store-content" style="text-align: center;">
                         <span class="store-name"
@@ -153,7 +154,8 @@
                 </a>
 
                 <!-- SHEIN -->
-                <a href="#" class="store-card shein"
+                <a href="https://br.shein.com/store/home?ici=PageGoodsDetail&main_cate_id=1740&main_goods_id=175528887&page_from=PageGoodsDetail&rule_poskey=DetailShopItemList&src_identifier=on%3Dstore%60cn%3DAVELUNE%20MODAS%60hz%3D0%60ps%3D1_1%60jc%3DthirdPartyStoreHome_7709578899&src_module=DetailBrand&src_tab_page_id=page_goods_detail1770595882223&store_code=7709578899&tab=items"
+                    target="_blank" class="store-card shein"
                     style="width: 140px; height: 90px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;">
                     <div class="store-content" style="text-align: center;">
                         <span class="store-name" style="font-weight: 800; font-size: 0.8rem;">SHEIN</span>
@@ -171,7 +173,8 @@
                 </a>
 
                 <!-- SHOPEE -->
-                <a href="#" class="store-card shopee"
+                <a href="https://shopee.com.br/oseiassilvadossantos134#product_list" target="_blank"
+                    class="store-card shopee"
                     style="width: 140px; height: 90px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;">
                     <div class="store-content" style="text-align: center;">
                         <span class="store-name" style="font-weight: 800; font-size: 0.8rem;">SHOPEE</span>
@@ -180,7 +183,8 @@
                 </a>
 
                 <!-- TIKTOK -->
-                <a href="#" class="store-card tiktok"
+                <a href="https://www.tiktok.com/@gracexpressbr?_r=1&_t=ZS-93lOFXPQC26" target="_blank"
+                    class="store-card tiktok"
                     style="width: 140px; height: 90px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;">
                     <div class="store-content" style="text-align: center;">
                         <span class="store-name"
@@ -231,10 +235,27 @@
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                         </svg>
                     </button>
+                    <!-- Admin Toggle Button -->
+                    <button class="admin-toggle-btn" id="adminToggleFooter" aria-label="Toggle Admin Mode"
+                        onclick="toggleAdminMode()"
+                        style="background: transparent; border: 1px solid #555; color: #888; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600; text-transform: uppercase;">
+                        🔐 Admin
+                    </button>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Supabase Config -->
+    <script src="js/supabase-config.js"></script>
+    <!-- Auth Service -->
+    <script src="js/auth-service.js"></script>
+    <!-- Cloudinary Service -->
+    <script src="js/services/cloudinary-service.js"></script>
+    <!-- Media Manager -->
+    <script src="media-manager.js"></script>
 
     <script src="js/i18n/i18n.js"></script>
     <script src="script.js"></script>
@@ -242,6 +263,68 @@
         const btn = document.getElementById('mobileMenuBtn');
         const overlay = document.getElementById('mobileNavOverlay');
         if (btn && overlay) { btn.addEventListener('click', () => overlay.classList.toggle('active')); }
+
+        // Show Login Modal
+        function toggleAdminMode() {
+            // Check if already logged in
+            if (window.supabaseClient) {
+                window.supabaseClient.auth.getSession().then(({ data: { session } }) => {
+                    if (session) {
+                        // Already logged in - offer to logout
+                        if (confirm('Você está logado. Deseja sair do modo admin?')) {
+                            window.logoutAdmin();
+                        }
+                    } else {
+                        // Show login modal
+                        showLoginModal();
+                    }
+                });
+            } else {
+                showLoginModal();
+            }
+        }
+
+        function showLoginModal() {
+            // Create modal if not exists
+            if (document.getElementById('adminLoginModal')) {
+                document.getElementById('adminLoginModal').style.display = 'flex';
+                return;
+            }
+
+            const modal = document.createElement('div');
+            modal.id = 'adminLoginModal';
+            modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;';
+            modal.innerHTML = `
+                <div style="background:#fff;padding:40px;border-radius:12px;max-width:400px;width:90%;">
+                    <h2 style="margin:0 0 20px;font-size:24px;text-align:center;">🔐 Login Admin</h2>
+                    <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                        <input type="email" id="adminEmail" placeholder="Email" required style="width:100%;padding:12px;margin-bottom:12px;border:1px solid #ddd;border-radius:6px;font-size:16px;box-sizing:border-box;">
+                        <input type="password" id="adminPassword" placeholder="Senha" required style="width:100%;padding:12px;margin-bottom:20px;border:1px solid #ddd;border-radius:6px;font-size:16px;box-sizing:border-box;">
+                        <button type="submit" style="width:100%;padding:14px;background:#333;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:600;cursor:pointer;">Entrar</button>
+                    </form>
+                    <button onclick="closeLoginModal()" style="width:100%;padding:12px;margin-top:12px;background:transparent;color:#666;border:1px solid #ddd;border-radius:6px;font-size:14px;cursor:pointer;">Cancelar</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('adminLoginModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        async function handleAdminLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+
+            const success = await window.loginAdmin(email, password);
+            if (success) {
+                closeLoginModal();
+                alert('Login realizado com sucesso!');
+                location.reload();
+            }
+        }
     </script>
 </body>
 

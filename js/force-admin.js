@@ -1,27 +1,63 @@
 (function () {
-    // Immediate Admin Mode Check
-    try {
-        const savedMode = localStorage.getItem('isAdminMode');
-        if (savedMode === 'true') {
-            document.documentElement.classList.add('edit-mode-active');
+    // Admin Mode Check - Only activate if authenticated via Supabase
 
-            const activateBody = () => {
-                if (document.body) {
-                    document.body.classList.add('edit-mode-active');
-                    injectAdminToolbar();
-                } else {
-                    setTimeout(activateBody, 10);
-                }
-            };
-            activateBody();
-
-            // Fallback for DOMContentLoaded
-            document.addEventListener('DOMContentLoaded', activateBody);
-
-            console.log('Admin Mode Forcibly Activated from Storage');
+    // Wait for Supabase to be available
+    function checkSupabaseAuth() {
+        // If Supabase client is not available yet, wait
+        if (typeof window.supabaseClient === 'undefined' || window.supabaseClient === null) {
+            // Retry after scripts load
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(checkSupabaseAuth, 500);
+            });
+            return;
         }
-    } catch (e) {
-        console.error('Admin Check Failed', e);
+
+        // Check Supabase session
+        window.supabaseClient.auth.getSession().then(({ data: { session } }) => {
+            if (session && session.user) {
+                // User is authenticated - activate admin mode
+                activateAdminMode();
+                console.log('✅ Admin Mode activated - User authenticated:', session.user.email);
+            } else {
+                // Not authenticated - remove admin mode
+                deactivateAdminMode();
+                console.log('🔒 Admin Mode not active - User not authenticated');
+            }
+        }).catch(err => {
+            console.warn('Supabase auth check failed:', err);
+            deactivateAdminMode();
+        });
+
+        // Listen for auth state changes
+        window.supabaseClient.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' && session) {
+                activateAdminMode();
+                console.log('✅ User signed in:', session.user.email);
+            } else if (event === 'SIGNED_OUT') {
+                deactivateAdminMode();
+                console.log('🔒 User signed out');
+                location.reload();
+            }
+        });
+    }
+
+    function activateAdminMode() {
+        document.documentElement.classList.add('edit-mode-active');
+        document.body.classList.add('edit-mode-active');
+        localStorage.setItem('isAdminMode', 'true');
+        injectAdminToolbar();
+    }
+
+    function deactivateAdminMode() {
+        document.documentElement.classList.remove('edit-mode-active');
+        document.body.classList.remove('edit-mode-active');
+        localStorage.removeItem('isAdminMode');
+        removeAdminToolbar();
+    }
+
+    function removeAdminToolbar() {
+        const toolbar = document.getElementById('adminToolbar');
+        if (toolbar) toolbar.remove();
     }
 
     function injectAdminToolbar() {
@@ -49,7 +85,7 @@
                         </svg>
                         <span>Descartar</span>
                     </button>
-                    <button class="admin-toolbar-btn exit" onclick="if(window.exitAdminMode) window.exitAdminMode(); else alert('Aguarde o carregamento do sistema...')">
+                    <button class="admin-toolbar-btn exit" onclick="window.logoutAdmin()">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                             <polyline points="16 17 21 12 16 7"/>
@@ -61,5 +97,55 @@
             </div>
         `;
         document.body.appendChild(toolbar);
+    }
+
+    // Global logout function
+    window.logoutAdmin = async function () {
+        if (window.supabaseClient) {
+            await window.supabaseClient.auth.signOut();
+        }
+        localStorage.removeItem('isAdminMode');
+        deactivateAdminMode();
+        location.reload();
+    };
+
+    // Global login function (for use in login forms)
+    window.loginAdmin = async function (email, password) {
+        if (!window.supabaseClient) {
+            alert('Sistema de autenticação não disponível');
+            return false;
+        }
+
+        try {
+            const { data, error } = await window.supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                console.error('Login error:', error.message);
+                alert('Erro de login: ' + error.message);
+                return false;
+            }
+
+            if (data.session) {
+                activateAdminMode();
+                return true;
+            }
+        } catch (err) {
+            console.error('Login failed:', err);
+            alert('Falha no login');
+            return false;
+        }
+        return false;
+    };
+
+    // Start checking after DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(checkSupabaseAuth, 100);
+        });
+    } else {
+        setTimeout(checkSupabaseAuth, 100);
     }
 })();
