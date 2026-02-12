@@ -57,25 +57,28 @@
             position: relative;
         }
 
-        /* White overlay strips on sides */
-        .portfolio-grid::before,
-        .portfolio-grid::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            width: 20px;
-            background: #ffffff;
-            z-index: 100;
-            pointer-events: none;
+        /* Scroll-reveal animation for cards */
+        .nike-card {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .portfolio-grid::before {
-            left: 0;
+        .nike-card.revealed {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .portfolio-grid::after {
-            right: 0;
+        .nike-section-title {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .nike-section-title.revealed {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .portfolio-item {
@@ -196,10 +199,8 @@
         .sx-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            gap: 16px;
-            /* 16px gap like standard design systems */
-            padding: 24px 4%;
-            /* Side padding */
+            gap: 20px;
+            padding: 32px 4%;
             max-width: 1920px;
             margin: 0 auto;
             grid-auto-flow: dense;
@@ -237,21 +238,102 @@
             /* Banner style for full width */
         }
 
-        @media (max-width: 768px) {
-            .sx-grid {
-                grid-template-columns: repeat(4, 1fr);
+        /* Tablet */
+        @media (max-width: 1024px) {
+            #portfolioGrid.sx-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px !important;
                 padding: 16px !important;
             }
 
             .col-span-12,
             .col-span-6,
+            .col-span-8 {
+                grid-column: span 2 !important;
+            }
+
             .col-span-4 {
-                grid-column: span 4;
-                /* Full width on mobile */
+                grid-column: span 1 !important;
             }
 
             .nike-card.col-span-12 {
                 aspect-ratio: 16/9;
+            }
+
+            /* Feature-side stacks vertically on tablet */
+            .nike-card.content-side {
+                flex-direction: column;
+            }
+
+            .nike-card.content-side .nike-media-wrapper,
+            .nike-card.content-side .nike-content {
+                width: 100%;
+            }
+
+            .nike-card.content-side .nike-content {
+                padding: 24px 16px;
+            }
+
+            .nike-card.content-side .nike-title {
+                font-size: clamp(20px, 4vw, 32px);
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            #portfolioGrid.sx-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+                padding: 12px !important;
+            }
+
+            .col-span-12,
+            .col-span-6,
+            .col-span-4,
+            .col-span-8 {
+                grid-column: span 1 !important;
+            }
+
+            .nike-card {
+                aspect-ratio: 3/4;
+            }
+
+            .nike-card.col-span-12 {
+                aspect-ratio: 16/9;
+            }
+
+            .nike-title {
+                font-size: 20px;
+            }
+
+            .col-span-12 .nike-title {
+                font-size: clamp(24px, 5vw, 32px);
+            }
+
+            .nike-content {
+                padding: 20px;
+            }
+
+            /* Always show content on mobile (no hover) */
+            .content-inside .nike-content {
+                opacity: 1;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 480px) {
+            #portfolioGrid.sx-grid {
+                padding: 8px !important;
+                gap: 12px !important;
+            }
+
+            .nike-card {
+                aspect-ratio: 4/5;
+            }
+
+            .nike-action-btn {
+                padding: 8px 16px;
+                font-size: 12px;
             }
         }
 
@@ -419,14 +501,21 @@
             color: #111;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .nike-section-title {
-                grid-column: span 4;
+                grid-column: span 2;
                 padding: 40px 0 20px;
             }
+        }
 
-            .nike-title {
-                font-size: 20px;
+        @media (max-width: 768px) {
+            .nike-section-title {
+                grid-column: span 1;
+                padding: 30px 0 15px;
+            }
+
+            .nike-section-title h2 {
+                font-size: clamp(24px, 5vw, 32px);
             }
         }
 
@@ -734,6 +823,131 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Enhanced Hero section */
+        .sx-hero {
+            padding: clamp(80px, 12vh, 140px) 4% clamp(40px, 6vh, 80px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sx-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 4%;
+            right: 4%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
+        }
+
+        .sx-hero-title {
+            font-size: clamp(56px, 10vw, 120px) !important;
+            line-height: 0.9 !important;
+            letter-spacing: -0.04em !important;
+            animation: heroReveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        .sx-hero-subtitle {
+            animation: heroSubReveal 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+        }
+
+        @keyframes heroReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heroSubReveal {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Smooth page transition */
+        main.spacex-light-wrapper {
+            animation: pageLoad 0.6s ease;
+        }
+
+        @keyframes pageLoad {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Content-side card improvements */
+        .nike-card.content-side {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            min-height: 400px;
+        }
+
+        .nike-card.content-side .nike-media-wrapper {
+            width: 55%;
+            position: relative;
+            aspect-ratio: auto;
+        }
+
+        .nike-card.content-side .nike-content {
+            width: 45%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 48px;
+            background: #f5f5f5;
+        }
+
+        .nike-card.content-side .nike-title {
+            font-size: clamp(28px, 3vw, 48px);
+            line-height: 0.95;
+            margin-bottom: 16px;
+        }
+
+        .nike-card.content-side .nike-subtitle {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .nike-card.content-side {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .nike-card.content-side .nike-media-wrapper {
+                width: 100%;
+                aspect-ratio: 16/9;
+            }
+
+            .nike-card.content-side .nike-content {
+                width: 100%;
+                padding: 24px 20px;
+            }
+
+            .nike-card.content-side .nike-title {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 
@@ -873,6 +1087,23 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Tamanho no Grid</label>
+                    <select id="portfolioDisplaySize">
+                        <option value="third">Padrão (1/3)</option>
+                        <option value="half">Metade (1/2)</option>
+                        <option value="full">Largura Total</option>
+                        <option value="feature-side">Destaque Lateral</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <select id="portfolioCategory">
+                        <option value="collection">Coleção</option>
+                        <option value="editorial">Editorial</option>
+                        <option value="product">Produto</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label data-i18n="titleLabel">Título</label>
                     <input type="text" id="portfolioTitle" placeholder="Ex: Coleção Verão 2024">
                 </div>
@@ -909,7 +1140,7 @@
 
     <!-- Crop Modal -->
     <div class="crop-modal" id="cropModal">
-        <div class="crop-container">
+        <div class="crop-container" id="cropContainer">
             <img id="cropImage" src="" alt="Crop">
         </div>
         <div class="crop-buttons">
@@ -1428,6 +1659,33 @@
             }
 
             grid.innerHTML = html;
+
+            // Scroll-reveal animation with IntersectionObserver
+            requestAnimationFrame(() => {
+                const cards = grid.querySelectorAll('.nike-card, .nike-section-title');
+                if ('IntersectionObserver' in window) {
+                    const revealObserver = new IntersectionObserver((entries) => {
+                        entries.forEach((entry, i) => {
+                            if (entry.isIntersecting) {
+                                // Staggered delay based on position in viewport batch
+                                const delay = i * 80;
+                                setTimeout(() => {
+                                    entry.target.classList.add('revealed');
+                                }, delay);
+                                revealObserver.unobserve(entry.target);
+                            }
+                        });
+                    }, {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -60px 0px'
+                    });
+
+                    cards.forEach(card => revealObserver.observe(card));
+                } else {
+                    // Fallback: reveal all immediately
+                    cards.forEach(card => card.classList.add('revealed'));
+                }
+            });
         }
 
         // Track current playing video
@@ -1565,29 +1823,13 @@
                 // Standard embed - simplified
                 const embedParams = 'autoplay=1&controls=1&rel=0&playsinline=1&fs=1';
 
-                wrapper.innerHTML = `< iframe
-            src = "https://www.youtube.com/embed/${videoId}?${embedParams}"
-            frameborder = "0"
-            style = "width:100%;height:100%;"
-            allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen ></iframe > `;
+                wrapper.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?${embedParams}" frameborder="0" style="width:100%;height:100%;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
             } else if (tiktokId) {
                 // TikTok Embed
-                wrapper.innerHTML = `< iframe
-            src = "https://www.tiktok.com/embed/v2/${tiktokId}"
-            frameborder = "0"
-            style = "width:100%;height:100%;"
-            allowfullscreen ></iframe > `;
+                wrapper.innerHTML = `<iframe src="https://www.tiktok.com/embed/v2/${tiktokId}" frameborder="0" style="width:100%;height:100%;" allowfullscreen></iframe>`;
             } else {
                 // Native HTML5 Video
-                wrapper.innerHTML = `< video
-            src = "${url}"
-            controls
-            autoplay
-            playsinline
-            style = "width:100%;height:100%;object-fit:contain;background:#000;" >
-                Seu navegador não suporta a tag de vídeo.
-                </video > `;
+                wrapper.innerHTML = `<video src="${url}" controls autoplay playsinline style="width:100%;height:100%;object-fit:contain;background:#000;">Seu navegador não suporta a tag de vídeo.</video>`;
             }
 
             document.getElementById('videoPlayerModal').classList.add('active');
@@ -1614,12 +1856,13 @@
             const item = portfolioItems[index];
 
             const t = getCurrentTranslations();
-            document.getElementById('modalTitle').textContent = t.editItem;
-            // Removed: document.getElementById('portfolioType').value = item.type; (This should set value not text content)
-            document.getElementById('portfolioType').value = item.type;
+            document.getElementById('modalTitle').textContent = t.editItem || 'Editar Item';
+            document.getElementById('portfolioType').value = item.type || 'photo';
+            document.getElementById('portfolioDisplaySize').value = item.displaySize || 'third';
+            document.getElementById('portfolioCategory').value = item.category || 'collection';
 
-            document.getElementById('portfolioTitle').value = item.title;
-            document.getElementById('portfolioPhrase').value = item.phrase;
+            document.getElementById('portfolioTitle').value = item.title || '';
+            document.getElementById('portfolioPhrase').value = item.phrase || '';
             document.getElementById('portfolioLink').value = item.link || '';
             document.getElementById('portfolioVideoUrl').value = item.videoUrl || '';
             document.getElementById('portfolioCustomThumbnail').value = item.customThumbnail || '';
@@ -1633,7 +1876,7 @@
             // Show image preview
             const preview = document.getElementById('imagePreview');
             if (item.image) {
-                preview.innerHTML = `< img src = "${item.image}" alt = "Preview" > `;
+                preview.innerHTML = `<img src="${item.image}" alt="Preview">`;
                 currentImageData = item.image;
             } else {
                 preview.innerHTML = '<span class="image-preview-placeholder">📷</span>';
@@ -1649,9 +1892,11 @@
             currentImageData = null;
 
             const t = getCurrentTranslations();
-            document.getElementById('modalTitle').textContent = t.addItem;
+            document.getElementById('modalTitle').textContent = t.addItem || 'Adicionar Item';
 
             document.getElementById('portfolioType').value = 'photo';
+            document.getElementById('portfolioDisplaySize').value = 'third';
+            document.getElementById('portfolioCategory').value = 'collection';
             document.getElementById('portfolioTitle').value = '';
             document.getElementById('portfolioPhrase').value = '';
             document.getElementById('portfolioLink').value = '';
@@ -1675,6 +1920,8 @@
         // Save portfolio item
         async function savePortfolioItem() {
             const type = document.getElementById('portfolioType').value;
+            const displaySize = document.getElementById('portfolioDisplaySize').value;
+            const category = document.getElementById('portfolioCategory').value;
             const title = document.getElementById('portfolioTitle').value.trim();
             const phrase = document.getElementById('portfolioPhrase').value.trim();
             const link = document.getElementById('portfolioLink').value.trim();
@@ -1699,7 +1946,7 @@
                 try {
                     if (typeof CloudinaryService !== 'undefined') {
                         const itemId = currentEditIndex !== null ? portfolioItems[currentEditIndex].id : Date.now();
-                        const result = await CloudinaryService.uploadBase64Image(currentImageData, `portfolio - ${itemId} `);
+                        const result = await CloudinaryService.uploadBase64Image(currentImageData, `portfolio-${itemId}`);
                         finalImageUrl = result.url;
                         console.log('✅ Image uploaded to Cloudinary:', result.url);
                     } else {
@@ -1740,9 +1987,14 @@
                 }
             }
 
+            // Preserve existing item data when editing, add displaySize + category
+            const existingItem = currentEditIndex !== null ? portfolioItems[currentEditIndex] : {};
             const item = {
+                ...existingItem,
                 id: currentEditIndex !== null ? portfolioItems[currentEditIndex].id : Date.now(),
                 type,
+                displaySize,
+                category,
                 image: finalImageUrl,
                 title,
                 phrase,
@@ -1787,18 +2039,25 @@
         let tempImageData = null;
 
         // Image upload handler with cropping
-        const imageInput = document.getElementById('portfolioImage');
-        imageInput?.addEventListener('change', function (e) {
-            const file = e.target.files[0];
-            if (!file) return;
+        const imageInput = document.getElementById('portfolioImageInput');
+        if (imageInput) {
+            imageInput.addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                console.log('📸 Image selected:', file.name, file.size, 'bytes');
 
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                tempImageData = event.target.result;
-                openCropModal(tempImageData);
-            };
-            reader.readAsDataURL(file);
-        });
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    tempImageData = event.target.result;
+                    console.log('📸 Image loaded, opening crop modal...');
+                    openCropModal(tempImageData);
+                };
+                reader.readAsDataURL(file);
+            });
+            console.log('✅ Image input listener registered on #portfolioImageInput');
+        } else {
+            console.error('❌ Could not find #portfolioImageInput element!');
+        }
 
         function openCropModal(imageSource) {
             const modal = document.getElementById('cropModal');

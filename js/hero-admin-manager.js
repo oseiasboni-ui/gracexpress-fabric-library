@@ -129,9 +129,9 @@
         // 2. Inject Modal if not exists
         if (!document.getElementById('heroAdminModal')) {
             const modalHTML = `
-                <div id="heroAdminModal" class="admin-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center;">
+                <div id="heroAdminModal" class="admin-modal">
                     <div class="admin-modal-content" style="background:white; padding:30px; border-radius:8px; width:90%; max-width:500px; position:relative;">
-                        <button onclick="document.getElementById('heroAdminModal').style.display='none'" style="position:absolute; top:10px; right:10px; border:none; background:none; font-size:24px; cursor:pointer;">&times;</button>
+                        <button onclick="document.getElementById('heroAdminModal').classList.remove('active')" class="admin-close">&times;</button>
                         <h2>Editar Slide</h2>
                         
                         <div class="form-group" style="margin-bottom:15px;">
@@ -170,7 +170,7 @@
 
         document.getElementById('heroSlideImage').value = slide.image;
         document.getElementById('heroSlideLink').value = slide.link;
-        document.getElementById('heroAdminModal').style.display = 'flex';
+        document.getElementById('heroAdminModal').classList.add('active');
         document.getElementById('uploadStatus').style.display = 'none';
 
         // Set up Save Button
@@ -219,7 +219,7 @@
         };
 
         saveSlides(slides);
-        document.getElementById('heroAdminModal').style.display = 'none';
+        document.getElementById('heroAdminModal').classList.remove('active');
         alert('Slide atualizado com sucesso!');
     }
 
